@@ -359,6 +359,11 @@ def brief_page(p):
 
 
 def course_page(p, crumb):
+    tree = ""
+    if p.get("tree"):
+        tree = f'''<section class="part cp-tree"><h2>{e(p['tree_h'])}</h2>
+      <div class="ltree-scroll"><ul class="ltree"><li>{tree_node(p['tree'])}</li></ul></div>
+      <p class="legend"><span class="k lever">Lever</span> what the decision changes <span class="k limit">Limit</span> what the answer must respect <span class="k fixed">Fixed</span> outside the decision</p></section>'''
     frag = open(f"data/course/{p['slug']}.html", encoding="utf-8").read()
     cards = "".join(
         f'<a class="dl" href="{e(href)}">{ico(i)}<span><b>{e(t)}</b><em>{e(s)}</em></span></a>' for i, t, s, href in p.get("files", [])
@@ -376,6 +381,7 @@ def course_page(p, crumb):
       <tr class="question"><th scope="row">Question</th><td>{e(p['scq'][2])}</td></tr>
       <tr class="answer"><th scope="row">Answer</th><td>{e(p['result'])}</td></tr>
     </table>
+    {tree}
     {frag}
     {pager(p)}
   </div></div>

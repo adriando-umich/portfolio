@@ -729,3 +729,4 @@ html:not(.js) .deckbar { display: none; }
 .cp-scqa tr.question { margin: 0; font: inherit; color: inherit; }
 .cp-scqa tr.question th { font: 700 15px/1.55 var(--sans); font-style: normal; color: var(--ink); }
 .cp-scqa th { font-size: 15px; }
+.cp-tree + .cp-kpis { margin-top: 48px; }

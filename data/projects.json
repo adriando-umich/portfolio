@@ -785,7 +785,83 @@
     "A city must give each of its six regions fire cover. It has six candidate sites for stations, each with a different cost.",
     "A station is useful to a region only if it gets there within 12 minutes, and three siting rules limit which sites can open together. To open all six sites costs $1.8M.",
     "Which sites must the city open to cover every region at the lowest cost?"
-   ]
+   ],
+   "tree_h": "The cost depends on which sites open; the 12-minute limit decides how few are enough",
+   "tree": {
+    "t": "Total cost of the stations",
+    "s": "$700,000 in the answer",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Stations opened",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Which sites open",
+        "s": "The lever: six yes/no choices",
+        "k": "lever",
+        "q": "Can two stations cover all six regions?",
+        "a": "Yes",
+        "ev": "Sites 1 and 3 reach every region within 12 minutes.",
+        "c": []
+       },
+       {
+        "t": "Response-time limit",
+        "s": "The limit: 12 minutes to each region",
+        "k": "limit",
+        "q": "What does one minute less cost?",
+        "a": "$450,000",
+        "ev": "An 11-minute limit needs three stations.",
+        "c": []
+       },
+       {
+        "t": "Siting rules",
+        "s": "The limit: three rules on which sites go together",
+        "k": "limit",
+        "q": "Do the rules change the answer?",
+        "a": "No",
+        "ev": "The plan without the rules is the same.",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Cost of each station",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Cost to open a site",
+        "s": "Fixed: $50,000 to $450,000 by site",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       },
+       {
+        "t": "Travel times",
+        "s": "Fixed: from each site to each region",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
   },
   {
    "slug": "supplier-bid-selection",
@@ -821,7 +897,83 @@
     "A confectionery company buys 12 packaging items through an online auction. Seven suppliers sent 12 bids.",
     "Each bid is a bundle: some of the items at one all-or-nothing price, and the bundles overlap. Procurement also wants to know the cost of each sourcing policy before it commits.",
     "Which bids buy all 12 items at the lowest cost, and what does each policy add?"
-   ]
+   ],
+   "tree_h": "The price of each bid is fixed, so the cost depends on which bids are accepted and on the rules they must meet",
+   "tree": {
+    "t": "Total price of the accepted bids",
+    "s": "$4,470 in the answer",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Bids accepted",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Which bids to accept",
+        "s": "The lever: 12 yes/no choices",
+        "k": "lever",
+        "q": "Is a mix of bids cheaper than one bundle from one supplier?",
+        "a": "Yes",
+        "ev": "$4,470 against $4,639.",
+        "c": []
+       },
+       {
+        "t": "Price of each bid",
+        "s": "Fixed: set by the suppliers in the auction",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Rules that the plan must meet",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Each item is covered",
+        "s": "The limit: 12 items, each in one accepted bid or more",
+        "k": "limit",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       },
+       {
+        "t": "Sourcing policies",
+        "s": "Local supplier, second source, strategic partners",
+        "k": "limit",
+        "q": "What does each policy add?",
+        "a": "$0 to $1,199",
+        "ev": "Local supplier: $0. Second source: $999. Strategic partners: $1,199.",
+        "c": []
+       },
+       {
+        "t": "Minimum order of a supplier",
+        "s": "Supplier 1 wants $500 or more, or nothing",
+        "k": "limit",
+        "q": "Does the minimum change the plan?",
+        "a": "Yes",
+        "ev": "The one-supplier bundle becomes the lowest cost, at $4,639.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
   },
   {
    "slug": "room-protection-pricing",
@@ -857,7 +1009,83 @@
     "A lodge has 10 cabins and sells them at $100 a night. About 100 guests ask for a cabin for each night.",
     "Most guests are leisure travelers who book early. A few business guests come late and will pay about three times more, but by then the cabins are sold.",
     "How many cabins must the lodge hold back for late guests, and at what rate?"
-   ]
+   ],
+   "tree_h": "Revenue comes from two rates; the cabins held back and the full rate are the two levers",
+   "tree": {
+    "t": "Revenue per night",
+    "s": "$1,388 in the answer",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Cabins sold at the low rate",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Cabins open at $100",
+        "s": "The lever: 10 less the cabins held back",
+        "k": "lever",
+        "q": "How many cabins to hold back?",
+        "a": "4",
+        "ev": "Revenue is highest with 4, and within 1% with 5.",
+        "c": []
+       },
+       {
+        "t": "Leisure guests",
+        "s": "Fixed: 95% of guests, who pay $100 on average",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Cabins sold at the full rate",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Full rate",
+        "s": "The lever",
+        "k": "lever",
+        "q": "Which rate earns the most?",
+        "a": "$260",
+        "ev": "Above $300, few business guests will pay.",
+        "c": []
+       },
+       {
+        "t": "Business guests",
+        "s": "Fixed: 5% of guests, who pay $300 on average",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       },
+       {
+        "t": "Held cabins that stay empty",
+        "s": "The limit: the cost of the wait",
+        "k": "limit",
+        "q": "How many stay empty?",
+        "a": "1.0 of 10",
+        "ev": "On an average night, at the best policy.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
   },
   {
    "slug": "seasonal-production-plan",
@@ -893,7 +1121,112 @@
     "A factory has 160 workers and makes one product. The demand forecast for the next 12 months is known.",
     "Demand in the peak month is three times the demand in the low months. The factory can hire, lay off, use overtime or build inventory, and each of the four has a cost.",
     "Which mix of the four gives the lowest cost for the year?"
-   ]
+   ],
+   "tree_h": "Four costs make the total; the plan trades inventory and overtime against changes in the workforce",
+   "tree": {
+    "t": "Cost for the year",
+    "s": "$6.22M in the answer",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Regular labor",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Workers each month",
+        "s": "The lever: 160 at the start, 237 at the peak",
+        "k": "lever",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       },
+       {
+        "t": "Salary",
+        "s": "Fixed: $2,400 a month",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Changes in the workforce",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Hires and layoffs",
+        "s": "The lever. $1,800 for a hire, $1,200 for a layoff",
+        "k": "lever",
+        "q": "Is one workforce size all year cheaper?",
+        "a": "No",
+        "ev": "A level workforce costs 8% more.",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Overtime",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Workers on overtime",
+        "s": "The lever. $3,300 for a worker-month",
+        "k": "lever",
+        "q": "When does overtime pay?",
+        "a": "At the peak only",
+        "ev": "Two months of the year.",
+        "c": []
+       },
+       {
+        "t": "Capacity",
+        "s": "The limit: one overtime shift for each worker; 13,000 units a month",
+        "k": "limit",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Inventory",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Units held at month end",
+        "s": "The lever. $8 for a unit-month",
+        "k": "lever",
+        "q": "Is a plan with no inventory cheaper?",
+        "a": "No",
+        "ev": "Production that follows demand costs 2% more.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
   },
   {
    "slug": "sealed-bid-decision",
@@ -921,7 +1254,74 @@
     "A developer plans a sealed bid of $5M for a property. If the project goes ahead, it is worth $15M for $8M of capital.",
     "A higher bid wins more often but leaves less profit. A win is also not the end: the plan then needs an approval that has a 30% chance, and without it the developer loses 10% of the bid.",
     "Which bid gives the highest expected value?"
-   ]
+   ],
+   "tree_h": "The bid moves two things in opposite directions: the chance to win and the profit of a win",
+   "tree": {
+    "t": "Expected value of the bid",
+    "s": "$67k in the answer",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Chance to win",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Bid amount",
+        "s": "The lever. A higher bid wins more often",
+        "k": "lever",
+        "q": "Which bid is best?",
+        "a": "$4.11M",
+        "ev": "12% chance to win; 20% at $5M.",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Expected result of a win",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Profit if the plan is approved",
+        "s": "$15M less $8M of capital, less the bid",
+        "k": "",
+        "q": "How high can the bid go?",
+        "a": "$5.68M",
+        "ev": "Above this, the expected value is negative.",
+        "c": []
+       },
+       {
+        "t": "Chance of approval",
+        "s": "Fixed: 30%",
+        "k": "fixed",
+        "q": "How low can it go before a $5M bid loses money?",
+        "a": "20%",
+        "ev": "The margin for error is 10 points.",
+        "c": []
+       },
+       {
+        "t": "Loss if the plan is not approved",
+        "s": "The limit: 10% of the bid",
+        "k": "limit",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
   },
   {
    "slug": "telemarketing-call-list",
@@ -949,7 +1349,74 @@
     "A bank sells term deposits by phone. A sale earns $5 net, and a call with no sale costs $1.",
     "Only 11% of calls end in a sale, so a campaign that calls all customers loses money.",
     "Which customers must the bank call, and which model finds them best?"
-   ]
+   ],
+   "tree_h": "Profit is sales less wasted calls; the model ranks the customers and the cutoff decides how many to call",
+   "tree": {
+    "t": "Profit of the campaign",
+    "s": "$2,610 on the test customers",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Sales: $5 each",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Model that ranks the customers",
+        "s": "The lever: seven models tested",
+        "k": "lever",
+        "q": "Does a complex model find more buyers?",
+        "a": "No",
+        "ev": "A plain logistic regression is ahead of the six other models.",
+        "c": []
+       },
+       {
+        "t": "Customers who will buy",
+        "s": "Fixed: 11% of all customers",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Calls with no sale: $1 each",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Call cutoff",
+        "s": "The lever: the lowest probability that gets a call",
+        "k": "lever",
+        "q": "Which cutoff gives the most profit?",
+        "a": "17%",
+        "ev": "The break-even probability: 1 sale in 6 calls.",
+        "c": []
+       },
+       {
+        "t": "Customers called",
+        "s": "16% of customers at this cutoff",
+        "k": "",
+        "q": "Do these calls find most of the buyers?",
+        "a": "Yes",
+        "ev": "62% of all sales.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
   },
   {
    "slug": "product-line-pricing",
@@ -978,7 +1445,83 @@
     "A retailer sells a line of 15 related products. Each product has its own cost and price.",
     "Customers do not react to price in the same way for each product: features such as import origin change the sensitivity. One price rule for the full line leaves profit unused.",
     "Which price for each product gives the highest expected profit, within 20% of the price today?"
-   ]
+   ],
+   "tree_h": "Profit per customer is margin times the chance of a purchase, and the price moves the two in opposite directions",
+   "tree": {
+    "t": "Expected profit per customer",
+    "s": "$1.08 today, $1.42 in the answer",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Margin on each product",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Price",
+        "s": "The lever: 15 prices",
+        "k": "lever",
+        "q": "Which prices change?",
+        "a": "12 up, 3 down",
+        "ev": "Eight go to the +20% limit.",
+        "c": []
+       },
+       {
+        "t": "Unit cost",
+        "s": "Fixed",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Chance that the customer buys the product",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Price sensitivity",
+        "s": "Estimated from 28,044 customer visits",
+        "k": "",
+        "q": "Does the sensitivity differ by product?",
+        "a": "Yes",
+        "ev": "Lower for imported and straight-shape products.",
+        "c": []
+       },
+       {
+        "t": "Price range",
+        "s": "The limit: within 20% of the price today",
+        "k": "limit",
+        "q": "Does the limit decide the answer?",
+        "a": "Yes, for 8 products",
+        "ev": "The model asks for more, outside the range of the data.",
+        "c": []
+       },
+       {
+        "t": "Share of customers who buy",
+        "s": "The limit: what the gain costs",
+        "k": "limit",
+        "q": "Does the share fall?",
+        "a": "Yes",
+        "ev": "From 10.5% to 7.2%.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
   },
   {
    "slug": "marketplace-scale",
@@ -1006,7 +1549,84 @@
     "A vacation rental marketplace operates in 281 local markets. Its growth teams add listings to make each market larger.",
     "More listings can help hosts (more travelers come) or hurt them (more competition). A plain comparison of markets cannot tell, because hosts enter the markets where demand is already good.",
     "What is the effect of more listings on the bookings of a host?"
-   ]
+   ],
+   "tree_h": "A host's bookings depend on demand and on the chance that an inquiry is confirmed; listings act on the second part",
+   "tree": {
+    "t": "Bookings of a host",
+    "s": "",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Travelers who inquire",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Inquiries per day in the market",
+        "s": "Fixed: held constant in the model",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Chance that an inquiry is confirmed",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Listings in the market",
+        "s": "The lever of the growth team",
+        "k": "lever",
+        "q": "Do more listings cut the confirmation rate?",
+        "a": "Yes",
+        "ev": "10% more listings: 1.7 points less, from an average of 21%.",
+        "c": []
+       },
+       {
+        "t": "Mix of listings",
+        "s": "Fixed: rooms, apartments, executive listings, location",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Nights occupied",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Occupancy rate",
+        "s": "",
+        "k": "",
+        "q": "Does occupancy fall too?",
+        "a": "Not clear",
+        "ev": "0.25 points less, but p = 0.13.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
   },
   {
    "slug": "lending-growth-and-losses",
@@ -1028,7 +1648,83 @@
     "A marketplace lender matched borrowers and investors for 230,716 loans from 2007 to 2013.",
     "Volume grew very quickly. From the totals, an investor cannot see if the growth came with more risk, or where the losses are.",
     "How did the platform grow, and which loans went bad?"
-   ]
+   ],
+   "tree_h": "Losses are volume times the charge-off rate; the grade is the split that separates risk best",
+   "tree": {
+    "t": "Credit losses of the platform",
+    "s": "",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Loan volume",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Number of loans",
+        "s": "603 in 2007, 134,814 in 2013",
+        "k": "",
+        "q": "How fast did the platform grow?",
+        "a": "224 times",
+        "ev": "With a stop of some months in 2008.",
+        "c": []
+       },
+       {
+        "t": "Average loan",
+        "s": "$8,255 to $14,707",
+        "k": "",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Charge-off rate",
+      "s": "15.5% of completed loans",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "By grade",
+        "s": "The lever for an investor: which grades to buy",
+        "k": "lever",
+        "q": "Does the grade separate risk?",
+        "a": "Yes",
+        "ev": "6% for grade A, 37% for grade G.",
+        "c": []
+       },
+       {
+        "t": "By year of issue",
+        "s": "",
+        "k": "",
+        "q": "Did risk rise with growth?",
+        "a": "In part",
+        "ev": "12.6% for 2009 loans, 16.2% for 2012 loans.",
+        "c": []
+       },
+       {
+        "t": "By state",
+        "s": "",
+        "k": "",
+        "q": "Do states differ?",
+        "a": "Yes",
+        "ev": "8.9% to 19.3% among states with 500 loans or more.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
   },
   {
    "slug": "classroom-crowdfunding",
@@ -1050,7 +1746,74 @@
     "Teachers post classroom projects on a crowdfunding site, and donors choose which projects to fund. 1.2 million projects were posted from 2002 to 2016.",
     "About 3 of 10 projects do not reach their goal. Teachers do not know which of their choices change the chance.",
     "Which projects get funded, and what can a teacher control?"
-   ]
+   ],
+   "tree_h": "Some drivers of funding are in the hands of the teacher; the price of the request is the strongest",
+   "tree": {
+    "t": "Chance that a project is funded",
+    "s": "70% of closed projects",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "What the teacher controls",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Price of the request",
+        "s": "The lever",
+        "k": "lever",
+        "q": "Does a lower price help?",
+        "a": "Yes",
+        "ev": "90% funded below $200, 45% above $1,500.",
+        "c": []
+       },
+       {
+        "t": "Type of resource",
+        "s": "The lever",
+        "k": "lever",
+        "q": "Does the resource matter?",
+        "a": "Yes",
+        "ev": "Books 77%, technology 63%.",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "What the teacher does not control",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Poverty level of the school",
+        "s": "Fixed",
+        "k": "fixed",
+        "q": "Are the poorest schools funded less?",
+        "a": "No",
+        "ev": "73% for the highest poverty level, 67% to 68% for the others.",
+        "c": []
+       },
+       {
+        "t": "Year",
+        "s": "Fixed",
+        "k": "fixed",
+        "q": "Did the rate fall as the site grew?",
+        "a": "No",
+        "ev": "Near 70% from 2010 to 2016.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
   },
   {
    "type": "work",
