@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which of 75 ATM locations are worth their cost: technical document</title>
+<meta name="description" content="An owned ATM pays for itself above about 2,100 transactions a month, and deposits decide which locations the bank cannot remove.">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<nav class="bar" aria-label="Main">
+  <div class="wrap">
+    <a class="home" href="/">Adrian Do</a>
+    <ul><li><a href="/">Home</a></li><li><a href="/projects/" aria-current="page">Projects</a></li><li><a href="/resume/">Resume</a></li><li><a href="/skills/">Skills</a></li><li><a href="/contact/">Contact</a></li></ul>
+  </div>
+</nav>
+<main>
+  <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / <a href="/projects/atm-location-value/">Which of 75 ATM locations are worth their cost</a> / Technical document</p>
+    <h1>Which of 75 ATM locations are worth their cost: technical document</h1>
+    <div class="dls"><a class="dl" href="https://github.com/adriando-umich/portfolio/tree/main/analysis/atm-location-value"><i class="ico" style="--i:url(/assets/icons/notebook.svg)" aria-hidden="true"></i><span><b>Model code</b><em>Python, on GitHub</em></span></a><a class="dl" href="/projects/atm-location-value/#deck"><i class="ico" style="--i:url(/assets/icons/deck.svg)" aria-hidden="true"></i><span><b>Board deck</b><em>For leadership</em></span></a></div>
+  </div></div>
+  <div class="body"><div class="wrap"><section class="part"><h2>Three tests, with rules set before the analysis</h2>
+      <p class="lede">The champion is &quot;keep all 75 locations&quot;. The challenger is the break-even rule with the access limit. The first test passes by design: the rule removes only locations with a negative NPV.</p>
+      <div class="table-scroll"><table class="eval"><thead><tr><th scope="col">Test</th><th scope="col">Measure</th><th scope="col">Result</th><th scope="col">Rule</th><th scope="col">Pass</th></tr></thead><tbody><tr><td><b>1. Value</b></td><td>5-year network NPV, rule against &quot;keep all 75&quot;, at three cost levels</td><td>+$0.18M, +$0.38M, +$0.62M</td><td>Higher at each cost level</td><td class="yes"><b>Yes</b></td></tr><tr><td><b>2. Access</b></td><td>Residents with a Capital One deposit ATM in 2 miles</td><td>52.8% to 51.8% (0.96 points)</td><td>Decrease of 1 point or less</td><td class="yes"><b>Yes</b></td></tr><tr><td><b>3. Stability</b></td><td>Locations that change decision when relationship value moves 50%</td><td>4%</td><td>20% or less</td><td class="yes"><b>Yes</b></td></tr></tbody></table></div></section><section class="part"><h2>Results</h2><div class="brief"><section class="bpart"><h3>What is real data, and what is an assumption</h3>
+<p>The locations, the distances and the population are real. The transaction volumes, the transaction mix and the costs are assumptions, because a bank does not publish them. The results show a rule and its sensitivity. They do not show the real economics of a named site.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Input</th><th>Source</th><th>Type</th></tr></thead>
+<tbody>
+<tr><th>75 locations with a Capital One ATM, in 50 miles of central Washington</th><td>Capital One public location finder, November 2026</td><td>Real</td></tr>
+<tr><th>Partner ATMs near each location (Allpoint and MoneyPass)</th><td>Capital One public location finder</td><td>Real</td></tr>
+<tr><th>Residents by census tract (3,879 tracts in DC, Maryland and Virginia)</th><td>2020 Census, TIGERweb</td><td>Real</td></tr>
+<tr><th>Transactions for each ATM, share of deposits, share of non-customers</th><td>Industry studies, adjusted to today; own estimates</td><td>Assumption</td></tr>
+<tr><th>Operating cost, rent, partner cost, value of a relationship</th><td>Industry studies; own estimates</td><td>Assumption</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="bpart"><h3>A partner ATM is near for a withdrawal, but not for a deposit</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>Measure</th><th>Result</th></tr></thead>
+<tbody>
+<tr><th>Locations at a branch / at a Cafe / stand-alone</th><td>65 / 3 / 7</td></tr>
+<tr><th>Locations that accept deposits</th><td>72 of 75</td></tr>
+<tr><th>Median distance to the nearest partner ATM</th><td>0.12 miles</td></tr>
+<tr><th>Locations with a partner ATM in 0.5 miles</th><td>69 of 75</td></tr>
+<tr><th>Locations with a partner ATM that accepts cash in 1 mile</th><td>28 of 75</td></tr>
+<tr><th>Deposit locations with no other deposit ATM in 2 miles (owned, or partner that accepts cash)</th><td>22 of 72</td></tr>
+</tbody></table></div>
+<p>Distances are straight lines. No partner ATM in the area lists check deposits.</p>
+</section>
+
+<section class="bpart"><h3>The model: value lost if the ATM is removed, minus the cost avoided</h3>
+<p>For each location, the model calculates the 5-year NPV of the owned ATM at a 10% discount rate. Volume falls 3.2% each year, the rate of US ATM withdrawals from 2021 to 2024.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Driver</th><th>Base</th><th>Low</th><th>High</th><th>Source</th></tr></thead>
+<tbody>
+<tr><th>Transactions each month, ATM at a branch</th><td>2,600</td><td>1,300</td><td>3,900</td><td>Dove study 2006 (4,500), adjusted by the fall in US withdrawals</td></tr>
+<tr><th>Transactions each month, stand-alone ATM</th><td>1,200</td><td>600</td><td>1,800</td><td>Dove study 2006 (1,996), same adjustment</td></tr>
+<tr><th>Operating cost each month, without rent ($)</th><td>1,800</td><td>1,200</td><td>2,400</td><td>Dove study 2006 ($1,131), adjusted for inflation</td></tr>
+<tr><th>Fee for a non-customer withdrawal ($)</th><td>3.00</td><td>3.00</td><td>3.00</td><td>Capital One location page</td></tr>
+<tr><th>Cost for each withdrawal that moves to a partner ATM ($)</th><td>0.60</td><td>0.40</td><td>1.00</td><td>Trade press on ATM interchange</td></tr>
+<tr><th>Profit of a primary checking relationship each year ($)</th><td>525</td><td>100</td><td>950</td><td>Bank Director: $850 revenue, $325 cost to maintain</td></tr>
+<tr><th>Share of transactions that are deposits</th><td>15%</td><td>5%</td><td>25%</td><td>Own estimate</td></tr>
+<tr><th>Share of withdrawals by non-customers</th><td>20%</td><td>10%</td><td>40%</td><td>Own estimate</td></tr>
+<tr><th>Deposit customers who leave in one year, if no deposit ATM is near</th><td>10%</td><td>2%</td><td>25%</td><td>Own estimate</td></tr>
+<tr><th>Rent each month, stand-alone ATM ($)</th><td>500</td><td>250</td><td>1,000</td><td>Own estimate</td></tr>
+</tbody></table></div>
+<p>Volume for each location is the base volume of its type multiplied by a volume index. The index is the residents in 2 miles divided by the mean of the type, limited to 0.5 to 1.5. Residents are a proxy. The index does not see workers, students or hospital visitors.</p>
+</section>
+
+<section class="bpart"><h3>Withdrawals give 93% of the value, so the first idea was wrong</h3>
+<p>The first idea was that an owned ATM has value because of deposits and relationships. The model rejects it.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Item, all 75 locations, year 1</th><th>$ each year</th><th>Share of value</th></tr></thead>
+<tbody>
+<tr><th>Fee income from non-customers</th><td>1.03M</td><td>52%</td></tr>
+<tr><th>Cost avoided because customers do not move to partner ATMs</th><td>0.82M</td><td>41%</td></tr>
+<tr><th>Relationship value at the 22 locations with no deposit substitute</th><td>0.14M</td><td>7%</td></tr>
+<tr><th>Operating cost and rent</th><td>1.66M</td><td></td></tr>
+</tbody></table></div>
+</section>
+
+<section class="bpart"><h3>Break-even volume: the rule for one ATM</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>Transactions each month at which the NPV is zero</th><th>Another deposit ATM in 2 miles</th><th>No other deposit ATM in 2 miles</th></tr></thead>
+<tbody>
+<tr><th>At a branch or Cafe (no separate rent)</th><td>2,078</td><td>1,530</td></tr>
+<tr><th>Stand-alone (rent $500 each month)</th><td>2,655</td><td>1,956</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="bpart"><h3>The access limit stops the rule at 8 of the 34 locations below break-even</h3>
+<p>Access is the share of residents who have a Capital One deposit ATM in 2 miles of the centre of their census tract. The base is 6.22 million residents in 5 miles of a Capital One ATM. The rule removes the location with the lowest NPV first, and stops when the next removal would decrease access by more than 1 point.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Measure</th><th>Result</th></tr></thead>
+<tbody>
+<tr><th>Network NPV, keep all 75</th><td>$0.81M</td></tr>
+<tr><th>Network NPV, break-even rule with the access limit</th><td>$1.19M</td></tr>
+<tr><th>Locations below break-even</th><td>34 (27 at a branch, 7 stand-alone)</td></tr>
+<tr><th>Removed by the rule</th><td>8 (6 stand-alone, 2 at a branch)</td></tr>
+<tr><th>Below break-even, but protected by the access limit</th><td>26</td></tr>
+<tr><th>Residents with a deposit ATM in 2 miles</th><td>52.8% to 51.8%</td></tr>
+</tbody></table></div>
+<p>The order "lowest NPV first" is simple. It is not the best use of the access limit.</p>
+</section>
+
+<section class="bpart"><h3>Scenarios: locations below break-even, of 75</h3>
+<p>Two numbers decide the count: the volume and the share of withdrawals from non-customers. The bank knows both for each ATM. These scenarios were added after the first results. They are not part of the three tests that were set before the analysis.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Volume against the base</th><th>10% non-customers</th><th>20%</th><th>30%</th><th>40%</th></tr></thead>
+<tbody>
+<tr><th>x0.5</th><td>75</td><td>75</td><td>61</td><td>53</td></tr>
+<tr><th>x0.75</th><td>59</td><td>49</td><td>38</td><td>32</td></tr>
+<tr><th>x1.0</th><td>46</td><td>34</td><td>27</td><td>12</td></tr>
+<tr><th>x1.25</th><td>34</td><td>15</td><td>10</td><td>5</td></tr>
+<tr><th>x1.5</th><td>17</td><td>10</td><td>5</td><td>4</td></tr>
+</tbody></table></div>
+<p>Across the three assumptions that were planned for the sensitivity test (customers who leave, share of deposits, operating cost), the count is from 5 to 58.</p>
+</section>
+
+<section class="bpart"><h3>Next step: a test of offers on the ATM screen</h3>
+<p>The model sets the value of offers on the ATM screen to zero, because no public data measures it. A test can measure it: show an offer at a random half of the locations, keep the other half as control, and compare the number of new primary relationships. The 26 protected locations are the first place to run it, because more volume or more relationships there change the economics with no loss of access.</p>
+</section>
+</div></section><section class="part"><h2>What each tool does in this case</h2><div class="table-scroll"><table><tbody><tr><td><b>Python</b></td><td>Measures distances, residents in reach and the 5-year NPV of each location, with the standard library only.</td></tr><tr><td><b>Financial modeling</b></td><td>One NPV model with seven drivers, a break-even volume and a scenario table.</td></tr><tr><td><b>Optimization</b></td><td>Removes locations in order of NPV while the access limit holds.</td></tr></tbody></table></div></section></div></div>
+</main>
+<footer>
+  <div class="wrap">
+    <p class="links"><a href="mailto:adriando@umich.edu">adriando@umich.edu</a><a href="https://www.linkedin.com/in/dzungdotran/">LinkedIn</a><a href="https://github.com/adriando-umich">GitHub</a></p>
+    <p class="note">The case studies use public data sets, not data from an employer or a client.</p>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

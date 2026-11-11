@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which of 75 ATM locations are worth their cost: Adrian Do</title>
+<meta name="description" content="An owned ATM pays for itself above about 2,100 transactions a month, and deposits decide which locations the bank cannot remove.">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<nav class="bar" aria-label="Main">
+  <div class="wrap">
+    <a class="home" href="/">Adrian Do</a>
+    <ul><li><a href="/">Home</a></li><li><a href="/projects/" aria-current="page">Projects</a></li><li><a href="/resume/">Resume</a></li><li><a href="/skills/">Skills</a></li><li><a href="/contact/">Contact</a></li></ul>
+  </div>
+</nav>
+<main>
+  <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / Which of 75 ATM locations are worth their cost</p>
+    <p class="kw">ATM and cash strategy · Physical network</p>
+    <h1>Which of 75 ATM locations are worth their cost</h1>
+    <p class="sub result">An owned ATM pays for itself above about 2,100 transactions a month, and deposits decide which locations the bank cannot remove.</p>
+    <div class="case-facts"><p class="facts"><b>Self-built case study.</b> Capital One public location finder, 2020 Census and industry studies. Volumes and costs are assumptions. Not client or employer work.</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/python.svg)" aria-hidden="true"></i>Python</span></div></div>
+    <div class="dls"><a class="dl" href="#deck"><i class="ico" style="--i:url(/assets/icons/deck.svg)" aria-hidden="true"></i><span><b>Board deck</b><em>For leadership</em></span></a><a class="dl" href="brief/"><i class="ico" style="--i:url(/assets/icons/doc.svg)" aria-hidden="true"></i><span><b>Technical document</b><em>Method, results and model code</em></span></a></div>
+  </div></div>
+  <div class="body"><div class="wrap">
+    <section id="deck">
+      <div class="deck">
+        <div class="stage" tabindex="0" aria-roledescription="slide deck" aria-label="Board deck, 7 slides. Use the arrow keys to change slide."><section class="slide" data-part="Summary">
+  <h3>An owned ATM pays for itself above about 2,100 transactions a month</h3>
+  <div class="s-body">
+    <div class="kpis">
+      <div><p class="k-label">Break-even volume</p><p class="k-num point">2,100</p><p class="k-sub">transactions a month; 1,500 at an only deposit point</p></div>
+      <div><p class="k-label">Locations below break-even</p><p class="k-num">34 of 75</p><p class="k-sub">with the base assumptions</p></div>
+      <div><p class="k-label">Can go inside the access limit</p><p class="k-num">8</p><p class="k-sub">the other 26 are the only deposit point for their residents</p></div>
+    </div>
+    <div class="ask"><b>Decision:</b> use the break-even volume as the rule for each ATM, with the bank's own volumes.</div>
+  </div>
+  <p class="s-src">Source: Capital One location finder (November 2026); 2020 Census; analysis. Volumes and costs are assumptions; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Situation and complication">
+  <h3>A partner ATM is within half a mile of 69 of the 75 owned ATM locations</h3>
+  <div class="s-body">
+    <p class="s-bar">Washington area: 75 locations with a Capital One ATM (65 at a branch, 3 at a Cafe, 7 stand-alone)</p>
+    <div class="pillars three">
+      <div class="pillar"><p class="p-step">Fee-free ATMs for customers</p><p class="p-num">70,000+</p><p class="p-sub">owned and partner ATMs in the US</p></div>
+      <div class="pillar"><p class="p-step">ATMs that the bank owns</p><p class="p-num">1,300</p><p class="p-sub">approximately; less than 2% of the network</p></div>
+      <div class="pillar"><p class="p-step">Distance to the nearest partner ATM</p><p class="p-num">0.12 mi</p><p class="p-sub">median, for the 75 locations</p></div>
+    </div>
+  </div>
+  <p class="s-src">Source: Capital One location finder (November 2026); 2020 Census; analysis. Volumes and costs are assumptions; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Answer">
+  <p class="s-kicker">Q: At which locations is an owned ATM worth more than its cost?</p>
+  <h3>The break-even volume is lower where the ATM is the only deposit point</h3>
+  <div class="s-body two">
+    <div class="s-main">
+      <p class="c-title">Break-even volume for one ATM</p>
+      <p class="c-unit">Transactions each month at which the 5-year NPV is zero</p>
+      <div class="hbars">
+        <p class="h-group">At a branch or Cafe</p>
+        <div class="hrow"><span>Another deposit ATM near</span><div class="h-track"><div class="h-fill point" style="width:70.4%"></div><b class="point">2,078</b></div></div>
+        <div class="hrow"><span>Only deposit point</span><div class="h-track"><div class="h-fill gray" style="width:51.9%"></div><b>1,530</b></div></div>
+        <p class="h-group">Stand-alone, with rent</p>
+        <div class="hrow"><span>Another deposit ATM near</span><div class="h-track"><div class="h-fill gray" style="width:90%"></div><b>2,655</b></div></div>
+        <div class="hrow"><span>Only deposit point</span><div class="h-track"><div class="h-fill gray" style="width:66.3%"></div><b>1,956</b></div></div>
+      </div>
+    </div>
+    <div class="s-side">
+      <p class="k-num point">–26%</p>
+      <p class="k-sub">volume that an only deposit point needs, against a location with a substitute</p>
+      <p class="s-head">"Near" in this case</p>
+      <ul>
+        <li>2 miles, straight line</li>
+        <li>Owned ATM, or partner ATM that accepts cash</li>
+      </ul>
+    </div>
+  </div>
+  <p class="s-src">Source: Capital One location finder (November 2026); 2020 Census; analysis. Volumes and costs are assumptions; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Evidence">
+  <h3>Withdrawals give 93% of the value of an owned ATM, and deposits give 7%</h3>
+  <div class="s-body two">
+    <div class="s-main">
+      <p class="c-title">Value of the 75 owned ATMs, year 1</p>
+      <p class="c-unit">Share of total value; operating cost and rent are $1.66M</p>
+      <div class="hbars">
+        <div class="hrow"><span>Fees from non-customers</span><div class="h-track"><div class="h-fill point" style="width:78%"></div><b class="point">52% ($1.03M)</b></div></div>
+        <div class="hrow"><span>Partner cost avoided</span><div class="h-track"><div class="h-fill point" style="width:61.5%"></div><b class="point">41% ($0.82M)</b></div></div>
+        <div class="hrow"><span>Deposit relationships</span><div class="h-track"><div class="h-fill gray" style="width:10.5%"></div><b>7% ($0.14M)</b></div></div>
+      </div>
+      <div class="sowhat">Deposits do not decide the value. They decide which locations the bank cannot remove.</div>
+    </div>
+    <div class="s-side">
+      <p class="k-num point">93%</p>
+      <p class="k-sub">of the value comes from withdrawals</p>
+      <p class="s-head">What this changes</p>
+      <ul>
+        <li>The first idea was that deposits carry the value</li>
+        <li>The model rejects it</li>
+      </ul>
+    </div>
+  </div>
+  <p class="s-src">Source: Capital One location finder (November 2026); 2020 Census; analysis. Volumes and costs are assumptions; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Evidence">
+  <h3>34 locations are below break-even, but only 8 can go inside the access limit</h3>
+  <div class="s-body two">
+    <div class="s-main">
+      <p class="c-title">Locations with an owned ATM</p>
+      <p class="c-unit">Number of locations, base assumptions</p>
+      <div class="vbars" style="height:300px;gap:36px">
+        <div class="vbar"><p class="b-val gray">75</p><div class="b-fill gray" style="height:240px"></div><p class="b-cat">All locations</p></div>
+        <div class="vbar"><p class="b-val gray">34</p><div class="b-fill gray" style="height:109px"></div><p class="b-cat">Below break-even</p></div>
+        <div class="vbar"><p class="b-val gray">26</p><div class="b-fill gray" style="height:83px"></div><p class="b-cat">Protected</p></div>
+        <div class="vbar"><p class="b-val point">8</p><div class="b-fill point" style="height:26px"></div><p class="b-cat">Can go</p></div>
+      </div>
+    </div>
+    <div class="s-side">
+      <p class="k-num point">0.96</p>
+      <p class="k-sub">points of residents lose a deposit ATM in 2 miles; the limit is 1 point</p>
+      <p class="s-head">Who the 8 are</p>
+      <ul>
+        <li>6 stand-alone ATMs</li>
+        <li>2 ATMs at branches</li>
+      </ul>
+    </div>
+  </div>
+  <p class="s-src">Source: Capital One location finder (November 2026); 2020 Census; analysis. Volumes and costs are assumptions; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Scenarios">
+  <h3>The answer moves with two numbers that the bank knows for each ATM</h3>
+  <div class="s-body two">
+    <div class="s-main">
+      <p class="c-title">Locations below break-even, of 75</p>
+      <p class="c-unit">By transaction volume and by share of withdrawals from non-customers</p>
+      <table class="s-grid">
+        <thead><tr><th scope="col">Volume against the base</th><th scope="col">10%</th><th scope="col">20%</th><th scope="col">30%</th><th scope="col">40%</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Half</th><td>75</td><td>75</td><td>61</td><td>53</td></tr>
+          <tr><th scope="row">3/4</th><td>59</td><td>49</td><td>38</td><td>32</td></tr>
+          <tr><th scope="row">Base</th><td>46</td><td class="point">34</td><td>27</td><td>12</td></tr>
+          <tr><th scope="row">1 1/4</th><td>34</td><td>15</td><td>10</td><td>5</td></tr>
+          <tr><th scope="row">1 1/2</th><td>17</td><td>10</td><td>5</td><td>4</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="s-side">
+      <p class="k-num">4 to 75</p>
+      <p class="k-sub">locations below break-even, across the range</p>
+      <p class="s-head">How to read it</p>
+      <ul>
+        <li>Find the row and column of the real numbers</li>
+        <li>The rule stays the same; the count changes</li>
+      </ul>
+    </div>
+  </div>
+  <p class="s-src">Source: Capital One location finder (November 2026); 2020 Census; analysis. Volumes and costs are assumptions; illustrative results.</p>
+</section>
+<section class="slide" data-part="Recommendation">
+  <h3>Apply the break-even rule with the bank&#x27;s own volumes, and protect the only deposit points</h3>
+  <div class="s-body halves">
+    <div><p class="s-bar">Actions</p><ol class="s-acts"><li class="main"><b>Use the break-even volume as the rule</b><span>about 2,100 transactions a month; start with the stand-alone ATMs</span></li><li class=""><b>Keep the only deposit points and lower their cost</b><span>26 locations are below break-even but protected by the access limit</span></li><li class=""><b>Test offers on the ATM screen</b><span>a random half of the locations, the other half as control</span></li></ol></div>
+    <div><p class="s-bar">Risks and controls</p><table class="s-risks"><tbody><tr><td>Volumes and costs are assumptions, not bank data</td><td>Run the rule with the real volume and cost of each ATM before any decision</td></tr><tr><td>The share of non-customers moves the answer from 12 to 46 locations</td><td>Measure it for each ATM from the transaction log</td></tr><tr><td>Residents are a proxy for volume</td><td>Hospital, campus and office ATMs need their real volume</td></tr></tbody></table></div>
+  </div>
+  <p class="s-src">Source: analysis. Public data; illustrative results.</p>
+</section></div>
+        <div class="deckbar"><button type="button" class="prev" aria-label="Previous slide">Previous</button><span class="count" aria-live="polite">1 / 7</span><button type="button" class="next" aria-label="Next slide">Next</button><button type="button" class="full">Full screen</button></div>
+      </div></section><section class="part" id="tree"><h2>The value of an owned ATM splits into volume, value of each transaction and cost</h2>
+      <div class="ltree-scroll"><ul class="ltree"><li><div class="node root"><b>5-year NPV of the owned ATM at one location</b><span>Volume x value of each transaction, minus cost</span></div><ul><li><div class="node "><b>Transactions each month</b><span>Assumption: 2,600 at a branch, 1,200 stand-alone, scaled by residents in 2 miles</span></div><div class="find"><p class="q">Is the volume above break-even at each location?</p><p class="a"><b>No.</b> 34 of 75 locations are below, with the base values.</p></div></li><li><div class="node "><b>Value of each transaction</b></div><ul><li><div class="node "><b>Fee from non-customers</b><span>$3 a withdrawal; 20% of withdrawals (assumption)</span></div><div class="find"><p class="q">Does fee income pay the ATM cost alone?</p><p class="a"><b>No.</b> $1.03M a year against a cost of $1.66M. It is 52% of the value.</p></div></li><li><div class="node "><b>Cost avoided on customer withdrawals</b><span>$0.60 for each withdrawal that moves to a partner ATM</span></div><div class="find"><p class="q">Is a partner ATM near for a withdrawal?</p><p class="a"><b>Yes.</b> In 0.5 miles of 69 of 75 locations. This item is 41% of the value.</p></div></li><li><div class="node limit"><b>Relationships of deposit customers</b><span>The limit: residents near a deposit ATM</span></div><div class="find"><p class="q">Does each location have another deposit ATM in 2 miles?</p><p class="a"><b>No.</b> 22 of 72 deposit locations have none. This item is 7% of the value.</p></div></li><li><div class="node "><b>Offers on the ATM screen</b><span>Not known. The recommended test measures it.</span></div></li></ul></li><li><div class="node "><b>Cost each month</b></div><ul><li><div class="node lever"><b>Cash service and maintenance</b><span>The lever: $1,800 a month (assumption)</span></div><div class="find"><p class="q">Does the answer hold if this cost changes?</p><p class="a"><b>No.</b> Below break-even: 11 locations at $1,200, 49 at $2,400.</p></div></li><li><div class="node lever"><b>Rent</b><span>Stand-alone locations only: $500 a month (assumption)</span></div></li></ul></li></ul></li></ul></div>
+      <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p></section>
+    <nav class="pager" aria-label="More projects"><a href="/projects/marketing-offer-targeting/"><span>Previous project</span><b>Which customers to send an email offer to</b></a><a class="next" href="/projects/fire-station-siting/"><span>Next project</span><b>Where to build fire stations so every region is within 12 minutes</b></a></nav>
+  </div></div>
+</main>
+<footer>
+  <div class="wrap">
+    <p class="links"><a href="mailto:adriando@umich.edu">adriando@umich.edu</a><a href="https://www.linkedin.com/in/dzungdotran/">LinkedIn</a><a href="https://github.com/adriando-umich">GitHub</a></p>
+    <p class="note">The case studies use public data sets, not data from an employer or a client.</p>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

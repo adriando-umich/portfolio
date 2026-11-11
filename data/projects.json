@@ -332,6 +332,10 @@
    "tasks": [
     "risk",
     "ml"
+   ],
+   "kw": [
+    "Credit risk",
+    "Approval strategy"
    ]
   },
   {
@@ -575,6 +579,10 @@
    "tasks": [
     "risk",
     "ml"
+   ],
+   "kw": [
+    "Fraud",
+    "Decline and review policy"
    ]
   },
   {
@@ -750,6 +758,247 @@
    "tasks": [
     "experiment",
     "stats"
+   ],
+   "kw": [
+    "Marketing",
+    "Test and learn"
+   ]
+  },
+  {
+   "slug": "atm-location-value",
+   "type": "case",
+   "short": "ATM case",
+   "kw": [
+    "ATM and cash strategy",
+    "Physical network"
+   ],
+   "title": "Which of 75 ATM locations are worth their cost",
+   "result": "An owned ATM pays for itself above about 2,100 transactions a month, and deposits decide which locations the bank cannot remove.",
+   "num": "2,100 a month",
+   "what": "transactions that an owned ATM needs to pay for itself",
+   "tools": [
+    "python"
+   ],
+   "data": "Capital One public location finder, 2020 Census and industry studies. Volumes and costs are assumptions",
+   "question": "At which locations is an owned ATM worth more than its cost?",
+   "answer": "Above about 2,100 transactions a month. With the base assumptions, 34 of 75 locations are below that line, but only 8 can go inside the access limit.",
+   "why": "Why? Three reasons, strongest first",
+   "keyline": [
+    {
+     "h": "Withdrawals carry the value, so volume decides the economics",
+     "pts": [
+      "Fee income and avoided partner cost give <b>93%</b> of the value. Deposits give 7%.",
+      "Break-even: <b>2,078</b> transactions a month at a branch, 1,530 where the ATM is the only deposit point in 2 miles.",
+      "A partner ATM is in 0.5 miles of <b>69 of 75</b> locations."
+     ]
+    },
+    {
+     "h": "Deposits decide which locations the bank cannot remove",
+     "pts": [
+      "<b>22 of 72</b> deposit locations have no other deposit ATM in 2 miles.",
+      "The access limit stops the rule at <b>8</b> of the 34 locations below break-even.",
+      "Residents near a deposit ATM: 52.8% to <b>51.8%</b>, inside the 1-point limit."
+     ]
+    },
+    {
+     "h": "The result moves with two numbers that the bank knows",
+     "pts": [
+      "Locations below break-even: <b>34</b> at the base volume, 10 at 1.5 times the volume, 75 at half.",
+      "At 40% non-customers: <b>12</b>. At 10%: 46.",
+      "Volumes and costs are assumptions from industry studies, not bank data."
+     ]
+    }
+   ],
+   "uses": [
+    [
+     "Python",
+     "Measures distances, residents in reach and the 5-year NPV of each location, with the standard library only."
+    ],
+    [
+     "Financial modeling",
+     "One NPV model with seven drivers, a break-even volume and a scenario table."
+    ],
+    [
+     "Optimization",
+     "Removes locations in order of NPV while the access limit holds."
+    ]
+   ],
+   "scqa": [
+    [
+     "Situation",
+     "What the reader knows",
+     "Capital One checking customers get cash free of charge at 70,000+ ATMs. The bank owns about 1,300 of them. In the Washington area, 75 locations have an owned ATM."
+    ],
+    [
+     "Complication",
+     "What makes the decision hard",
+     "A partner ATM is within half a mile of 69 of the 75 locations. Each owned ATM has a cost each month, and the bank needs one rule to decide where an owned ATM is worth that cost."
+    ],
+    [
+     "Question",
+     "The decision",
+     "Q: At which locations is an owned ATM worth more than its cost?"
+    ],
+    [
+     "Answer",
+     "The recommendation and its effect",
+     "Above about <b>2,100</b> transactions a month, an owned ATM pays for itself. With the base assumptions, <b>34</b> of 75 locations are below that line, but only <b>8</b> can go inside the access limit. For the other 26, the lever is cost and volume. Next step: apply the rule with the bank's own volumes."
+    ]
+   ],
+   "tree": {
+    "t": "5-year NPV of the owned ATM at one location",
+    "s": "Volume x value of each transaction, minus cost",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Transactions each month",
+      "s": "Assumption: 2,600 at a branch, 1,200 stand-alone, scaled by residents in 2 miles",
+      "k": "",
+      "q": "Is the volume above break-even at each location?",
+      "a": "No",
+      "ev": "34 of 75 locations are below, with the base values.",
+      "c": []
+     },
+     {
+      "t": "Value of each transaction",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Fee from non-customers",
+        "s": "$3 a withdrawal; 20% of withdrawals (assumption)",
+        "k": "",
+        "q": "Does fee income pay the ATM cost alone?",
+        "a": "No",
+        "ev": "$1.03M a year against a cost of $1.66M. It is 52% of the value.",
+        "c": []
+       },
+       {
+        "t": "Cost avoided on customer withdrawals",
+        "s": "$0.60 for each withdrawal that moves to a partner ATM",
+        "k": "",
+        "q": "Is a partner ATM near for a withdrawal?",
+        "a": "Yes",
+        "ev": "In 0.5 miles of 69 of 75 locations. This item is 41% of the value.",
+        "c": []
+       },
+       {
+        "t": "Relationships of deposit customers",
+        "s": "The limit: residents near a deposit ATM",
+        "k": "limit",
+        "q": "Does each location have another deposit ATM in 2 miles?",
+        "a": "No",
+        "ev": "22 of 72 deposit locations have none. This item is 7% of the value.",
+        "c": []
+       },
+       {
+        "t": "Offers on the ATM screen",
+        "s": "Not known. The recommended test measures it.",
+        "k": "",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Cost each month",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Cash service and maintenance",
+        "s": "The lever: $1,800 a month (assumption)",
+        "k": "lever",
+        "q": "Does the answer hold if this cost changes?",
+        "a": "No",
+        "ev": "Below break-even: 11 locations at $1,200, 49 at $2,400.",
+        "c": []
+       },
+       {
+        "t": "Rent",
+        "s": "Stand-alone locations only: $500 a month (assumption)",
+        "k": "lever",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     }
+    ]
+   },
+   "tree_h": "The value of an owned ATM splits into volume, value of each transaction and cost",
+   "evaluation": [
+    [
+     "1. Value",
+     "5-year network NPV, rule against \"keep all 75\", at three cost levels",
+     "+$0.18M, +$0.38M, +$0.62M",
+     "Higher at each cost level",
+     "Yes"
+    ],
+    [
+     "2. Access",
+     "Residents with a Capital One deposit ATM in 2 miles",
+     "52.8% to 51.8% (0.96 points)",
+     "Decrease of 1 point or less",
+     "Yes"
+    ],
+    [
+     "3. Stability",
+     "Locations that change decision when relationship value moves 50%",
+     "4%",
+     "20% or less",
+     "Yes"
+    ]
+   ],
+   "eval_h": "Three tests, with rules set before the analysis",
+   "eval_lede": "The champion is \"keep all 75 locations\". The challenger is the break-even rule with the access limit. The first test passes by design: the rule removes only locations with a negative NPV.",
+   "eval_note": "",
+   "code": "https://github.com/adriando-umich/portfolio/tree/main/analysis/atm-location-value",
+   "recs": [
+    [
+     "Use the break-even volume as the rule",
+     "about 2,100 transactions a month; start with the stand-alone ATMs"
+    ],
+    [
+     "Keep the only deposit points and lower their cost",
+     "26 locations are below break-even but protected by the access limit"
+    ],
+    [
+     "Test offers on the ATM screen",
+     "a random half of the locations, the other half as control"
+    ]
+   ],
+   "risks": [
+    [
+     "Volumes and costs are assumptions, not bank data",
+     "Run the rule with the real volume and cost of each ATM before any decision"
+    ],
+    [
+     "The share of non-customers moves the answer from 12 to 46 locations",
+     "Measure it for each ATM from the transaction log"
+    ],
+    [
+     "Residents are a proxy for volume",
+     "Hospital, campus and office ATMs need their real volume"
+    ]
+   ],
+   "rec_title": "Apply the break-even rule with the bank's own volumes, and protect the only deposit points",
+   "industry": "banking",
+   "tasks": [
+    "model",
+    "optimize"
    ]
   },
   {

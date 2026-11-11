@@ -1,0 +1,25 @@
+{
+ "evaluation": [
+  [
+   "1. Value",
+   "5-year network NPV, rule against \"keep all 75\", at three cost levels",
+   "+$0.18M, +$0.38M, +$0.62M",
+   "Higher at each cost level",
+   "Yes"
+  ],
+  [
+   "2. Access",
+   "Residents with a Capital One deposit ATM in 2 miles",
+   "52.8% to 51.8% (0.96 points)",
+   "Decrease of 1 point or less",
+   "Yes"
+  ],
+  [
+   "3. Stability",
+   "Locations that change decision when relationship value moves 50%",
+   "4%",
+   "20% or less",
+   "Yes"
+  ]
+ ]
+}

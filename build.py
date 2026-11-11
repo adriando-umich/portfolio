@@ -68,6 +68,10 @@ def page(path, title, desc, current, body):
         f.write(html)
 
 
+def kw(p):
+    return f'<p class="kw">{e(" · ".join(p["kw"]))}</p>' if p.get("kw") else ""
+
+
 def home():
     hl = [p for p in PROJECTS if p.get("highlight")]
     proofs = "".join(
@@ -76,7 +80,7 @@ def home():
         for p in hl
     )
     cases = "".join(
-        f'<a class="card" href="{url(p)}"><span class="name">{e(p["title"])}</span><span class="num">{e(p["num"])}</span>'
+        f'<a class="card" href="{url(p)}"><span class="kw">{e(" · ".join(p.get("kw", [])))}</span><span class="name">{e(p["title"])}</span><span class="num">{e(p["num"])}</span>'
         f'<span class="what">{e(p["what"])}</span><span class="go">Open the case</span></a>'
         for p in CASES
     )
@@ -106,9 +110,9 @@ def home():
   </section>
   <section class="section">
     <div class="wrap">
-      <h2>Three case studies that I built on my own, with public data</h2>
-      <p class="lede">They show how I work on a credit, a fraud and a marketing decision. They are not client or employer work.</p>
-      <div class="cards">{cases}</div>
+      <h2>Four case studies that I built on my own, with public data</h2>
+      <p class="lede">They show how I work on a credit, a fraud, a marketing and an ATM network decision. They are not client or employer work.</p>
+      <div class="cards c2">{cases}</div>
     </div>
   </section>
   <section class="section">
@@ -154,7 +158,7 @@ def project_row(p):
     meta = f'<b>{e(p["org"])}</b>{e(p.get("period", ""))}' if p.get("org") else "<b>Practice set</b>"
     return (
         f'<li class="prow" {data_attrs(p)}><div class="meta">{meta}</div>'
-        f'<div><h3>{head}</h3><p>{e(p["result"])}</p>{tags(p)}</div>{tools(p["tools"]) or "<div></div>"}</li>'
+        f'<div>{kw(p)}<h3>{head}</h3><p>{e(p["result"])}</p>{tags(p)}</div>{tools(p["tools"]) or "<div></div>"}</li>'
     )
 
 
@@ -276,7 +280,7 @@ def deliverables(p, has_deck, has_brief):
     if has_deck:
         items.append(("deck", "Board deck", "For leadership", "#deck"))
     if has_brief:
-        items.append(("doc", "Technical document", "Method, results, notebook and files", "brief/"))
+        items.append(("doc", "Technical document", "Method, results and model code" if p.get("code") else "Method, results, notebook and files", "brief/"))
     cards = "".join(
         f'<a class="dl" href="{href}">{ico(i)}<span><b>{e(t)}</b><em>{e(s)}</em></span></a>' for i, t, s, href in items
     )
@@ -317,6 +321,7 @@ def case_page(p, crumb):
         parts += f'<section class="part" id="method"><h2>{e(p["method"]["h"])}</h2>{SWAP}</section>'
     return f"""<main>
   <div class="pagehead"><div class="wrap">{crumb}
+    {kw(p)}
     <h1>{e(p['title'])}</h1>
     <p class="sub result">{e(p['result'])}</p>
     <div class="case-facts"><p class="facts"><b>Self-built case study.</b> {e(p['data'])}. Not client or employer work.</p>{tools(p['tools'])}</div>
@@ -348,8 +353,10 @@ def brief_page(p):
             f'<tr><td><b>{e(r[0])}</b></td><td>{e(r[1])}</td><td>{e(r[2])}</td><td>{e(r[3])}</td><td class="{"yes" if r[4] == "Yes" else "no"}"><b>{e(r[4])}</b></td></tr>'
             for r in ev
         )
-        parts += f"""<section class="part"><h2>Five tests, with rules set before the analysis</h2>
-      <p class="lede">In the notebook, the champion is the current policy and the challenger is the new policy.</p>
+        eval_h = p.get("eval_h", "Five tests, with rules set before the analysis")
+        eval_lede = p.get("eval_lede", "In the notebook, the champion is the current policy and the challenger is the new policy.")
+        parts += f"""<section class="part"><h2>{e(eval_h)}</h2>
+      <p class="lede">{e(eval_lede)}</p>
       <div class="table-scroll"><table class="eval"><thead><tr><th scope="col">Test</th><th scope="col">Measure</th><th scope="col">Result</th><th scope="col">Rule</th><th scope="col">Pass</th></tr></thead><tbody>{trs}</tbody></table></div></section>"""
     brief = open(brief_file, encoding="utf-8").read().replace('href="notebook/', 'href="../notebook/')
     parts += f'<section class="part"><h2>Results</h2><div class="brief">{brief}</div></section>'
@@ -357,10 +364,13 @@ def brief_page(p):
         us = "".join(f'<tr><td><b>{e(x[0])}</b></td><td>{e(x[1])}</td></tr>' for x in p["uses"])
         parts += f'<section class="part"><h2>What each tool does in this case</h2><div class="table-scroll"><table><tbody>{us}</tbody></table></div></section>'
     xl = f'<a class="dl" href="../{e(p["excel"])}">{ico("excel")}<span><b>P&amp;L model</b><em>Excel workbook</em></span></a>' if p.get("excel") else ""
+    nb = f'<a class="dl" href="../notebook/">{ico("notebook")}<span><b>Full notebook</b><em>Every step, with code</em></span></a>'
+    if p.get("code"):
+        nb = f'<a class="dl" href="{e(p["code"])}">{ico("notebook")}<span><b>Model code</b><em>Python, on GitHub</em></span></a>'
     body = f"""<main>
   <div class="pagehead"><div class="wrap">{crumb}
     <h1>{e(p['title'])}: technical document</h1>
-    <div class="dls"><a class="dl" href="../notebook/">{ico("notebook")}<span><b>Full notebook</b><em>Every step, with code</em></span></a>{xl}<a class="dl" href="{url(p)}#deck">{ico("deck")}<span><b>Board deck</b><em>For leadership</em></span></a></div>
+    <div class="dls">{nb}{xl}<a class="dl" href="{url(p)}#deck">{ico("deck")}<span><b>Board deck</b><em>For leadership</em></span></a></div>
   </div></div>
   <div class="body"><div class="wrap">{parts}</div></div>
 </main>"""

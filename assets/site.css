@@ -783,3 +783,19 @@ html:not(.js) .deckbar { display: none; }
 .group .rows { border-top: 1px solid var(--gray-300); }
 .found + .group, .found:not([hidden]) ~ .group:first-of-type { padding-top: 40px; }
 @media (max-width: 760px) { .zone { display: none; } .filter { margin-top: 8px; padding: 16px; } .group { padding-top: 48px; } .group > .ghead h2 { font-size: 22px; } }
+
+/* Keyword line: business area and type of problem */
+.kw { display: block; margin-bottom: 6px; font-size: 13px; line-height: 1.3; letter-spacing: .02em; color: var(--muted); }
+.card .kw { margin-bottom: 8px; }
+.card .kw + .name { font: 700 18px/1.35 var(--sans); color: var(--ink); }
+.pagehead .kw { margin-bottom: 10px; font-size: 14px; }
+.cards.c2 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 760px) { .cards.c2 { grid-template-columns: 1fr; } }
+
+/* Scenario table on a slide */
+.s-grid { margin-top: 18px; width: 100%; border-collapse: collapse; font-size: 20px; }
+.s-grid th, .s-grid td { padding: 11px 14px; border-bottom: 1px solid var(--gray-300); text-align: right; }
+.s-grid thead th { background: var(--navy); color: #fff; font-weight: 700; border-bottom: 0; }
+.s-grid th:first-child { text-align: left; font-weight: 700; }
+.s-grid td.point { background: #E9EEFF; color: var(--blue); font-weight: 700; }
+.s-grid tbody th { background: none; color: var(--ink); }
