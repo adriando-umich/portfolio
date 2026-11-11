@@ -730,3 +730,32 @@ html:not(.js) .deckbar { display: none; }
 .cp-scqa tr.question th { font: 700 15px/1.55 var(--sans); font-style: normal; color: var(--ink); }
 .cp-scqa th { font-size: 15px; }
 .cp-tree + .cp-kpis { margin-top: 48px; }
+
+/* Phone layout */
+@media (max-width: 760px) {
+  .matrix, .howto, .matrix + .legend, .table-scroll:has(> .matrix), .table-scroll:has(> .matrix) + .legend { display: none; }
+  .filter .frow { align-items: stretch; }
+  .filter .label, .filter .label.gap { width: 100%; margin: 0 0 2px; }
+  .filter select { width: 100%; min-width: 0; padding: 10px; font-size: 16px; }
+  .filter button { padding: 9px 12px; }
+  .found { margin-top: 16px; padding: 14px 16px; }
+  .found h2 { font-size: 17px; }
+  .ltree-scroll { overflow: visible; }
+  .ltree { min-width: 0; }
+  .ltree li { display: block; padding: 8px 0 0; }
+  .ltree ul { margin-left: 10px; padding-left: 12px; border-left: 1px solid var(--gray-500); }
+  .ltree ul::before, .ltree ul > li::before, .ltree ul > li::after, .find::before { display: none; }
+  .ltree .node, .ltree .node.root { width: auto; }
+  .ltree .find { max-width: none; margin: 6px 0 4px 12px; }
+  .scqa.cp-scqa, .scqa.cp-scqa tbody, .scqa.cp-scqa tr, .scqa.cp-scqa th, .scqa.cp-scqa td { display: block; width: auto; }
+  .scqa.cp-scqa th { padding: 12px 0 2px; border-bottom: 0; font-size: 13px; color: var(--muted); }
+  .scqa.cp-scqa td { padding: 0 0 12px; }
+  .scqa.cp-scqa tr.answer th { padding: 12px 14px 2px; }
+  .scqa.cp-scqa tr.answer td { padding: 0 14px 14px; }
+  .pagehead h1 { font-size: 28px; }
+  .part > h2 { font-size: 22px; }
+  .cp-kpis .v { font-size: 34px; }
+  .dls { gap: 10px; }
+  .skill summary { padding: 14px 2px; }
+  .cp-table, .cp-grid { font-size: 14px; }
+}
