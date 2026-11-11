@@ -1,0 +1,96 @@
+{
+  "rows": 41188,
+  "success_rate": 11.265417,
+  "test_rows": 10298,
+  "test_sales": 1160,
+  "call_all": -3338,
+  "models": [
+    {
+      "model": "Logistic",
+      "cutoff": 0.17,
+      "calls": 1686,
+      "sales": 716,
+      "call_rate": 16.372111,
+      "hit_rate": 42.467378,
+      "recall": 61.724138,
+      "profit_default": 1275,
+      "profit": 2610
+    },
+    {
+      "model": "Neural network",
+      "cutoff": 0.13,
+      "calls": 1822,
+      "sales": 716,
+      "call_rate": 17.692756,
+      "hit_rate": 39.297475,
+      "recall": 61.724138,
+      "profit_default": 1262,
+      "profit": 2474
+    },
+    {
+      "model": "Stacked",
+      "cutoff": 0.07,
+      "calls": 1388,
+      "sales": 639,
+      "call_rate": 13.478345,
+      "hit_rate": 46.037464,
+      "recall": 55.086207,
+      "profit_default": 1252,
+      "profit": 2446
+    },
+    {
+      "model": "Decision tree",
+      "cutoff": 0.06,
+      "calls": 1971,
+      "sales": 731,
+      "call_rate": 19.139639,
+      "hit_rate": 37.087773,
+      "recall": 63.017241,
+      "profit_default": 1325,
+      "profit": 2415
+    },
+    {
+      "model": "kNN",
+      "cutoff": 0.13,
+      "calls": 1872,
+      "sales": 702,
+      "call_rate": 18.178287,
+      "hit_rate": 37.5,
+      "recall": 60.517241,
+      "profit_default": 698,
+      "profit": 2340
+    },
+    {
+      "model": "Random forest",
+      "cutoff": 0.26,
+      "calls": 1596,
+      "sales": 652,
+      "call_rate": 15.498155,
+      "hit_rate": 40.85213,
+      "recall": 56.206897,
+      "profit_default": 1645,
+      "profit": 2316
+    },
+    {
+      "model": "SVM",
+      "cutoff": 0.1,
+      "calls": 381,
+      "sales": 255,
+      "call_rate": 3.699748,
+      "hit_rate": 66.929134,
+      "recall": 21.982759,
+      "profit_default": 1149,
+      "profit": 1149
+    }
+  ],
+  "best": "Logistic",
+  "best_beats": {
+    "kNN": 1,
+    "Neural network": 0.999,
+    "SVM": 1,
+    "Decision tree": 1,
+    "Random forest": 1,
+    "Stacked": 1
+  },
+  "logit_terms": ["job", "default", "contact", "month", "day_of_week", "campaign", "pdays", "previous", "poutcome", "emp.var.rate", "cons.price.idx", "cons.conf.idx", "nr.employed"]
+}

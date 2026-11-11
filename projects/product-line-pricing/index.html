@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to reprice 15 products when price sensitivity differs by product: Adrian Do</title>
+<meta name="description" content="Raise 12 prices and cut 3. Expected profit per customer rises 31%, with each price inside a ±20% limit.">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<nav class="bar" aria-label="Main">
+  <div class="wrap">
+    <a class="home" href="/">Adrian Do</a>
+    <ul><li><a href="/">Home</a></li><li><a href="/projects/" aria-current="page">Projects</a></li><li><a href="/resume/">Resume</a></li><li><a href="/skills/">Skills</a></li><li><a href="/contact/">Contact</a></li></ul>
+  </div>
+</nav>
+<main>
+  <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / How to reprice 15 products when price sensitivity differs by product</p>
+    <h1>How to reprice 15 products when price sensitivity differs by product</h1>
+    <p class="sub result">Raise 12 prices and cut 3. Expected profit per customer rises 31%, with each price inside a ±20% limit.</p>
+    <div class="case-facts"><p class="facts"><b>Course project, Michigan Ross MBA.</b> Multinomial logit demand model and constrained price optimization in R. Not client or employer work.</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/r.svg)" aria-hidden="true"></i>R</span></div></div>
+    <div class="dls"><a class="dl" href="analysis.R"><i class="ico" style="--i:url(/assets/icons/r.svg)" aria-hidden="true"></i><span><b>R script</b><em>Demand model and price optimization</em></span></a></div>
+  </div></div>
+  <div class="body"><div class="wrap cp">
+    <div class="cp-kpis"><div><p class="k">Expected profit per customer</p><p class="v">+31%</p><p class="s">$1.08 to $1.42, with each price inside a ±20% limit</p></div><div><p class="k">Price changes</p><p class="v">12 up, 3 down</p><p class="s">8 products stop at the +20% limit</p></div><div><p class="k">Share of customers who buy</p><p class="v">10.5% to 7.2%</p><p class="s">fewer sales at a higher margin: the cost of the gain</p></div></div>
+<section class="part"><h2>Twelve prices go up, eight of them to the limit, and three high-margin prices come down</h2>
+  <div class="table-scroll"><table class="cp-table prices">
+    <thead><tr><th scope="col">Product</th><th scope="col" class="n">Unit cost</th><th scope="col" class="n">Price now</th><th scope="col" class="n">New price</th><th scope="col" colspan="2">Change</th><th scope="col" class="n">Margin now</th><th scope="col" class="n">New margin</th></tr></thead>
+    <tbody><tr><td>Product 1</td><td class="n">$35.00</td><td class="n">$36.04</td><td class="n strong">$43.25</td><td class="chg"><span class="up"><i style="width:50.0%"></i></span></td><td class="n">+20%*</td><td class="n">3%</td><td class="n">19%</td></tr><tr><td>Product 2</td><td class="n">$31.41</td><td class="n">$39.72</td><td class="n strong">$47.67</td><td class="chg"><span class="up"><i style="width:50.0%"></i></span></td><td class="n">+20%*</td><td class="n">21%</td><td class="n">34%</td></tr><tr><td>Product 3</td><td class="n">$41.45</td><td class="n">$47.19</td><td class="n strong">$56.63</td><td class="chg"><span class="up"><i style="width:50.0%"></i></span></td><td class="n">+20%*</td><td class="n">12%</td><td class="n">27%</td></tr><tr><td>Product 4</td><td class="n">$41.51</td><td class="n">$51.38</td><td class="n strong">$61.65</td><td class="chg"><span class="up"><i style="width:50.0%"></i></span></td><td class="n">+20%*</td><td class="n">19%</td><td class="n">33%</td></tr><tr><td>Product 5</td><td class="n">$81.97</td><td class="n">$118.20</td><td class="n strong">$141.84</td><td class="chg"><span class="up"><i style="width:50.0%"></i></span></td><td class="n">+20%*</td><td class="n">31%</td><td class="n">42%</td></tr><tr><td>Product 6</td><td class="n">$83.54</td><td class="n">$121.54</td><td class="n strong">$145.85</td><td class="chg"><span class="up"><i style="width:50.0%"></i></span></td><td class="n">+20%*</td><td class="n">31%</td><td class="n">43%</td></tr><tr><td>Product 7</td><td class="n">$51.04</td><td class="n">$86.86</td><td class="n strong">$71.00</td><td class="chg"><span class="dn"><i style="width:45.7%"></i></span></td><td class="n neg">-18%</td><td class="n">41%</td><td class="n">28%</td></tr><tr><td>Product 8</td><td class="n">$56.55</td><td class="n">$84.08</td><td class="n strong">$74.90</td><td class="chg"><span class="dn"><i style="width:27.3%"></i></span></td><td class="n neg">-11%</td><td class="n">33%</td><td class="n">24%</td></tr><tr><td>Product 9</td><td class="n">$78.16</td><td class="n">$99.79</td><td class="n strong">$119.74</td><td class="chg"><span class="up"><i style="width:50.0%"></i></span></td><td class="n">+20%*</td><td class="n">22%</td><td class="n">35%</td></tr><tr><td>Product 10</td><td class="n">$13.45</td><td class="n">$18.08</td><td class="n strong">$21.69</td><td class="chg"><span class="up"><i style="width:50.0%"></i></span></td><td class="n">+20%*</td><td class="n">26%</td><td class="n">38%</td></tr><tr><td>Product 11</td><td class="n">$82.27</td><td class="n">$102.80</td><td class="n strong">$108.96</td><td class="chg"><span class="up"><i style="width:15.0%"></i></span></td><td class="n">+6%</td><td class="n">20%</td><td class="n">24%</td></tr><tr><td>Product 12</td><td class="n">$84.31</td><td class="n">$87.36</td><td class="n strong">$93.39</td><td class="chg"><span class="up"><i style="width:17.3%"></i></span></td><td class="n">+7%</td><td class="n">3%</td><td class="n">10%</td></tr><tr><td>Product 13</td><td class="n">$83.84</td><td class="n">$85.10</td><td class="n strong">$92.93</td><td class="chg"><span class="up"><i style="width:23.0%"></i></span></td><td class="n">+9%</td><td class="n">1%</td><td class="n">10%</td></tr><tr><td>Product 14</td><td class="n">$98.18</td><td class="n">$119.01</td><td class="n strong">$112.53</td><td class="chg"><span class="dn"><i style="width:13.6%"></i></span></td><td class="n neg">-5%</td><td class="n">18%</td><td class="n">13%</td></tr><tr><td>Product 15</td><td class="n">$102.72</td><td class="n">$134.21</td><td class="n strong">$141.76</td><td class="chg"><span class="up"><i style="width:14.1%"></i></span></td><td class="n">+6%</td><td class="n">23%</td><td class="n">28%</td></tr></tbody>
+  </table></div>
+  <p class="cp-note">* The price stops at the +20% limit. Without the limit, the model asks for a larger increase, outside the range of prices in the data.</p>
+</section>
+<section class="part"><h2>Customers are less sensitive to the price of imported and straight-shape products</h2>
+  <div class="cp-bars feats" role="img" aria-label="Estimated effect of price on utility, and how each product feature changes it."><div class="cp-bar on neg"><span class="c">Base effect of $1 more</span><span class="t"><i style="width:100.0%"></i></span><span class="v">-0.135</span><span class="s">clear</span></div><div class="cp-bar"><span class="c">Imported</span><span class="t"><i style="width:43.8%"></i></span><span class="v">+0.059</span><span class="s">clear, less sensitive to price</span></div><div class="cp-bar"><span class="c">Straight shape</span><span class="t"><i style="width:23.4%"></i></span><span class="v">+0.032</span><span class="s">clear, less sensitive to price</span></div><div class="cp-bar"><span class="c">Slow flow</span><span class="t"><i style="width:20.2%"></i></span><span class="v">+0.027</span><span class="s">clear, less sensitive to price</span></div><div class="cp-bar"><span class="c">Age below 6 months</span><span class="t"><i style="width:12.7%"></i></span><span class="v">+0.017</span><span class="s">clear, less sensitive to price</span></div><div class="cp-bar"><span class="c">Small size</span><span class="t"><i style="width:6.3%"></i></span><span class="v">+0.008</span><span class="s">not clear</span></div><div class="cp-bar"><span class="c">Wide neck</span><span class="t"><i style="width:3.6%"></i></span><span class="v">+0.005</span><span class="s">not clear</span></div></div>
+  <p class="cp-note">Multinomial logit on 28,044 customer visits; 11% end with a purchase. A positive value makes the price effect weaker for products with that feature. "Clear" means clear at the 5% level.</p>
+</section>
+<section class="part"><h2>The model</h2>
+  <div class="cp-model"><div><h3>Demand</h3><p>Each customer chooses one of 15 products or no purchase. The price effect is different for each product, through six product features.</p></div><div><h3>Decision</h3><p>The 15 prices, each within 20% of the current average price.</p></div><div><h3>Objective</h3><p>The highest expected profit per customer: margin times the probability of a purchase, summed over the products.</p></div></div>
+  <ul class="notes"><li>Eight products go to the +20% limit, so the limit decides most of the answer. A test in the market must come before larger increases.</li><li>The gain has a cost: the share of customers who buy falls from 10.5% to 7.2%. If customer count has value beyond this purchase, the increase must be smaller.</li><li>Products 7, 8 and 14 have high margins and price-sensitive customers. A lower price brings more than enough volume.</li><li>The demand model has no competitor prices. The result assumes that competitors do not react.</li></ul>
+</section>
+    <nav class="pager" aria-label="More projects"><a href="/projects/telemarketing-call-list/"><span>Previous project</span><b>Which customers to call in a bank telemarketing campaign</b></a><a class="next" href="/projects/marketplace-scale/"><span>Next project</span><b>Whether more listings help or hurt hosts in a vacation rental market</b></a></nav>
+  </div></div>
+</main>
+<footer>
+  <div class="wrap">
+    <p class="links"><a href="mailto:adriando@umich.edu">adriando@umich.edu</a><a href="https://www.linkedin.com/in/dzungdotran/">LinkedIn</a><a href="https://github.com/adriando-umich">GitHub</a></p>
+    <p class="note">The case studies use public data sets, not data from an employer or a client.</p>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

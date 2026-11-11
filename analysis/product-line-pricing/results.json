@@ -1,0 +1,179 @@
+{
+  "customers": 28044,
+  "loglik": -16967.25415849,
+  "buy_rate": 0.11175296,
+  "coef": {
+    "price": -0.13530047,
+    "price:imported": 0.05924474,
+    "price:sizesmall": 0.00848924,
+    "price:below6month": 0.01722381,
+    "price:slowflow": 0.02737427,
+    "price:wideneck": 0.00487674,
+    "price:straightshape": 0.03160541
+  },
+  "se": {
+    "price": 0.01618861,
+    "price:imported": 0.01109529,
+    "price:sizesmall": 0.00538317,
+    "price:below6month": 0.00793089,
+    "price:slowflow": 0.00920641,
+    "price:wideneck": 0.00911209,
+    "price:straightshape": 0.00916041
+  },
+  "profit_now": 1.08080264,
+  "profit_new": 1.42111858,
+  "buy_now": 0.10546429,
+  "buy_new": 0.07218872,
+  "products": [
+    {
+      "product": 1,
+      "cost": 34.99913,
+      "price_now": 36.04070884,
+      "price_new": 43.24885061,
+      "change_pct": 20,
+      "slope": -0.10369506,
+      "share_now": 2.5137979,
+      "share_new": 1.23475129
+    },
+    {
+      "product": 2,
+      "cost": 31.411098,
+      "price_now": 39.72338801,
+      "price_new": 47.66806561,
+      "change_pct": 20,
+      "slope": -0.05060773,
+      "share_now": 0.9408562,
+      "share_new": 0.65278753
+    },
+    {
+      "product": 3,
+      "cost": 41.450386,
+      "price_now": 47.1919168,
+      "price_new": 56.63030015,
+      "change_pct": 20,
+      "slope": -0.0272265,
+      "share_now": 0.36332676,
+      "share_new": 0.29144518
+    },
+    {
+      "product": 4,
+      "cost": 41.514874,
+      "price_now": 51.37711216,
+      "price_new": 61.65253459,
+      "change_pct": 20,
+      "slope": -0.04445032,
+      "share_now": 0.17552636,
+      "share_new": 0.11530341
+    },
+    {
+      "product": 5,
+      "cost": 81.969856,
+      "price_now": 118.20185042,
+      "price_new": 141.84222051,
+      "change_pct": 20,
+      "slope": -0.01386053,
+      "share_now": 0.20215535,
+      "share_new": 0.15109247
+    },
+    {
+      "product": 6,
+      "cost": 83.535919,
+      "price_now": 121.54368063,
+      "price_new": 145.85241675,
+      "change_pct": 20,
+      "slope": -0.01386053,
+      "share_now": 0.22045385,
+      "share_new": 0.16324955
+    },
+    {
+      "product": 7,
+      "cost": 51.041348,
+      "price_now": 86.85969034,
+      "price_new": 70.99637176,
+      "change_pct": -18.2631535,
+      "slope": -0.05395517,
+      "share_now": 0.26958042,
+      "share_new": 0.65806148
+    },
+    {
+      "product": 8,
+      "cost": 56.553051,
+      "price_now": 84.08082305,
+      "price_new": 74.89551193,
+      "change_pct": -10.92438297,
+      "slope": -0.05909697,
+      "share_now": 0.1329425,
+      "share_new": 0.23728556
+    },
+    {
+      "product": 9,
+      "cost": 78.156631,
+      "price_now": 99.78517651,
+      "price_new": 119.74221181,
+      "change_pct": 20,
+      "slope": -0.02234976,
+      "share_now": 0.67986671,
+      "share_new": 0.45141418
+    },
+    {
+      "product": 10,
+      "cost": 13.451119,
+      "price_now": 18.0770736,
+      "price_new": 21.69248832,
+      "change_pct": 20,
+      "slope": -0.0773364,
+      "share_now": 0.20784517,
+      "share_new": 0.16299406
+    },
+    {
+      "product": 11,
+      "cost": 82.266335,
+      "price_now": 102.80208331,
+      "price_new": 108.95683886,
+      "change_pct": 5.98699496,
+      "slope": -0.03957358,
+      "share_now": 0.65328656,
+      "share_new": 0.53111241
+    },
+    {
+      "product": 12,
+      "cost": 84.305206,
+      "price_now": 87.35718425,
+      "price_new": 93.39364072,
+      "change_pct": 6.9100859,
+      "slope": -0.13042373,
+      "share_now": 1.57475242,
+      "share_new": 0.74328513
+    },
+    {
+      "product": 13,
+      "cost": 83.840012,
+      "price_now": 85.10065871,
+      "price_new": 92.9284474,
+      "change_pct": 9.19827039,
+      "slope": -0.13042373,
+      "share_now": 1.55593353,
+      "share_new": 0.58139195
+    },
+    {
+      "product": 14,
+      "cost": 98.176628,
+      "price_now": 119.00519733,
+      "price_new": 112.52826785,
+      "change_pct": -5.44256018,
+      "slope": -0.0773364,
+      "share_now": 0.40374891,
+      "share_new": 0.69105481
+    },
+    {
+      "product": 15,
+      "cost": 102.71722,
+      "price_now": 134.21276881,
+      "price_new": 141.75933711,
+      "change_pct": 5.62283929,
+      "slope": -0.0265809,
+      "share_now": 0.65235612,
+      "share_new": 0.55364271
+    }
+  ]
+}

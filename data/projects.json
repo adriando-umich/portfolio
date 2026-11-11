@@ -331,7 +331,7 @@
    "industry": "banking",
    "tasks": [
     "risk",
-    "model"
+    "ml"
    ]
   },
   {
@@ -573,7 +573,8 @@
    "rec_title": "Test the new policy on 10% of transactions, with the 3% limit as a stop rule",
    "industry": "payments",
    "tasks": [
-    "risk"
+    "risk",
+    "ml"
    ]
   },
   {
@@ -747,7 +748,8 @@
    "rec_title": "Send the men's email to all customers, and keep a 10% holdout",
    "industry": "retail",
    "tasks": [
-    "experiment"
+    "experiment",
+    "stats"
    ]
   },
   {
@@ -808,6 +810,76 @@
      "Python check",
      "All 4,096 plans, enumerated",
      "check_model.py"
+    ]
+   ]
+  },
+  {
+   "slug": "telemarketing-call-list",
+   "type": "course",
+   "title": "Which customers to call in a bank telemarketing campaign",
+   "org": "Michigan Ross MBA",
+   "industry": "banking",
+   "tasks": [
+    "ml"
+   ],
+   "tools": [
+    "r"
+   ],
+   "result": "Call the 16% of customers with a sale probability of 17% or more. Profit is twice the profit at the usual 50% cutoff, and a plain logistic regression beats six other models.",
+   "method": "Seven classifiers in R, including a stacked model, each with a call cutoff chosen for profit",
+   "files": [
+    [
+     "r",
+     "R script",
+     "Models, cutoffs and the test of the result",
+     "analysis.R"
+    ]
+   ]
+  },
+  {
+   "slug": "product-line-pricing",
+   "type": "course",
+   "title": "How to reprice 15 products when price sensitivity differs by product",
+   "org": "Michigan Ross MBA",
+   "industry": "retail",
+   "tasks": [
+    "pricing",
+    "optimize"
+   ],
+   "tools": [
+    "r"
+   ],
+   "result": "Raise 12 prices and cut 3. Expected profit per customer rises 31%, with each price inside a ±20% limit.",
+   "method": "Multinomial logit demand model and constrained price optimization in R",
+   "files": [
+    [
+     "r",
+     "R script",
+     "Demand model and price optimization",
+     "analysis.R"
+    ]
+   ]
+  },
+  {
+   "slug": "marketplace-scale",
+   "type": "course",
+   "title": "Whether more listings help or hurt hosts in a vacation rental market",
+   "org": "Michigan Ross MBA",
+   "industry": "travel",
+   "tasks": [
+    "stats"
+   ],
+   "tools": [
+    "r"
+   ],
+   "result": "They hurt. 10% more listings cut the booking confirmation rate by 1.7 points. A plain regression shows no effect.",
+   "method": "Instrumental-variable regression (two-stage least squares) in R on 281 local markets",
+   "files": [
+    [
+     "r",
+     "R script",
+     "Two-stage least squares with robust standard errors",
+     "analysis.R"
     ]
    ]
   },
@@ -1141,6 +1213,10 @@
   {
    "id": "public",
    "name": "Public sector"
+  },
+  {
+   "id": "travel",
+   "name": "Travel and hospitality"
   }
  ],
  "tasks": [
@@ -1175,6 +1251,14 @@
   {
    "id": "optimize",
    "name": "Optimization and simulation"
+  },
+  {
+   "id": "ml",
+   "name": "Machine learning"
+  },
+  {
+   "id": "stats",
+   "name": "Statistics and causal inference"
   }
  ]
 }

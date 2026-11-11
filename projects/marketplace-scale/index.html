@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Whether more listings help or hurt hosts in a vacation rental market: Adrian Do</title>
+<meta name="description" content="They hurt. 10% more listings cut the booking confirmation rate by 1.7 points. A plain regression shows no effect.">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<nav class="bar" aria-label="Main">
+  <div class="wrap">
+    <a class="home" href="/">Adrian Do</a>
+    <ul><li><a href="/">Home</a></li><li><a href="/projects/" aria-current="page">Projects</a></li><li><a href="/resume/">Resume</a></li><li><a href="/skills/">Skills</a></li><li><a href="/contact/">Contact</a></li></ul>
+  </div>
+</nav>
+<main>
+  <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / Whether more listings help or hurt hosts in a vacation rental market</p>
+    <h1>Whether more listings help or hurt hosts in a vacation rental market</h1>
+    <p class="sub result">They hurt. 10% more listings cut the booking confirmation rate by 1.7 points. A plain regression shows no effect.</p>
+    <div class="case-facts"><p class="facts"><b>Course project, Michigan Ross MBA.</b> Instrumental-variable regression (two-stage least squares) in R on 281 local markets. Not client or employer work.</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/r.svg)" aria-hidden="true"></i>R</span></div></div>
+    <div class="dls"><a class="dl" href="analysis.R"><i class="ico" style="--i:url(/assets/icons/r.svg)" aria-hidden="true"></i><span><b>R script</b><em>Two-stage least squares with robust standard errors</em></span></a></div>
+  </div></div>
+  <div class="body"><div class="wrap cp">
+    <div class="cp-kpis"><div><p class="k">Booking confirmation rate, for 10% more listings</p><p class="v">-1.7 pts</p><p class="s">from an average of 21%; clear at the 5% level</p></div><div><p class="k">The same effect in a plain regression</p><p class="v">+0.1 pts</p><p class="s">the competition effect is hidden, because good markets attract listings</p></div><div><p class="k">Strength of the instrument</p><p class="v">F = 12.8</p><p class="s">above the usual minimum of 10, but not by much</p></div></div>
+<section class="part"><h2>A plain regression shows no effect; the instrument shows that more listings cut confirmations</h2>
+  <div class="table-scroll"><table class="cp-table">
+    <caption>Effect of 10% more listings in a market, 281 local markets</caption>
+    <thead><tr><th scope="col">Outcome for hosts</th><th scope="col">Method</th><th scope="col" class="n">Effect</th><th scope="col" class="n">p-value</th><th scope="col">Reading</th></tr></thead>
+    <tbody><tr><td>Booking confirmation rate<span class="sub">average 21.0%</span></td><td>Plain regression</td><td class="n">+0.10 points</td><td class="n">0.55</td><td>not statistically clear</td></tr><tr><td>Booking confirmation rate<span class="sub">average 21.0%</span></td><td>With the instrument</td><td class="n strong">-1.71 points</td><td class="n">0.04</td><td>clear at the 5% level</td></tr><tr><td>Occupancy rate<span class="sub">average 4.1%</span></td><td>Plain regression</td><td class="n">+0.04 points</td><td class="n">0.36</td><td>not statistically clear</td></tr><tr><td>Occupancy rate<span class="sub">average 4.1%</span></td><td>With the instrument</td><td class="n">-0.25 points</td><td class="n">0.13</td><td>not statistically clear</td></tr></tbody>
+  </table></div>
+  <p class="cp-note">Standard errors are robust to heteroskedasticity. Controls: inquiries per day, average number of rooms, share of apartments, share of executive listings, share near adventure sites and national parks.</p>
+</section>
+<section class="part"><h2>The model</h2>
+  <div class="cp-model"><div><h3>Question</h3><p>Does a larger market bring each host more bookings (more travelers come) or fewer (more hosts compete)?</p></div><div><h3>Problem</h3><p>Listings are not random. Hosts enter the markets where demand is already good, so a plain regression mixes the two directions.</p></div><div><h3>Method</h3><p>Two-stage least squares. New listings from a migration of hosts move the market size for a reason that is not local demand.</p></div></div>
+  <ul class="notes"><li>The occupancy effect has the same sign (-0.25 points) but is not statistically clear (p = 0.13).</li><li>The first-stage F statistic is 12.8. The instrument is usable, but the estimates are not precise.</li><li>For the marketplace, the result points to demand: more travelers, not more hosts, are what the weak markets need.</li><li>The instrument is valid only if the new listings affect confirmations through market size alone. The data cannot test this.</li></ul>
+</section>
+    <nav class="pager" aria-label="More projects"><a href="/projects/product-line-pricing/"><span>Previous project</span><b>How to reprice 15 products when price sensitivity differs by product</b></a><a class="next" href="/projects/leetcode-sql-50/"><span>Next project</span><b>LeetCode SQL 50</b></a></nav>
+  </div></div>
+</main>
+<footer>
+  <div class="wrap">
+    <p class="links"><a href="mailto:adriando@umich.edu">adriando@umich.edu</a><a href="https://www.linkedin.com/in/dzungdotran/">LinkedIn</a><a href="https://github.com/adriando-umich">GitHub</a></p>
+    <p class="note">The case studies use public data sets, not data from an employer or a client.</p>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

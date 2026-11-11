@@ -190,14 +190,23 @@ def projects_index():
             inner = '<ul class="rows">' + "".join(project_row(p) for p in items) + "</ul>"
         note = f'<p class="note">{e(t["note"])}</p>' if t["note"] else ""
         groups += f'<section class="group" id="{t["id"]}"><h2>{e(t["name"])}</h2>{note}{inner}</section>'
+    typebtn = "".join(f'<button type="button" data-f="type" data-v="{t["id"]}" aria-pressed="false">{e(t["name"].split(",")[0])}</button>' for t in P["types"] if any(p["type"] == t["id"] for p in PROJECTS))
+    taskopt = "".join(f'<option value="{k}">{e(v)}</option>' for k, v in TASK.items())
+    indopt = "".join(f'<option value="{k}">{e(v)}</option>' for k, v in IND.items())
     body = f"""<main>
   <div class="pagehead"><div class="wrap">
     <h1>Projects</h1>
-    <p class="sub">Work experience, self-built case studies and course projects, by task and industry. Select a number to filter the list.</p>
+    <p class="sub">Work experience, self-built case studies and course projects, by task and industry.</p>
   </div></div>
   <div class="body"><div class="wrap">
+    <p class="howto">Select a number, a task or an industry in the table to see the projects.</p>
     {matrix()}
-    <div class="filter" role="group" aria-label="Filter projects"><span class="label">Show</span><button type="button" data-f="type" data-v="work" aria-pressed="false">Work experience</button><button type="button" data-f="type" data-v="case" aria-pressed="false">Self-built case studies</button><button type="button" data-f="type" data-v="course" aria-pressed="false">Course projects</button><span class="label gap">Tool</span>{buttons}<span class="active" aria-live="polite"></span><button type="button" class="clear" hidden>Clear filters</button></div>
+    <div class="filter" role="group" aria-label="Filter projects">
+      <div class="frow"><span class="label">Type</span>{typebtn}</div>
+      <div class="frow"><span class="label">Task</span><select data-s="task" aria-label="Task"><option value="">All tasks</option>{taskopt}</select><span class="label gap">Industry</span><select data-s="industry" aria-label="Industry"><option value="">All industries</option>{indopt}</select></div>
+      <div class="frow"><span class="label">Tool</span>{buttons}</div>
+    </div>
+    <div class="found" id="found" hidden><h2 aria-live="polite"></h2><button type="button" class="clear">Show all projects</button></div>
     {groups}
     <p class="empty">No project matches these filters.</p>
   </div></div>

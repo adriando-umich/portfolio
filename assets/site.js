@@ -57,7 +57,9 @@
   var state = { type: '', industry: '', task: '', tool: '' };
   var items = Array.prototype.slice.call(document.querySelectorAll('[data-tools]'));
   var groups = Array.prototype.slice.call(document.querySelectorAll('.group'));
-  var empty = document.querySelector('.empty'), clear = filter.querySelector('.clear'), active = filter.querySelector('.active');
+  var empty = document.querySelector('.empty'), found = document.getElementById('found'), foundH = found.querySelector('h2');
+  var selects = Array.prototype.slice.call(filter.querySelectorAll('select[data-s]'));
+  selects.forEach(function (s) { Array.prototype.forEach.call(s.options, function (o) { if (o.value) NAMES[s.getAttribute('data-s') + ':' + o.value] = o.textContent; }); });
   function has(list, v) { return (' ' + list + ' ').indexOf(' ' + v + ' ') > -1; }
   function apply() {
     var shown = 0;
@@ -78,11 +80,18 @@
     });
     var parts = [];
     ['type', 'task', 'industry', 'tool'].forEach(function (k) { if (state[k]) parts.push(NAMES[k + ':' + state[k]]); });
-    active.textContent = parts.length ? shown + ' shown: ' + parts.join(', ') : '';
-    clear.hidden = !parts.length;
+    selects.forEach(function (s) { s.value = state[s.getAttribute('data-s')]; });
+    foundH.textContent = shown + (shown === 1 ? ' project: ' : ' projects: ') + parts.join(', ');
+    found.hidden = !parts.length;
   }
+  function show() {
+    if (found.hidden) return;
+    var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    found.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
+  }
+  selects.forEach(function (s) { s.addEventListener('change', function () { state[s.getAttribute('data-s')] = s.value; apply(); }); });
   document.addEventListener('click', function (ev) {
-    var b = ev.target.closest ? ev.target.closest('[data-f], .matrix .cell, .filter .clear') : null;
+    var b = ev.target.closest ? ev.target.closest('[data-f], .matrix .cell, .found .clear') : null;
     if (!b) return;
     if (b.classList.contains('clear')) { state = { type: '', industry: '', task: '', tool: '' }; }
     else if (b.classList.contains('cell')) {
@@ -94,6 +103,7 @@
       state[k] = state[k] === v ? '' : v;
     }
     apply();
+    if (b.closest('.matrix')) show();
   });
   (location.hash.slice(1).split('&')).forEach(function (kv) {
     var p = kv.split('=');
