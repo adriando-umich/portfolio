@@ -768,3 +768,18 @@ html:not(.js) .deckbar { display: none; }
 .method b { display: block; margin-top: 10px; font: 700 22px/1.2 var(--serif); color: var(--navy); }
 .method span { display: block; margin-top: 8px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
 @media (max-width: 900px) { .method { grid-template-columns: 1fr; } .method li, .method li + li { padding: 16px 0; border-left: 0; border-bottom: 1px solid var(--gray-300); } }
+
+/* Section separation: 2px navy starts a section, 1px gray separates rows */
+.zone { font: 700 24px/1.3 var(--serif); padding-top: 18px; border-top: 2px solid var(--navy); margin-bottom: 8px; }
+.howto { margin-bottom: 18px; }
+.matrix { border-top: 1px solid var(--gray-300); }
+.filter { margin-top: 44px; padding: 20px 24px 16px; background: var(--gray-100); border: 0; border-top: 2px solid var(--navy); }
+.filter .fhead { font: 700 18px/1.3 var(--serif); color: var(--navy); margin-bottom: 6px; }
+.filter button, .filter select { background: #fff; }
+.group { padding-top: 72px; }
+.ghead { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 18px; border-top: 2px solid var(--navy); }
+.group > .ghead h2 { font: 700 28px/1.25 var(--serif); }
+.gcount { flex: none; font-size: 14px; color: var(--muted); }
+.group .rows { border-top: 1px solid var(--gray-300); }
+.found + .group, .found:not([hidden]) ~ .group:first-of-type { padding-top: 40px; }
+@media (max-width: 760px) { .zone { display: none; } .filter { margin-top: 8px; padding: 16px; } .group { padding-top: 48px; } .group > .ghead h2 { font-size: 22px; } }
