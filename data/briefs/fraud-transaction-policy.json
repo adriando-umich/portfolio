@@ -1,0 +1,51 @@
+{
+ "evaluation": [
+  [
+   "1. Order of risk",
+   "PR-AUC and dollar recall in the top 2%, months...",
+   "0.486 / 0.269; 26.5% / 17.0%; +75%",
+   "Both above the champion; gain of 10% or more",
+   "Yes"
+  ],
+  [
+   "2. Level",
+   "Mean score minus actual fraud rate, months 5–6",
+   "-0.06 points",
+   "Less than 0.5 points",
+   "Yes"
+  ],
+  [
+   "3. Stability",
+   "PSI of the score (month 6 against months 1–3);...",
+   "0.008; 85%",
+   "PSI less than 0.1; 80% or more",
+   "Yes"
+  ],
+  [
+   "4. Business value",
+   "Total cost per month (challenger / champion); ...",
+   "$172,612 / $299,432; 2.46%",
+   "Lower total cost; 3% or less (as-08)",
+   "Yes"
+  ],
+  [
+   "5. Explainability",
+   "Share of declines in surrogate leaves with a d...",
+   "0%",
+   "50% or more",
+   "No"
+  ]
+ ],
+ "recommendations": [
+  "<strong>Test the challenger policy.</strong> Send a random 10% of transactions and 10% of the review capacity to the challenger. Run the test for about 16 days (<a href=\"notebook/#step-7\">Step 7c</a>). Stop the test if a kill criterion applies.",
+  "<strong>Confirm two values before the test.</strong> Finance and Marketing confirm the cost of a false decline (as-02) and the guardrail limit of 3% (as-08). These values decide the size of the decline tier (<a href=\"notebook/#step-7\">Step 7b</a>).",
+  "<strong>Retrain the score each month on all months with labels.</strong> A monthly retrain lifts the mean PR-AUC from 0.487 to 0.576 (<a href=\"notebook/#dec-07\">Part 2</a>).",
+  "<strong>Check the PR-AUC of each month, not only the PSI.</strong> The PSI of the score stays at 0.008, but the score loses 15% of its PR-AUC (<a href=\"notebook/#step-6\">Step 6c</a>).",
+  "<strong>Do not change the team size before the test.</strong> The lowest sum of the total cost and the team cost is at 4 analysts. It is only $1,534 each month below the current team (<a href=\"notebook/#step-7\">Step 7a</a>)."
+ ],
+ "answer": [
+  "The challenger policy gives a lower total cost than the champion. It uses a GBM fraud score and the expected cost in dollars, with the same review capacity. On the test months, it decreases the total cost by $126,820 each month (42%) against our base champion.",
+  "Against the strongest champion of the ladder, the decrease is $64,274 each month. The champion is our assumption, so the lower value is the result that we can defend. The decrease is at least $53,544 each month for each cost assumption that we tested. It stops 71.2% of the fraud dollars, against 38.4% for the champion.",
+  "The price is more declines of good customers: 2.46% against 0.28%. This rate is inside the guardrail of 3% (as-08). The challenger passes 4 of the 5 branches of the evaluation framework. The branches that fail are: explainability."
+ ]
+}

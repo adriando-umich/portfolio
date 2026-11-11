@@ -165,6 +165,122 @@ CHART = """<div class="exhibit">
 </div>"""
 
 
+def tree_node(n):
+    sub = f'<span>{e(n["s"])}</span>' if n.get("s") else ""
+    box = f'<div class="node {n.get("k", "")}"><b>{e(n["t"])}</b>{sub}</div>'
+    find = ""
+    if n.get("q"):
+        find = f'<div class="find"><p class="q">{e(n["q"])}</p><p class="a"><b>{e(n["a"])}.</b> {e(n["ev"])}</p></div>'
+    kids = ""
+    if n.get("c"):
+        kids = "<ul>" + "".join(f"<li>{tree_node(c)}</li>" for c in n["c"]) + "</ul>"
+    return box + find + kids
+
+
+def case_page(p, crumb):
+    slug = p["slug"]
+    brief_file = f"data/briefs/{slug}.html"
+    extra_file = f"data/briefs/{slug}.json"
+    X = json.load(open(extra_file, encoding="utf-8")) if os.path.exists(extra_file) else {}
+    key = ""
+    for k in p["keyline"]:
+        pts = "".join(f"<li>{x}</li>" for x in k.get("pts", []))
+        key += f'<li><h3>{e(k["h"])}</h3><ul class="pts">{pts}</ul></li>'
+    nav, extra = [("summary", "Summary")], ""
+
+    if p.get("scqa"):
+        nav.append(("framework", "Framework"))
+        pr = p["problem"]
+        rows = "".join(f'<tr class="{r[0].lower()}"><th scope="row">{r[0]}<span>{e(r[1])}</span></th><td>{r[2]}</td></tr>' for r in p["scqa"])
+        tree = ""
+        if p.get("tree"):
+            tree = f"""<h3 class="sub3">The issue tree</h3>
+      <p class="lede">{e(p['tree_h'])}.</p>
+      <div class="ltree-scroll"><ul class="ltree"><li>{tree_node(p['tree'])}</li></ul></div>
+      <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p>"""
+        method = ""
+        if p.get("method"):
+            mt = p["method"]
+            st = "".join(f'<li><h3>{e(x[0])}</h3><p>{e(x[1])}</p></li>' for x in mt["steps"])
+            notes = "".join(f"<li>{e(x)}</li>" for x in mt["notes"])
+            method = f'<h3 class="sub3">The method</h3><p class="lede">{e(mt["h"])}.</p><ol class="steps3">{st}</ol><ul class="notes">{notes}</ul>'
+        extra += f"""<section class="part" id="framework"><h2>The framework behind the answer</h2>
+      <h3 class="sub3">The problem</h3>
+      <div class="strip"><div class="scene"><span>Starting point</span><p>{e(pr['scene'])}</p></div><div class="now"><span>Result now</span><p>{e(pr['now'])}</p></div><div class="want"><span>Result wanted</span><p>{e(pr['want'])}</p></div></div>
+      <h3 class="sub3">The story in four lines</h3>
+      <table class="scqa"><tbody>{rows}</tbody></table>
+      {tree}
+      {method}</section>"""
+
+    ev = X.get("evaluation", [])
+    if ev:
+        over = p.get("evaluation", [])
+        ev = [over[i] if i < len(over) and over[i] else r for i, r in enumerate(ev)]
+        passed = sum(1 for r in ev if r[4] == "Yes")
+        nav.append(("evidence", "Evidence"))
+        trs = "".join(
+            f'<tr><td><b>{e(r[0])}</b></td><td>{e(r[1])}</td><td>{e(r[2])}</td><td>{e(r[3])}</td><td class="{"yes" if r[4] == "Yes" else "no"}"><b>{e(r[4])}</b></td></tr>'
+            for r in ev
+        )
+        head = f"The answer passes all {len(ev)} tests set before the analysis" if passed == len(ev) else f"The answer passes {passed} of the {len(ev)} tests set before the analysis"
+        note = f'<p class="lede">{e(p["eval_note"])}</p>' if p.get("eval_note") else ""
+        note += '<p class="lede">In the analysis, the champion is the current policy and the challenger is the new policy.</p>' 
+        extra += f"""<section class="part" id="evidence"><h2>{head}</h2>{note}
+      <div class="table-scroll"><table class="eval"><thead><tr><th scope="col">Test</th><th scope="col">Measure</th><th scope="col">Result</th><th scope="col">Rule set before the analysis</th><th scope="col">Pass</th></tr></thead><tbody>{trs}</tbody></table></div></section>"""
+
+    if X.get("recommendations"):
+        nav.append(("recommendation", "Recommendation"))
+        recs = "".join(f"<li>{r}</li>" for r in X["recommendations"])
+        extra += f'<section class="part" id="recommendation"><h2>Recommendation</h2><ol class="recs">{recs}</ol></section>'
+
+    if p.get("deck"):
+        nav.append(("deck", "Deck"))
+        slides = "".join(
+            f'<li><div class="sn"><b>{i}</b><span>{e(d[0])}</span></div><div><h3>{e(d[1])}</h3><p>{e(d[2])}</p></div></li>'
+            for i, d in enumerate(p["deck"], 1)
+        )
+        extra += f"""<section class="part" id="deck"><h2>The leadership deck makes the argument in {len(p['deck'])} slides</h2>
+      <p class="lede">Each slide title is one conclusion. Read in order, the titles give the whole argument.</p>
+      <ol class="slides">{slides}</ol></section>"""
+
+    if os.path.exists(brief_file):
+        nav.append(("brief", "Technical brief"))
+        brief = open(brief_file, encoding="utf-8").read()
+        extra += f"""<section class="part" id="brief"><h2>Technical brief</h2>
+      <p class="lede">The main sections of the analysis, without code. <a href="notebook/">Open the full notebook</a> for every step, table and chart.</p>
+      <div class="brief">{brief}</div></section>"""
+
+    if p.get("uses"):
+        nav.append(("tools", "Tools"))
+        us = "".join(f'<tr><td><b>{e(x[0])}</b></td><td>{e(x[1])}</td></tr>' for x in p["uses"])
+        extra += f'<section class="part" id="tools"><h2>What each tool does in this case</h2><div class="table-scroll"><table><tbody>{us}</tbody></table></div></section>'
+
+    files = ""
+    if p.get("files"):
+        files = '<ul class="files">' + "".join(f'<li><a href="{e(x[1])}">{e(x[0])}</a><span>{e(x[2])}</span></li>' for x in p["files"]) + "</ul>"
+
+    sub = "".join(f'<a href="#{i}">{n}</a>' for i, n in nav)
+    return f"""<main>
+  <div class="pagehead"><div class="wrap">{crumb}
+    <h1>{e(p['title'])}</h1>
+  </div></div>
+  <nav class="subnav" aria-label="On this page"><div class="wrap">{sub}</div></nav>
+  <div class="body"><div class="wrap">
+    <section id="summary">
+    <div class="case-head"><p class="facts">{e(p['data'])}</p>{tools(p['tools'])}</div>
+    <p class="question">Q: {e(p['question'])}</p>
+    <h2 class="answer">{e(p['answer'])}</h2>
+    <p class="why">{e(p['why'])}</p>
+    <ol class="keyline">{key}</ol>
+    {CHART if p.get('exhibit') == 'credit' else ''}
+    {files}
+    </section>
+    {extra}
+    {pager(p)}
+  </div></div>
+</main>"""
+
+
 def pager(p):
     i = PAGES.index(p)
     prev = PAGES[i - 1] if i > 0 else None
@@ -178,56 +294,7 @@ def project_pages():
     for p in PAGES:
         crumb = f'<p class="crumb"><a href="/projects/">Projects</a> / {e(p["title"])}</p>'
         if p["type"] == "case":
-            key = "".join(f'<li><h3>{e(k["h"])}</h3><p>{k["p"]}</p></li>' for k in p["keyline"])
-            nav, extra = [("summary", "Summary")], ""
-            if p.get("scqa"):
-                nav.append(("framework", "Framework"))
-                pr = p["problem"]
-                rows = "".join(f'<tr class="{r[0].lower()}"><th scope="row">{r[0]}<span>{e(r[1])}</span></th><td>{r[2]}</td></tr>' for r in p["scqa"])
-                tree = "".join(f'<li><p class="tq">{e(t[0])}</p><p class="ta"><b>{t[1]}.</b> {e(t[2])}</p></li>' for t in p["tree"])
-                extra += f"""<section class="part" id="framework"><h2>The framework behind the answer</h2>
-      <h3 class="sub3">The problem</h3>
-      <div class="strip"><div class="scene"><span>Starting point</span><p>{e(pr['scene'])}</p></div><div class="now"><span>Result now</span><p>{e(pr['now'])}</p></div><div class="want"><span>Result wanted</span><p>{e(pr['want'])}</p></div></div>
-      <h3 class="sub3">The story in four lines</h3>
-      <table class="scqa"><tbody>{rows}</tbody></table>
-      <h3 class="sub3">The questions that the analysis must answer</h3>
-      <p class="treeq">{e(p['tree_q'])}</p>
-      <ol class="tree">{tree}</ol></section>"""
-            if p.get("method"):
-                nav.append(("method", "Method"))
-                mt = p["method"]
-                st = "".join(f'<li><h3>{e(x[0])}</h3><p>{e(x[1])}</p></li>' for x in mt["steps"])
-                notes = "".join(f"<li>{e(x)}</li>" for x in mt["notes"])
-                outline = "".join(f'<tr><td class="n">{i}</td><td><b>{e(x[0])}</b></td><td>{e(x[1])}</td></tr>' for i, x in enumerate(p["steps"], 1))
-                extra += f"""<section class="part" id="method"><h2>{e(mt['h'])}</h2>
-      <ol class="steps3">{st}</ol><ul class="notes">{notes}</ul>
-      <h3 class="sub3">The analysis in {len(p['steps'])} steps</h3>
-      <div class="table-scroll"><table><thead><tr><th scope="col" class="n">Step</th><th scope="col">What it does</th><th scope="col">Question it answers</th></tr></thead><tbody>{outline}</tbody></table></div></section>"""
-            if p.get("uses"):
-                nav.append(("tools", "Tools"))
-                us = "".join(f'<tr><td><b>{e(x[0])}</b></td><td>{e(x[1])}</td></tr>' for x in p["uses"])
-                extra += f"""<section class="part" id="tools"><h2>What each tool does in this case</h2>
-      <div class="table-scroll"><table><tbody>{us}</tbody></table></div></section>"""
-            sub = "".join(f'<a href="#{i}">{n}</a>' for i, n in nav) if len(nav) > 1 else ""
-            subnav = f'<nav class="subnav" aria-label="On this page"><div class="wrap">{sub}</div></nav>' if sub else ""
-            body = f"""<main>
-  <div class="pagehead"><div class="wrap">{crumb}
-    <h1>{e(p['title'])}</h1>
-  </div></div>
-  {subnav}
-  <div class="body"><div class="wrap">
-    <section id="summary">
-    <div class="case-head"><p class="facts">{e(p['data'])}</p>{tools(p['tools'])}</div>
-    <p class="question">Q: {e(p['question'])}</p>
-    <h2 class="answer">{e(p['answer'])}</h2>
-    <p class="why">{e(p['why'])}</p>
-    <ol class="keyline">{key}</ol>
-    {CHART if p.get('exhibit') == 'credit' else ''}
-    </section>
-    {extra}
-    {pager(p)}
-  </div></div>
-</main>"""
+            body = case_page(p, crumb)
         else:
             rows = "".join(
                 f'<tr><td><a href="{e(p["repo"])}/{g[2]}">{e(g[0])}</a></td><td class="n">{g[1]}</td></tr>' for g in p["groups"]

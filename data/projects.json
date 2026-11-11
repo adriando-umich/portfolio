@@ -71,15 +71,27 @@
    "keyline": [
     {
      "h": "It approves more applicants with no more defaults",
-     "p": "Approval rate: <b>85.7%</b> vs. 84.5% today. Bad rate (default rate of approved loans): <b>12.5%</b>, held equal."
+     "pts": [
+      "Approval rate: <b>85.7%</b> of the 2015 applicants vs. 84.5% today.",
+      "Bad rate (default rate of approved loans): <b>12.5%</b> for both policies.",
+      "At the same number of approvals it swaps 24,426 loans. The loans it adds default less: <b>23.6%</b> vs. 25.1%."
+     ]
     },
     {
      "h": "The gain holds under every cost assumption tested",
-     "p": "Realized NPV against the current policy: <b>+$7.1M</b>. Lowest result in the stress test: <b>+$5.1M</b>."
+     "pts": [
+      "Realized NPV against the current policy, 2015 loans: <b>+$7.1M</b>.",
+      "Lowest result when cost of funds and acquisition cost change: <b>+$5.1M</b>.",
+      "The swapped loans alone add <b>$8.3M</b>."
+     ]
     },
     {
      "h": "A small test limits the risk of the change",
-     "p": "Start on <b>10%</b> of applications. Stop if 12-month defaults rise <b>1 point</b>."
+     "pts": [
+      "Start on a random <b>10%</b> of applications.",
+      "Stop if the 12-month default rate is more than <b>1 point</b> above the current policy.",
+      "About 1,000 random approvals below the cutoff measure the applicants that the data does not contain."
+     ]
     }
    ],
    "exhibit": "credit",
@@ -92,50 +104,22 @@
     [
      "Situation",
      "What the reader knows",
-     "A consumer lender approves applicants by credit grade. Loans from 2013–2014: <b>realized NPV +$71.7M</b>."
+     "A lender approves 36-month personal loans by risk sub-grade. The loans from 2013–2014 made <b>$71.7M</b> of realized NPV."
     ],
     [
      "Complication",
      "What changed, and what it cost",
-     "In 2015, interest rates fell and default rates rose in every grade. Loans from 2015: <b>realized NPV –$32.9M</b>."
+     "The loans from 2015 lost <b>$32.9M</b>. Defaults rose from 12.3% in 2013 to 14.9%, and the mean interest rate fell from 13.4% to 11.3%. The business wants more approvals, but Risk accepts no more defaults."
     ],
     [
      "Question",
      "The decision",
-     "Q: How can the lender approve more customers with no increase in losses?"
+     "Q: Can a new score approve more applicants at the current bad rate of 12.5%, and add money?"
     ],
     [
      "Answer",
      "The recommendation and its effect",
-     "Replace the credit grade with a risk scorecard. <b>Approval rate 84.5% → 85.7%</b> at a bad rate of 12.5%. <b>Realized NPV +$7.1M</b>. Next step: a test on 10% of applications."
-    ]
-   ],
-   "tree_q": "Is the new cutoff good enough to test on real applications?",
-   "tree": [
-    [
-     "Does the scorecard approve more applicants at the same bad rate?",
-     "Yes",
-     "Approval rate 85.7% vs. 84.5%, bad rate 12.5% for both."
-    ],
-    [
-     "Do the swapped applicants make money?",
-     "Yes",
-     "The applicants that the scorecard approves in place of others add $8.3M of realized NPV."
-    ],
-    [
-     "Does the gain hold when the cost assumptions change?",
-     "Yes",
-     "At least +$5.1M under every cost assumption tested."
-    ],
-    [
-     "Is a more complex model worth it?",
-     "No",
-     "A gradient boosting model ranks risk only 1.5 KS points better, below the 2-point rule set before the test. The scorecard stays, and it gives a reason for each decline."
-    ],
-    [
-     "Does the cutoff alone fix the loss on the 2015 loans?",
-     "No",
-     "The cutoff recovers $7.1M of a $32.9M loss. A pricing test for grades A to C must go with it."
+     "Yes. A scorecard approves <b>85.7% vs. 84.5%</b> and adds <b>$7.1M</b> on the 2015 loans, and $5.1M or more under every cost assumption. Next step: a test on 10% of applications, together with a pricing test, because the price, not the cutoff, drove the 2015 loss."
     ]
    ],
    "method": {
@@ -160,36 +144,6 @@
      "The current policy is my assumption. The public data shows only booked loans, not the lender's approval rule. The result shows a method and the likely size of the gain. The test on 10% of applications measures the gain against the real policy."
     ]
    },
-   "steps": [
-    [
-     "Get the data",
-     "Which data shows the actual outcome of each applicant?"
-    ],
-    [
-     "Clean and prepare",
-     "Which loans, which target and which columns are allowed? What did the current policy return?"
-    ],
-    [
-     "Split the data",
-     "How do we test the model on a period that it never saw?"
-    ],
-    [
-     "Build the score",
-     "Which columns and which model type rank applicants by risk best?"
-    ],
-    [
-     "Calibrate and explain",
-     "Is the probability of default at the right level, and is there a reason for each decline?"
-    ],
-    [
-     "Compare the policies",
-     "Is the new policy better than the current one, in model metrics and in dollars?"
-    ],
-    [
-     "Set the cutoff and the test",
-     "Where does the cutoff go, and how do we test it with real applicants?"
-    ]
-   ],
    "uses": [
     [
      "SQL",
@@ -211,6 +165,184 @@
      "Excel",
      "Holds the P&L model: NPV by policy and the sensitivity chart."
     ]
+   ],
+   "tree": {
+    "t": "Realized NPV of the loan book",
+    "s": "2015 loans: –$32.9M",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Loans approved",
+      "s": "Volume",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Applicants",
+        "s": "Fixed: the 2015 applicants",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       },
+       {
+        "t": "Approval rate",
+        "s": "The lever of this case: the cutoff",
+        "k": "lever",
+        "q": "Can a new score approve more applicants at the same bad rate?",
+        "a": "Yes",
+        "ev": "85.7% vs. 84.5%.",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Revenue for each loan",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Loan amount",
+        "s": "Fixed: set by the application",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       },
+       {
+        "t": "Interest rate",
+        "s": "Fell from 13.4% to 11.3%",
+        "k": "",
+        "q": "Did the 2015 prices pay for the risk?",
+        "a": "No",
+        "ev": "32 of 35 sub-grades lost money. Grades A to C need 1 point or less to break even, so test a higher price.",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Cost for each loan",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Credit loss",
+        "s": "",
+        "k": "",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": [
+         {
+          "t": "Default rate",
+          "s": "The limit: bad rate 12.5%",
+          "k": "limit",
+          "q": "Do the loans that the scorecard adds default less?",
+          "a": "Yes",
+          "ev": "23.6% vs. 25.1% for the loans it drops. The swap adds $8.3M.",
+          "c": []
+         },
+         {
+          "t": "Recoveries after default",
+          "s": "",
+          "k": "",
+          "q": "Does a recovery model add dollars?",
+          "a": "No",
+          "ev": "The top 20% by balance holds 45.5% of recovery dollars. A model reaches 46.2%.",
+          "c": []
+         }
+        ]
+       },
+       {
+        "t": "Operating cost",
+        "s": "Funds 3% a year, servicing 1% of payments, acquisition $300 a loan",
+        "k": "",
+        "q": "Does the gain hold if these costs change?",
+        "a": "Yes",
+        "ev": "+$5.1M to +$8.4M across all cost cases.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   },
+   "tree_h": "Realized NPV splits into volume, revenue and cost. The analysis tests one question on each branch",
+   "evaluation": [
+    [
+     "1. Order of risk",
+     "KS of the scorecard against the sub-grade; gain of the gradient boosting benchmark",
+     "0.262 against 0.262; +1.5 points",
+     "KS above the sub-grade; benchmark gain below 2 points",
+     "No"
+    ]
+   ],
+   "eval_note": "The failed test: on all applicants the scorecard ranks risk as well as the sub-grade, not better. Its value is near the cutoff, where the approval decision happens.",
+   "deck": [
+    [
+     "Summary",
+     "A scorecard cutoff approves 85.7% vs. 84.5% at the same bad rate and adds $7.1M",
+     "The bottom line first. At the bad rate of today's policy, a scorecard approves 1.2 points more applicants and adds $7.1M of realized NPV on the 2015 loans. The gain holds at $5.1M or more under every cost assumption. But the whole 2015 book lost money, so the cutoff goes together with a pricing test."
+    ],
+    [
+     "Situation",
+     "The 2013–2014 loans made $71.7M of realized NPV after all costs",
+     "The 2013 and 2014 loans made money after a 3% cost of funds, servicing and a $300 acquisition cost. The current policy approves the best sub-grades up to about 85% of applicants. Every gain is against this rule."
+    ],
+    [
+     "Complication",
+     "The 2015 loans lost $32.9M as defaults rose to 14.9% and rates fell to 11.3%",
+     "The loss is not only in the risky grades: 32 of 35 sub-grades lost money. So the problem has two parts: who we approve, and at what price."
+    ],
+    [
+     "Resolution",
+     "Yes: test the scorecard cutoff on 10% of applications, together with a pricing test",
+     "One action for each stage of the loan life. Approve: swap to a scorecard cutoff. Price: test higher rates by grade. Reserve: plan with lifetime defaults. Recover: rank collections by balance."
+    ],
+    [
+     "Resolution",
+     "Near the cutoff the scorecard swaps 24,426 loans for safer ones and adds $8.3M",
+     "The loans it adds default less than the loans it drops, 23.6% against 25.1%, and pay a higher rate. The test is out-of-time, the population is stable, and the level of the probability of default is correct after recalibration."
+    ],
+    [
+     "Resolution",
+     "At 2015 prices every grade lost money; grades A–C need 1 point or less",
+     "Grades A to C need a small increase to break even. Grades D to G need 2.7 to almost 20 points, which the market will not accept, so for them the cutoff is the right tool."
+    ],
+    [
+     "Resolution",
+     "The gain stays at $5.1M or more under every cost assumption we tested",
+     "Cost of funds from 2% to 5% and acquisition cost from $150 to $450: the gain never falls below $5.1M. With current policies that approve 80% and 90%, the scorecard still approves more at the same bad rate."
+    ],
+    [
+     "Resolution",
+     "Run the scorecard cutoff on 10% of applications; stop if 12-month defaults rise 1 point",
+     "A random 10% of applications get the scorecard cutoff. A small random sample below both cutoffs shows how risky the declined applicants are. Month 12 is the gate. Month 36 decides on the realized NPV."
+    ]
+   ],
+   "files": [
+    [
+     "Full notebook",
+     "notebook/",
+     "All steps with code, tables and charts"
+    ],
+    [
+     "P&L model",
+     "pnl_model.xlsx",
+     "Excel: NPV by policy and the sensitivity chart"
+    ]
    ]
   },
   {
@@ -227,20 +359,31 @@
    ],
    "data": "IEEE-CIS public transaction data",
    "question": "Which policy gives the lowest total cost of fraud, false declines and reviews?",
-   "answer": "A three-tier policy (approve, review, decline) on a fraud score cuts the total monthly cost by $64k and keeps false declines under the 3% cap.",
+   "answer": "A three-tier policy (approve, review, decline) on a fraud score cuts the total monthly cost by at least $64k, with false declines inside the 3% limit.",
    "why": "Why? Three reasons, strongest first",
    "keyline": [
     {
      "h": "It stops almost twice the fraud dollars",
-     "p": "Share of fraud dollars stopped: <b>71.2%</b> vs. 38.4% for a fixed rule set."
+     "pts": [
+      "Share of fraud dollars stopped: <b>71.2%</b> vs. 38.4% for the current rules.",
+      "The score ranks fraud better than the rules: PR-AUC <b>0.486</b> vs. 0.269."
+     ]
     },
     {
-     "h": "The total cost falls, not only the fraud loss",
-     "p": "Total monthly cost = fraud loss that gets through + cost of false declines + cost of reviews. Decrease: <b>$64k to $127k</b> per month, depending on the baseline. $64k is the lowest figure."
+     "h": "The total cost falls under every comparison",
+     "pts": [
+      "Total cost each month: <b>$172,612</b> vs. $299,432 for the base current policy (down 42%).",
+      "Against the strongest current policy tested, the decrease is <b>$64,274</b> each month.",
+      "The decrease is at least <b>$53,544</b> under every cost assumption tested."
+     ]
     },
     {
-     "h": "Good customers stay protected",
-     "p": "False decline rate (share of good transactions declined): <b>2.46%</b>, under the cap of <b>3%</b>."
+     "h": "False declines rise, but stay inside the limit",
+     "pts": [
+      "Good transactions declined: <b>2.46%</b> vs. 0.28% today. Limit: 3%.",
+      "Finance and Marketing confirm the cost of a false decline and the limit before the test.",
+      "The test runs on a random <b>10%</b> of transactions for about 16 days, with stop rules."
+     ]
     }
    ],
    "uses": [
@@ -259,6 +402,167 @@
     [
      "Statistics",
      "Validates over time, tracks drift with the population stability index, and tests the sensitivity to costs."
+    ]
+   ],
+   "problem": {
+    "scene": "An online merchant accepts card payments. A set of fixed rules gives each transaction one of three actions: approve, review or decline.",
+    "now": "Fraud loss goes up, and stricter rules decline more good customers. Total cost under the current rules: $299,432 each month.",
+    "want": "The lowest total cost of fraud loss, false declines and reviews, with the same review team and at most 3% of good transactions declined."
+   },
+   "scqa": [
+    [
+     "Situation",
+     "What the reader knows",
+     "An online merchant accepts card payments. A set of fixed rules approves, reviews or declines each transaction."
+    ],
+    [
+     "Complication",
+     "What changed, and what it cost",
+     "Fraud loss goes up. Stricter rules decline more good customers, and each false decline costs margin and goodwill. The analyst team can examine only 120 alerts each day, and fixed rules lose value as fraud patterns change."
+    ],
+    [
+     "Question",
+     "The decision",
+     "Q: Which policy gives the lowest total cost of fraud loss, false declines and reviews, with the same review capacity?"
+    ],
+    [
+     "Answer",
+     "The recommendation and its effect",
+     "A fraud score that puts each transaction in a tier by its expected cost in dollars. Total cost falls by <b>$64,274</b> each month against the strongest current policy tested. It stops <b>71.2%</b> of fraud dollars vs. 38.4%. Next step: a test on 10% of transactions."
+    ]
+   ],
+   "tree": {
+    "t": "Total cost each month",
+    "s": "Current rules: $299,432",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Fraud loss that gets through",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Fraud dollars attempted",
+        "s": "Fixed: the test months",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       },
+       {
+        "t": "Share of fraud dollars stopped",
+        "s": "The lever: the score and the three tiers",
+        "k": "lever",
+        "q": "Does the new policy stop more fraud dollars?",
+        "a": "Yes",
+        "ev": "71.2% vs. 38.4%.",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Cost of false declines",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Good transactions declined",
+        "s": "The limit: 3% of good transactions",
+        "k": "limit",
+        "q": "Does the decline rate of good customers stay inside the limit?",
+        "a": "Yes",
+        "ev": "2.46%, up from 0.28% today.",
+        "c": []
+       },
+       {
+        "t": "Cost of each false decline",
+        "s": "3% margin on the amount, plus $10 of friction",
+        "k": "",
+        "q": "Does the saving hold if this cost changes?",
+        "a": "Yes",
+        "ev": "At least $53,544 each month under every cost assumption.",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Cost of reviews",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Alerts reviewed each day",
+        "s": "Capacity: 3 analysts, 120 alerts",
+        "k": "",
+        "q": "Does a larger team pay?",
+        "a": "No",
+        "ev": "4 analysts is the lowest-cost team, but only $1,534 each month below today. No change before the test.",
+        "c": []
+       },
+       {
+        "t": "Cost of an analyst day",
+        "s": "Fixed: $300",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     }
+    ]
+   },
+   "tree_h": "Total cost splits into three parts. The policy must lower the sum, not one part",
+   "evaluation": [
+    [
+     "1. Order of risk",
+     "PR-AUC and dollar recall in the top 2%, new policy against current rules",
+     "0.486 against 0.269; 26.5% against 17.0%",
+     "Both above the current rules; gain of 10% or more",
+     "Yes"
+    ],
+    null,
+    [
+     "3. Stability",
+     "PSI of the score; share of the PR-AUC that the score keeps in later months",
+     "0.008; 85%",
+     "PSI less than 0.1; 80% or more",
+     "Yes"
+    ],
+    [
+     "4. Business value",
+     "Total cost each month, new policy against current rules; decline rate of good transactions",
+     "$172,612 against $299,432; 2.46%",
+     "Lower total cost; 3% or less",
+     "Yes"
+    ],
+    [
+     "5. Explainability",
+     "Share of declines that readable rules explain",
+     "0%",
+     "50% or more",
+     "No"
+    ]
+   ],
+   "eval_note": "The failed test: readable rules do not explain most declines. Also, the score loses 15% of its PR-AUC after month 4, so the plan retrains it each month.",
+   "files": [
+    [
+     "Full notebook",
+     "notebook/",
+     "All steps with code, tables and charts"
     ]
    ]
   },
@@ -280,15 +584,26 @@
    "keyline": [
     {
      "h": "The email raises spend",
-     "p": "Spend effect against the no-email group: <b>+$0.77</b> per customer in the 2 weeks after the email."
+     "pts": [
+      "Spend effect against the no-email group: <b>+$0.77</b> for each customer in 2 weeks (95% CI $0.49 to $1.05).",
+      "The three groups differ only by the email: the randomization check passes.",
+      "The men's email gives <b>$10,362</b> more than the women's email for each campaign."
+     ]
     },
     {
      "h": "The extra margin is larger than the contact cost",
-     "p": "30% margin on $0.77, less $0.10 for each email, gives <b>$13,095</b> of profit per 100,000 customers. The email pays back at any cost below <b>$0.23</b>."
+     "pts": [
+      "30% margin on $0.77, less $0.10 for each email: <b>$13,095</b> for each 100,000 customers (95% CI $4,554 to $21,635).",
+      "The email pays at any contact cost below <b>$0.23</b>."
+     ]
     },
     {
      "h": "A targeting model adds nothing at this cost",
-     "p": "Two uplift models did not beat a simple ranking by purchase history, and at <b>$0.10</b> per email no segment earns more than an email to all customers."
+     "pts": [
+      "At <b>$0.10</b> an email, no targeting rule and no uplift model beats an email to all customers.",
+      "A shorter list (the top 25% by purchase history) pays only if the full contact cost is <b>$0.25</b> or more.",
+      "A 10% holdout confirms each campaign and costs $1,309."
+     ]
     }
    ],
    "uses": [
@@ -303,6 +618,108 @@
     [
      "Machine learning",
      "Tests two uplift models (T-learner and uplift tree). They do not beat the ranking by purchase history, so the recommendation does not use them."
+    ]
+   ],
+   "problem": {
+    "scene": "A retailer emails customers who bought in the last year. A test put each customer at random into one of three groups: the men's email, the women's email or no email.",
+    "now": "Leadership does not know which version to send, or if all customers should get it. An email pays for itself only if it adds more than $0.33 of spend.",
+    "want": "The version and the audience with the most incremental profit for each customer, confirmed by a holdout after the launch."
+   },
+   "scqa": [
+    [
+     "Situation",
+     "What the reader knows",
+     "A retailer sent an email to customers who bought in the last year. Each customer went at random into one of three groups: the men's email, the women's email or no email. Visits, conversions and spend were measured for 2 weeks."
+    ],
+    [
+     "Complication",
+     "What changed, and what it cost",
+     "Each email has a contact cost. Most customers buy nothing in the test window, so the spend data is noisy, and the mean effect can hide customers where the email loses money."
+    ],
+    [
+     "Question",
+     "The decision",
+     "Q: Which email version do we send, and to which customers, for the most incremental profit?"
+    ],
+    [
+     "Answer",
+     "The recommendation and its effect",
+     "Send the men's email to all customers. Spend rises by <b>$0.77</b> for each customer. Incremental profit: <b>$13,095</b> for each campaign of 100,000 customers. Keep a 10% holdout."
+    ]
+   ],
+   "tree": {
+    "t": "Incremental profit of a campaign",
+    "s": "$13,095 for 100,000 customers",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Customers who get the email",
+      "s": "The lever: all customers, or a targeted list",
+      "k": "lever",
+      "q": "Does a targeted list beat an email to all customers?",
+      "a": "No",
+      "ev": "At $0.10 an email, no rule and no uplift model beats send-to-all. The top 25% by purchase history pays only at $0.25 or more.",
+      "c": []
+     },
+     {
+      "t": "Profit for each customer emailed",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Incremental margin",
+        "s": "",
+        "k": "",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": [
+         {
+          "t": "Incremental spend",
+          "s": "Measured by the randomized test",
+          "k": "",
+          "q": "Does the email raise spend?",
+          "a": "Yes",
+          "ev": "+$0.77 for each customer (95% CI $0.49 to $1.05).",
+          "c": []
+         },
+         {
+          "t": "Margin on spend",
+          "s": "Fixed: assumed 30%",
+          "k": "fixed",
+          "q": "",
+          "a": "",
+          "ev": "",
+          "c": []
+         }
+        ]
+       },
+       {
+        "t": "Contact cost",
+        "s": "The limit: assumed $0.10 an email",
+        "k": "limit",
+        "q": "Does the email pay at the assumed cost?",
+        "a": "Yes",
+        "ev": "It pays at any cost below $0.23 an email.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   },
+   "tree_h": "Campaign profit splits into audience, margin and contact cost. The test measures the one unknown: incremental spend",
+   "eval_note": "",
+   "files": [
+    [
+     "Full notebook",
+     "notebook/",
+     "All steps with code, tables and charts"
     ]
    ]
   },

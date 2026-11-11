@@ -1,0 +1,50 @@
+{
+ "evaluation": [
+  [
+   "1. Validity",
+   "Largest absolute standardized difference; sample-ratio p-value",
+   "0.014; 0.90",
+   "Less than 0.05; more than 0.01",
+   "Yes"
+  ],
+  [
+   "2. Effect",
+   "Welch 95% CI of the spend effect; customers in each group / customers for 80% power",
+   "[$0.49, $1.05]; 21,306 / 5,988",
+   "Excludes 0; at least the customers for 80% power",
+   "Yes"
+  ],
+  [
+   "3. Robustness",
+   "Bootstrap 95% CI; largest change of the CUPED and the regression effect",
+   "[$0.48, $1.06]; 0.3%",
+   "Excludes 0; within 10%",
+   "Yes"
+  ],
+  [
+   "4. Business value",
+   "Profit for 100,000 customers, with its 95% CI",
+   "$13,095 [$4,554, $21,635]",
+   "More than 0; lower end more than 0",
+   "Yes"
+  ],
+  [
+   "5. Targeting",
+   "Best ML model against rank by history (Qini area); 90% interval of the gain of the top 25% at $0.10",
+   "-123%, 0 of 10; [-$11,245, $11]",
+   "+20% or more and 9 of 10; interval above 0 (then targeting replaces send to all)",
+   "Yes"
+  ]
+ ],
+ "recommendations": [
+  "<strong>Send the men’s email to all customers.</strong> At the base contact cost, it gives the most profit of all rules (<a href=\"notebook/#dec-07\">Step 7a</a>).",
+  "<strong>Confirm the full contact cost before the launch.</strong> If Marketing confirms a cost of $0.25 or more, send only to the top 25% by history (<a href=\"notebook/#dec-07\">Step 7a</a>). If the cost is more than $0.23, “send to all” loses money.",
+  "<strong>Keep a 10% holdout.</strong> It shows with 87% power that the email still pays for itself, and it costs $1,309 for each campaign (<a href=\"notebook/#dec-08\">Step 7d</a>).",
+  "<strong>Stop “send to all” if the effect falls.</strong> If the incremental spend stays below $0.33 for two campaigns, send only to the top 25% by history (<a href=\"notebook/#step-7\">Step 7d</a>).",
+  "<strong>Use the same method for the open questions of case 01.</strong> A pricing test for grades A to C, and a test of a debt sale against in-house collection (<a href=\"notebook/#part-2\">Part 2</a>)."
+ ],
+ "answer": [
+  "Send the men’s email to all customers. It increases the mean spend by $0.77 for each customer (95% CI [$0.49, $1.05]). For each campaign of 100,000 customers, it gives $13,095 of incremental profit, with a range of $4,554 to $21,635. It gives $10,362 more than the women’s email.",
+  "The policy passes 5 of the 5 branches of the evaluation framework. The branches that fail are: none. At the base contact cost of $0.10, no targeting rule and no ML uplift model beats “send to all”. A shorter list pays only if the full contact cost is $0.25 or more."
+ ]
+}

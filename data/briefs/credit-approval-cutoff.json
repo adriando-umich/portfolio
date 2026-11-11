@@ -1,0 +1,48 @@
+{
+ "evaluation": [
+  [
+   "1. Order of risk",
+   "KS: challenger / champion; KS of the GBM bench...",
+   "0.262 / 0.262; +1.5 points",
+   "KS above the champion; GBM less than 2 KS poin...",
+   "No"
+  ],
+  [
+   "2. Level",
+   "Mean PD minus actual rate, July–December 2015",
+   "-0.2 points",
+   "Less than 1 point",
+   "Yes"
+  ],
+  [
+   "3. Stability",
+   "PSI of the score; largest feature PSI",
+   "0.005; 0.057",
+   "Less than 0.1",
+   "Yes"
+  ],
+  [
+   "4. Business value",
+   "Approval at the champion bad rate; swap-set NPV",
+   "85.7% against 84.5%; +8.3 $M",
+   "More approvals and a positive NPV",
+   "Yes"
+  ],
+  [
+   "5. Explainability",
+   "Declines with three reasons in plain English",
+   "100%",
+   "95% or more",
+   "Yes"
+  ]
+ ],
+ "recommendations": [
+  "<strong>Test the challenger cutoff.</strong> Send 10% of applications to the challenger at the champion bad rate (<a href=\"notebook/#dec-06\">Step 7</a>). Add a small random test below the cutoff to measure the applicants that the data does not contain (<a href=\"notebook/#dec-07\">Step 7</a>).",
+  "<strong>Test a higher price for the grades with a negative NPV.</strong> The 2015 prices did not pay for the risk: 32 of 35 sub-grades lost money (<a href=\"notebook/#pricing\">Part 2: Pricing</a>).",
+  "<strong>Plan the losses with the lifetime default rate, not the current rate.</strong> The 2018 vintage shows 2.7% to date, but its forecast is 12.8% (<a href=\"notebook/#loss-forecast\">Part 2: Loss forecast</a>).",
+  "<strong>Do not build a recovery model.</strong> A rank by balance gives the same dollars. Test a sale of the debt against in-house collection (<a href=\"notebook/#recoveries\">Part 2: Recoveries</a>)."
+ ],
+ "answer": [
+  "Yes. At the champion bad rate of 12.5%, the challenger approves 85.7% of the 2015 applicants against 84.5% for the champion. On the 2015 loans, it adds $7.1M of realized NPV, and at least $5.1M for each cost assumption that we tested. But the 2015 book lost money at its prices, so the cutoff must go together with a pricing test."
+ ]
+}
