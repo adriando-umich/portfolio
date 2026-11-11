@@ -94,12 +94,6 @@
      ]
     }
    ],
-   "exhibit": "credit",
-   "problem": {
-    "scene": "A consumer lender offers unsecured 36-month loans. A risk grade puts each applicant in a sub-grade from A1 to G5. The lender approves the best sub-grades and declines the others.",
-    "now": "The business wants more approvals, but Risk does not accept a higher bad rate. The loans from 2015 lost $32.9M.",
-    "want": "More approvals at the same bad rate of 12.5%, and more realized NPV from the same applicants."
-   },
    "scqa": [
     [
      "Situation",
@@ -142,7 +136,8 @@
      "The scorecard learns from the loans of 2013–2014 and is tested on the loans of 2015, which it never saw.",
      "Grade, sub-grade and interest rate are not inputs to the scorecard, because they are results of the lender's own policy.",
      "The current policy is my assumption. The public data shows only booked loans, not the lender's approval rule. The result shows a method and the likely size of the gain. The test on 10% of applications measures the gain against the real policy."
-    ]
+    ],
+    "viz": true
    },
    "uses": [
     [
@@ -279,7 +274,7 @@
      }
     ]
    },
-   "tree_h": "Realized NPV splits into volume, revenue and cost. The analysis tests one question on each branch",
+   "tree_h": "Realized NPV splits into volume, revenue and cost, with one tested question on each branch",
    "evaluation": [
     [
      "1. Order of risk",
@@ -289,59 +284,38 @@
      "No"
     ]
    ],
-   "eval_note": "The failed test: on all applicants the scorecard ranks risk as well as the sub-grade, not better. Its value is near the cutoff, where the approval decision happens.",
-   "deck": [
+   "eval_note": "The failed test: on all applicants the scorecard ranks risk as well as the sub-grade, not better. Its value is near the cutoff.",
+   "recs": [
     [
-     "Summary",
-     "A scorecard cutoff approves 85.7% vs. 84.5% at the same bad rate and adds $7.1M",
-     "The bottom line first. At the bad rate of today's policy, a scorecard approves 1.2 points more applicants and adds $7.1M of realized NPV on the 2015 loans. The gain holds at $5.1M or more under every cost assumption. But the whole 2015 book lost money, so the cutoff goes together with a pricing test."
+     "Test the scorecard cutoff",
+     "on a random 10% of applications"
     ],
     [
-     "Situation",
-     "The 2013–2014 loans made $71.7M of realized NPV after all costs",
-     "The 2013 and 2014 loans made money after a 3% cost of funds, servicing and a $300 acquisition cost. The current policy approves the best sub-grades up to about 85% of applicants. Every gain is against this rule."
+     "Test a higher price",
+     "for grades A to C: 1 point or less"
     ],
     [
-     "Complication",
-     "The 2015 loans lost $32.9M as defaults rose to 14.9% and rates fell to 11.3%",
-     "The loss is not only in the risky grades: 32 of 35 sub-grades lost money. So the problem has two parts: who we approve, and at what price."
+     "Plan losses with lifetime defaults",
+     "12.8% forecast, not 2.7% to date"
     ],
     [
-     "Resolution",
-     "Yes: test the scorecard cutoff on 10% of applications, together with a pricing test",
-     "One action for each stage of the loan life. Approve: swap to a scorecard cutoff. Price: test higher rates by grade. Reserve: plan with lifetime defaults. Recover: rank collections by balance."
-    ],
-    [
-     "Resolution",
-     "Near the cutoff the scorecard swaps 24,426 loans for safer ones and adds $8.3M",
-     "The loans it adds default less than the loans it drops, 23.6% against 25.1%, and pay a higher rate. The test is out-of-time, the population is stable, and the level of the probability of default is correct after recalibration."
-    ],
-    [
-     "Resolution",
-     "At 2015 prices every grade lost money; grades A–C need 1 point or less",
-     "Grades A to C need a small increase to break even. Grades D to G need 2.7 to almost 20 points, which the market will not accept, so for them the cutoff is the right tool."
-    ],
-    [
-     "Resolution",
-     "The gain stays at $5.1M or more under every cost assumption we tested",
-     "Cost of funds from 2% to 5% and acquisition cost from $150 to $450: the gain never falls below $5.1M. With current policies that approve 80% and 90%, the scorecard still approves more at the same bad rate."
-    ],
-    [
-     "Resolution",
-     "Run the scorecard cutoff on 10% of applications; stop if 12-month defaults rise 1 point",
-     "A random 10% of applications get the scorecard cutoff. A small random sample below both cutoffs shows how risky the declined applicants are. Month 12 is the gate. Month 36 decides on the realized NPV."
+     "Rank collections by balance",
+     "no recovery model"
     ]
    ],
-   "files": [
+   "excel": "pnl_model.xlsx",
+   "risks": [
     [
-     "Full notebook",
-     "notebook/",
-     "All steps with code, tables and charts"
+     "Declined applicants are riskier than the booked loans",
+     "About 1,000 random approvals below the cutoff measure their default rate"
     ],
     [
-     "P&L model",
-     "pnl_model.xlsx",
-     "Excel: NPV by policy and the sensitivity chart"
+     "Defaults rise in the test",
+     "Stop if the 12-month default rate is 1 point above the current policy"
+    ],
+    [
+     "2015 prices do not pay for the risk",
+     "The pricing test for grades A to C runs with the cutoff test"
     ]
    ]
   },
@@ -404,11 +378,6 @@
      "Validates over time, tracks drift with the population stability index, and tests the sensitivity to costs."
     ]
    ],
-   "problem": {
-    "scene": "An online merchant accepts card payments. A set of fixed rules gives each transaction one of three actions: approve, review or decline.",
-    "now": "Fraud loss goes up, and stricter rules decline more good customers. Total cost under the current rules: $299,432 each month.",
-    "want": "The lowest total cost of fraud loss, false declines and reviews, with the same review team and at most 3% of good transactions declined."
-   },
    "scqa": [
     [
      "Situation",
@@ -525,7 +494,7 @@
      }
     ]
    },
-   "tree_h": "Total cost splits into three parts. The policy must lower the sum, not one part",
+   "tree_h": "Total cost splits into three parts, and the policy must lower the sum",
    "evaluation": [
     [
      "1. Order of risk",
@@ -557,12 +526,33 @@
      "No"
     ]
    ],
-   "eval_note": "The failed test: readable rules do not explain most declines. Also, the score loses 15% of its PR-AUC after month 4, so the plan retrains it each month.",
-   "files": [
+   "eval_note": "The failed test: readable rules do not explain most declines.",
+   "recs": [
     [
-     "Full notebook",
-     "notebook/",
-     "All steps with code, tables and charts"
+     "Test the new policy",
+     "on a random 10% of transactions, about 16 days"
+    ],
+    [
+     "Retrain the score each month",
+     "mean PR-AUC 0.576 vs. 0.487"
+    ],
+    [
+     "Keep the team at 3 analysts",
+     "a fourth saves only $1,534 a month"
+    ]
+   ],
+   "risks": [
+    [
+     "More good customers are declined: 2.46% vs. 0.28% today",
+     "The 3% limit is a stop rule of the test"
+    ],
+    [
+     "The cost of a false decline is an assumption",
+     "Finance and Marketing confirm it before the test; it sets the size of the decline tier"
+    ],
+    [
+     "The score loses 15% of its PR-AUC after month 4",
+     "Monthly retrain, and a check of the PR-AUC each month"
     ]
    ]
   },
@@ -620,11 +610,6 @@
      "Tests two uplift models (T-learner and uplift tree). They do not beat the ranking by purchase history, so the recommendation does not use them."
     ]
    ],
-   "problem": {
-    "scene": "A retailer emails customers who bought in the last year. A test put each customer at random into one of three groups: the men's email, the women's email or no email.",
-    "now": "Leadership does not know which version to send, or if all customers should get it. An email pays for itself only if it adds more than $0.33 of spend.",
-    "want": "The version and the audience with the most incremental profit for each customer, confirmed by a holdout after the launch."
-   },
    "scqa": [
     [
      "Situation",
@@ -713,13 +698,30 @@
      }
     ]
    },
-   "tree_h": "Campaign profit splits into audience, margin and contact cost. The test measures the one unknown: incremental spend",
+   "tree_h": "Campaign profit splits into audience, margin and contact cost",
    "eval_note": "",
-   "files": [
+   "recs": [
     [
-     "Full notebook",
-     "notebook/",
-     "All steps with code, tables and charts"
+     "Send the men's email to all customers",
+     "$13,095 for each 100,000 customers"
+    ],
+    [
+     "Keep a 10% holdout",
+     "costs $1,309 a campaign, 87% power"
+    ],
+    [
+     "Confirm the full contact cost",
+     "before the launch"
+    ]
+   ],
+   "risks": [
+    [
+     "The full contact cost is higher than $0.10: above $0.23, an email to all loses money",
+     "At $0.25 or more, send only to the top 25% by purchase history"
+    ],
+    [
+     "The effect falls after the launch",
+     "If incremental spend stays below $0.33 for two campaigns, switch to the top 25%"
     ]
    ]
   },

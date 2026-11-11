@@ -10,6 +10,45 @@
     } else { chart.classList.add('go'); }
   }
 
+  // Board deck: scale the 1280 x 720 slides to the stage, and step through them
+  Array.prototype.forEach.call(document.querySelectorAll('.deck'), function (deck) {
+    var stage = deck.querySelector('.stage');
+    var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+    var prev = deck.querySelector('.prev'), next = deck.querySelector('.next');
+    var count = deck.querySelector('.count'), full = deck.querySelector('.full');
+    var at = 0;
+    function fit() {
+      var fs = document.fullscreenElement === stage;
+      var k = fs ? Math.min(window.innerWidth / 1280, window.innerHeight / 720) : stage.clientWidth / 1280;
+      slides.forEach(function (s) {
+        s.style.transform = 'scale(' + k + ')';
+        s.style.left = fs ? (window.innerWidth - 1280 * k) / 2 + 'px' : '0';
+        s.style.top = fs ? (window.innerHeight - 720 * k) / 2 + 'px' : '0';
+      });
+    }
+    function show(i) {
+      at = Math.max(0, Math.min(slides.length - 1, i));
+      slides.forEach(function (s, n) { s.classList.toggle('on', n === at); });
+      count.textContent = (at + 1) + ' / ' + slides.length;
+      prev.disabled = at === 0;
+      next.disabled = at === slides.length - 1;
+    }
+    prev.addEventListener('click', function () { show(at - 1); });
+    next.addEventListener('click', function () { show(at + 1); });
+    stage.addEventListener('click', function () { show(at + 1); });
+    stage.addEventListener('keydown', function (ev) {
+      if (ev.key === 'ArrowRight' || ev.key === ' ' || ev.key === 'PageDown') { ev.preventDefault(); show(at + 1); }
+      if (ev.key === 'ArrowLeft' || ev.key === 'PageUp') { ev.preventDefault(); show(at - 1); }
+    });
+    if (stage.requestFullscreen) {
+      full.addEventListener('click', function () { stage.requestFullscreen(); stage.focus(); });
+    } else { full.hidden = true; }
+    document.addEventListener('fullscreenchange', fit);
+    window.addEventListener('resize', fit);
+    var m = location.hash.match(/^#slide-(\d+)$/);
+    fit(); show(m ? parseInt(m[1], 10) - 1 : 0);
+  });
+
   // Projects page: filter by tool
   var filter = document.querySelector('.filter');
   if (!filter) return;
