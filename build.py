@@ -119,7 +119,7 @@ def home():
     </div>
   </section>
 </main>"""
-    page("/", f"{R['name']}: strategy and analytics", R["claim"], "/", body)
+    page("/", f"{R['name']}: strategy and business operations", R["claim"], "/", body)
 
 
 IND = {x["id"]: x["name"] for x in P.get("industries", [])}
