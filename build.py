@@ -92,7 +92,7 @@ def home():
 <main>
   <section class="section">
     <div class="wrap">
-      <h2>Ten years of work across audit, finance and strategy</h2>
+      <h2>Ten years of work across audit, business operations and strategy</h2>
       <ul class="timeline">{jobs}</ul>
       <p class="more"><a href="/resume/">Full resume</a></p>
     </div>
@@ -243,7 +243,8 @@ def resume():
     <h2>Experience</h2>{jobs}
     <h2>Education</h2>{edu}
     <h2>Certifications</h2><ul class="plainlist">{certs}</ul>
-    <h2>Tools</h2><div style="margin-top:20px">{tools(list(TOOLS))}</div>
+    <h2>Tools</h2><div style="margin-top:20px">{tools([t for t in TOOLS if t != "r"])}</div>
+    <p style="margin-top:14px;font-size:15px;color:var(--muted)">Also: {e(R.get("other_tools", ""))}</p>
   </div></div>
 </main>"""
     page("/resume/", f"Resume: {R['name']}", R["background"], "/resume/", body)

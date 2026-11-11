@@ -1,68 +1,115 @@
 {
-  "name": "Adrian Do",
-  "role": "Strategy and analytics",
-  "claim": "I turn data into decisions a leadership team can approve: a clear recommendation, its dollar effect and a safe way to test it.",
-  "background": "MBA from Michigan Ross. Before that, strategy and analytics lead at UrBox, and audit senior at KPMG and Grant Thornton.",
-  "email": "adriando@umich.edu",
-  "linkedin": "https://www.linkedin.com/in/dzungdotran/",
-  "github": "https://github.com/adriando-umich",
-  "experience": [
+ "name": "Adrian Do",
+ "role": "Strategy and analytics",
+ "claim": "I turn data into decisions a leadership team can approve: a clear recommendation, its dollar effect and a safe way to test it.",
+ "background": "MBA from Michigan Ross. Before that, strategy and business operations lead at UrBox, and audit senior at KPMG and Grant Thornton.",
+ "email": "adriando@umich.edu",
+ "linkedin": "https://www.linkedin.com/in/dzungdotran/",
+ "github": "https://github.com/adriando-umich",
+ "experience": [
+  {
+   "org": "Embedded Capital, LLP",
+   "about": "Financial services: private equity in P&C insurance",
+   "place": "Alpharetta, GA",
+   "period": "2025",
+   "roles": [
     {
-      "org": "Embedded Capital", "about": "Private equity firm that invests in P&C insurance", "place": "Alpharetta, GA", "period": "2025",
-      "roles": [
-        {"title": "MBA Consultant", "bullets": [
-          "Developed custom Applied Epic dashboards for churn, producer revenue and KPI tracking across 3 portfolio companies, cutting report preparation time by 30%",
-          "Standardized the Applied Epic renewal workflow across 3 insurance portfolio companies, cutting churn by 5% across 25K policies"
-        ]}
-      ]
-    },
-    {
-      "org": "UrBox", "about": "Vietnam B2B e-reward startup, pre-Series A", "place": "Hanoi, Vietnam", "period": "2021–2024",
-      "roles": [
-        {"title": "Senior Manager, Strategy & Analytics", "note": "Managed a team of 10+, 2022–2024", "bullets": [
-          "Modeled partnership ROI and pricing with Vietnam Airlines and internal leaders, projecting a redemption uplift of about 30% and shaping the Cash & Miles launch",
-          "Redesigned renewal pricing tiers across 15 categories and 50K SKUs, supporting client negotiations and lifting spread by about 1 point across 10+ renewals",
-          "Built a 3 to 5 year fundraising model, reclassifying campaign revenue and lowering the valuation assumptions used in the investor deck",
-          "Translated loyalty-program KPIs, margin rules and supplier constraints into optimization logic for an engine later used by 90% of clients",
-          "Created transfer mappings and audit trails for loyalty balances, preserving contract-level traceability on about $0.5M of annual campaign transfers"
-        ]},
-        {"title": "Manager, Finance & Operations", "note": "Managed a team of 3+, 2021–2022", "bullets": [
-          "Owned the annual budget and forecast for a $60M+ operating plan across revenue, operating expense, headcount and margin, improving the cash conversion cycle by 15%",
-          "Standardized monthly reporting for a $60M segment, using Tableau for P&L variance tracking and delivering KPI insights 5 business days faster",
-          "Modernized SQL-based reporting automation for sales, finance and operations teams, documenting ambiguous logic and reducing process time by 30%",
-          "Led a 2-year finance transformation program across 10+ major clients and 4 departments, digitizing transaction verification and saving 10,000 hours each year"
-        ]}
-      ]
-    },
-    {
-      "org": "Grant Thornton", "about": "Public accounting, external audit", "place": "Hanoi, Vietnam", "period": "2019–2021",
-      "roles": [
-        {"title": "Senior Assurance Associate", "note": "Led audit teams of 6+", "bullets": [
-          "Designed the close workflow for a new solar-energy entity, reconciling the parent reporting package to the statutory financial statements and cutting the reporting cycle by 2 to 3 weeks",
-          "Led a 12-month revenue and margin bridge for a steel-pipe business across 4 product groups and 2 channels, explaining more than 85% of the variance and isolating 3 audit risks"
-        ]}
-      ]
-    },
-    {
-      "org": "KPMG", "about": "Public accounting, external audit", "place": "Hanoi, Vietnam", "period": "2015–2019",
-      "roles": [
-        {"title": "Audit Senior", "note": "Led audit teams of 6+", "bullets": [
-          "Prepared the annual budget and financial plan in SAP and Excel for 5 Vietnam branches of a global Japanese client with annual sales above VND 200B (about $7.6M)",
-          "Built CFO dashboards in Excel and VBA across 5 branches and 4 functions, cutting monthly budget package preparation from 2 days to the same day",
-          "Analyzed EPC contract revenue timing, challenging policy assumptions and driving a downward adjustment of about $500K through audit review"
-        ]}
-      ]
+     "title": "MBA Consultant",
+     "bullets": [
+      "Standardized renewal workflows across 25K policies, documenting 90/60/30-day outreach, task routing and response tracking to cut churn from about 25% to about 20%",
+      "Launched self-service Epic dashboards on churn, producer revenue and KPIs for 15+ users at 3 portfolio firms, cutting weekly report preparation from about 10 hours to about 7 hours"
+     ]
     }
-  ],
-  "education": [
-    {"school": "University of Michigan, Stephen M. Ross School of Business", "place": "Ann Arbor, MI", "degree": "Master of Business Administration, May 2026", "bullets": [
-      "Dean's Fellow: full merit-based tuition scholarship",
-      "Concentration: Artificial Intelligence",
-      "Director of Operations and Events, Asian American Business Association"
-    ]},
-    {"school": "Academy of Finance", "place": "Hanoi, Vietnam", "degree": "Bachelor of Business Administration, October 2015", "bullets": [
-      "Dean's List (top 10% of students)"
-    ]}
-  ],
-  "certifications": ["CFA Level I", "Certified ScrumMaster", "Lean Six Sigma Green Belt"]
+   ]
+  },
+  {
+   "org": "UrBox",
+   "about": "B2B loyalty and rewards marketplace, pre-Series A",
+   "place": "Hanoi, Vietnam",
+   "period": "2021–2024",
+   "roles": [
+    {
+     "title": "Senior Manager, Strategy & Business Operations",
+     "note": "Managed a team of 10+, 2022–2024",
+     "bullets": [
+      "Diagnosed a gross-margin drop from 19% to 15% by testing 3 demand hypotheses in SQL against a control, tracing it to zero-margin gold vouchers; piloted a fee that lifted margin to 18%",
+      "Modeled point-balance segments and pricing for the Vietnam Airlines loyalty redesign, projecting a redemption uplift of about 30% that won partner approval for the Cash & Miles launch",
+      "Rebuilt customer discount tiers against supplier rebate economics across 15 categories and 50K SKUs, widening gross spread by about 1 point on 10+ major renewals",
+      "Persuaded the CEO, the CFO and business teams with Excel demos to adopt a reusable gift-allocation engine, translating client KPIs into logic later used by 90% of loyalty clients",
+      "Sized the voucher-based salary-advance market by industrial zone, worker eligibility and usage frequency, shaping a new business line that launched and signed its first 2 employer clients",
+      "Ran a 2-week Jira intake and prioritization cycle for 10 to 20 requests from 4 teams, balancing developer capacity and reporting weekly to the CEO and CFO, lifting on-time delivery from about 50% to about 70%",
+      "Led a 2-year finance transformation with Product and Engineering across 10+ major clients and 4 departments, automating transaction verification and saving an estimated 10,000 hours each year"
+     ]
+    },
+    {
+     "title": "Manager, Strategy & Business Operations",
+     "note": "Managed a team of 3+, 2021–2022",
+     "bullets": [
+      "Segmented web users by gift-card holdings and expiry data, pitching the CEO an in-web wallet and expiry-alert prompts for multi-card users that grew mobile-app users 50% in 12 months",
+      "Owned the annual budget for a $60M+ operating plan across revenue, operating expense, headcount and margin, setting KPIs for monthly CFO reviews that cut the cash conversion cycle 15% in 12 months",
+      "Standardized monthly Tableau P&L reporting for a $60M segment, giving executives sales, cost and margin variance by business line and channel 5 business days faster"
+     ]
+    }
+   ]
+  },
+  {
+   "org": "Grant Thornton",
+   "about": "Public accounting, external audit",
+   "place": "Hanoi, Vietnam",
+   "period": "2019–2021",
+   "roles": [
+    {
+     "title": "Senior Assurance Associate",
+     "note": "Led teams of 6+",
+     "bullets": [
+      "Directed a steel-pipe revenue and margin bridge across price, volume, mix, cost, rebate and timing, tracing Q4 export rebates to support a revenue adjustment of about $430K",
+      "Designed a cost-monitoring framework for a manufacturing client, analyzing COGS drivers with client management to identify $300K of annual savings opportunities"
+     ]
+    }
+   ]
+  },
+  {
+   "org": "KPMG",
+   "about": "Public accounting, external audit",
+   "place": "Hanoi, Vietnam",
+   "period": "2015–2019",
+   "roles": [
+    {
+     "title": "Audit Senior",
+     "note": "Led teams of 6+",
+     "bullets": [
+      "Developed Excel and VBA budget dashboards for a client CFO across 5 branches and 4 functions, tracking monthly expense against budget and cutting package preparation from 2 days to the same day",
+      "Challenged EPC revenue-recognition timing against contract terms, shifting the treatment to percentage-of-completion and driving a downward adjustment of about $500K that the client adopted"
+     ]
+    }
+   ]
+  }
+ ],
+ "education": [
+  {
+   "school": "University of Michigan, Stephen M. Ross School of Business",
+   "place": "Ann Arbor, MI",
+   "degree": "Master of Business Administration, May 2026",
+   "bullets": [
+    "Dean's Fellow: full merit-based tuition scholarship",
+    "Concentration: Artificial Intelligence, with 12 credits of quantitative electives",
+    "Coursework: Applied Business Analytics, Applied Business Statistics, Marketing Analytics",
+    "Leadership: Director of Operations and Events, Asian American Business Association"
+   ]
+  },
+  {
+   "school": "Academy of Finance",
+   "place": "Hanoi, Vietnam",
+   "degree": "Bachelor of Finance, October 2015",
+   "bullets": [
+    "Dean's List (top 10% of students)"
+   ]
+  }
+ ],
+ "certifications": [
+  "CFA Level I",
+  "Scrum Master Certified (SMC)",
+  "Lean Six Sigma Green Belt"
+ ],
+ "other_tools": "SAP, Oracle"
 }
