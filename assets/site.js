@@ -49,31 +49,55 @@
     fit(); show(m ? parseInt(m[1], 10) - 1 : 0);
   });
 
-  // Projects page: filter by tool
+  // Projects page: filter by industry, task and tool
   var filter = document.querySelector('.filter');
   if (!filter) return;
-  var buttons = Array.prototype.slice.call(filter.querySelectorAll('button'));
+  var NAMES = {};
+  Array.prototype.forEach.call(document.querySelectorAll('[data-f]'), function (b) { NAMES[b.getAttribute('data-f') + ':' + b.getAttribute('data-v')] = b.textContent.trim(); });
+  var state = { industry: '', task: '', tool: '' };
   var items = Array.prototype.slice.call(document.querySelectorAll('[data-tools]'));
   var groups = Array.prototype.slice.call(document.querySelectorAll('.group'));
-  var empty = document.querySelector('.empty');
-  function apply(tool) {
+  var empty = document.querySelector('.empty'), clear = filter.querySelector('.clear'), active = filter.querySelector('.active');
+  function has(list, v) { return (' ' + list + ' ').indexOf(' ' + v + ' ') > -1; }
+  function apply() {
     var shown = 0;
     items.forEach(function (el) {
-      var on = !tool || (' ' + el.getAttribute('data-tools') + ' ').indexOf(' ' + tool + ' ') > -1;
+      var on = (!state.industry || el.getAttribute('data-industry') === state.industry) &&
+        (!state.task || has(el.getAttribute('data-tasks'), state.task)) &&
+        (!state.tool || has(el.getAttribute('data-tools'), state.tool));
       el.hidden = !on;
       if (on) shown += 1;
     });
-    groups.forEach(function (g) {
-      g.hidden = !g.querySelector('[data-tools]:not([hidden])');
+    groups.forEach(function (g) { g.hidden = !g.querySelector('[data-tools]:not([hidden])'); });
+    empty.style.display = shown ? 'none' : 'block';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-f]'), function (b) {
+      b.setAttribute('aria-pressed', String(state[b.getAttribute('data-f')] === b.getAttribute('data-v')));
     });
-    if (empty) empty.style.display = shown ? 'none' : 'block';
-    buttons.forEach(function (b) {
-      b.setAttribute('aria-pressed', String((b.getAttribute('data-tool') || '') === (tool || '')));
+    Array.prototype.forEach.call(document.querySelectorAll('.matrix .cell'), function (b) {
+      b.setAttribute('aria-pressed', String(state.industry === b.getAttribute('data-i') && state.task === b.getAttribute('data-t')));
     });
+    var parts = [];
+    ['task', 'industry', 'tool'].forEach(function (k) { if (state[k]) parts.push(NAMES[k + ':' + state[k]]); });
+    active.textContent = parts.length ? shown + ' shown: ' + parts.join(', ') : '';
+    clear.hidden = !parts.length;
   }
-  buttons.forEach(function (b) {
-    b.addEventListener('click', function () { apply(b.getAttribute('data-tool') || ''); });
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest ? ev.target.closest('[data-f], .matrix .cell, .filter .clear') : null;
+    if (!b) return;
+    if (b.classList.contains('clear')) { state = { industry: '', task: '', tool: '' }; }
+    else if (b.classList.contains('cell')) {
+      var same = state.industry === b.getAttribute('data-i') && state.task === b.getAttribute('data-t');
+      state.industry = same ? '' : b.getAttribute('data-i');
+      state.task = same ? '' : b.getAttribute('data-t');
+    } else {
+      var k = b.getAttribute('data-f'), v = b.getAttribute('data-v');
+      state[k] = state[k] === v ? '' : v;
+    }
+    apply();
   });
-  var start = (location.hash.match(/^#tool=([a-z]+)$/) || [])[1];
-  apply(start || '');
+  (location.hash.slice(1).split('&')).forEach(function (kv) {
+    var p = kv.split('=');
+    if (state.hasOwnProperty(p[0]) && /^[a-z]+$/.test(p[1] || '')) state[p[0]] = p[1];
+  });
+  apply();
 })();

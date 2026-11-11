@@ -19,37 +19,10 @@
   <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / Approval cutoff for a consumer lender</p>
     <h1>Approval cutoff for a consumer lender</h1>
     <div class="case-facts"><p class="facts">Lending Club public loan data</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/python.svg)" aria-hidden="true"></i>Python</span><span class="tool"><i class="ico" style="--i:url(/assets/icons/sql.svg)" aria-hidden="true"></i>SQL</span><span class="tool"><i class="ico" style="--i:url(/assets/icons/excel.svg)" aria-hidden="true"></i>Excel</span></div></div>
-    <div class="dls"><a class="dl" href="#deck"><i class="ico" style="--i:url(/assets/icons/deck.svg)" aria-hidden="true"></i><span><b>Board deck</b><em>Slides</em></span></a><a class="dl" href="brief/"><i class="ico" style="--i:url(/assets/icons/doc.svg)" aria-hidden="true"></i><span><b>Technical document</b><em>Method and results</em></span></a><a class="dl" href="pnl_model.xlsx"><i class="ico" style="--i:url(/assets/icons/excel.svg)" aria-hidden="true"></i><span><b>P&amp;L model</b><em>Excel workbook</em></span></a><a class="dl" href="notebook/"><i class="ico" style="--i:url(/assets/icons/notebook.svg)" aria-hidden="true"></i><span><b>Full notebook</b><em>Every step, with code</em></span></a></div>
+    <div class="dls"><a class="dl" href="#deck"><i class="ico" style="--i:url(/assets/icons/deck.svg)" aria-hidden="true"></i><span><b>Board deck</b><em>For leadership</em></span></a><a class="dl" href="brief/"><i class="ico" style="--i:url(/assets/icons/doc.svg)" aria-hidden="true"></i><span><b>Technical document</b><em>Method, results, notebook and files</em></span></a></div>
   </div></div>
-  <nav class="subnav" aria-label="On this page"><div class="wrap"><a href="#question">Question</a><a href="#answer">Answer</a><a href="#tree">Issue tree</a><a href="#method">Method</a><a href="#recommendation">Recommendation</a><a href="#deck">Board deck</a></div></nav>
   <div class="body"><div class="wrap">
-    <section id="question" class="scq">
-      <div><h2>Situation</h2><p>A lender approves 36-month personal loans by risk sub-grade. The loans from 2013–2014 made <b>$71.7M</b> of realized NPV.</p></div>
-      <div><h2>Complication</h2><p>The loans from 2015 lost <b>$32.9M</b>. Defaults rose from 12.3% in 2013 to 14.9%, and the mean interest rate fell from 13.4% to 11.3%. The business wants more approvals, but Risk accepts no more defaults.</p></div>
-      <div class="q"><h2>Question</h2><p>Can a new score approve more applicants at the current bad rate of 12.5%, and add money?</p></div>
-    </section><section id="answer">
-      <h2 class="answer">Yes. A scorecard cutoff approves more applicants at the same bad rate and adds $7.1M of realized NPV on the 2015 loans.</h2>
-      <p class="why">Why? Three reasons, strongest first</p>
-      <ol class="keyline"><li><h3>It approves more applicants with no more defaults</h3><ul class="pts"><li>Approval rate: <b>85.7%</b> of the 2015 applicants vs. 84.5% today.</li><li>Bad rate (default rate of approved loans): <b>12.5%</b> for both policies.</li><li>At the same number of approvals it swaps 24,426 loans. The loans it adds default less: <b>23.6%</b> vs. 25.1%.</li></ul></li><li><h3>The gain holds under every cost assumption tested</h3><ul class="pts"><li>Realized NPV against the current policy, 2015 loans: <b>+$7.1M</b>.</li><li>Lowest result when cost of funds and acquisition cost change: <b>+$5.1M</b>.</li><li>The swapped loans alone add <b>$8.3M</b>.</li></ul></li><li><h3>A small test limits the risk of the change</h3><ul class="pts"><li>Start on a random <b>10%</b> of applications.</li><li>Stop if the 12-month default rate is more than <b>1 point</b> above the current policy.</li><li>About 1,000 random approvals below the cutoff measure the applicants that the data does not contain.</li></ul></li></ol>
-    </section><section class="part" id="tree"><h2>Realized NPV splits into volume, revenue and cost, with one tested question on each branch</h2>
-      <div class="ltree-scroll"><ul class="ltree"><li><div class="node root"><b>Realized NPV of the loan book</b><span>2015 loans: –$32.9M</span></div><ul><li><div class="node "><b>Loans approved</b><span>Volume</span></div><ul><li><div class="node fixed"><b>Applicants</b><span>Fixed: the 2015 applicants</span></div></li><li><div class="node lever"><b>Approval rate</b><span>The lever of this case: the cutoff</span></div><div class="find"><p class="q">Can a new score approve more applicants at the same bad rate?</p><p class="a"><b>Yes.</b> 85.7% vs. 84.5%.</p></div></li></ul></li><li><div class="node "><b>Revenue for each loan</b></div><ul><li><div class="node fixed"><b>Loan amount</b><span>Fixed: set by the application</span></div></li><li><div class="node "><b>Interest rate</b><span>Fell from 13.4% to 11.3%</span></div><div class="find"><p class="q">Did the 2015 prices pay for the risk?</p><p class="a"><b>No.</b> 32 of 35 sub-grades lost money. Grades A to C need 1 point or less to break even, so test a higher price.</p></div></li></ul></li><li><div class="node "><b>Cost for each loan</b></div><ul><li><div class="node "><b>Credit loss</b></div><ul><li><div class="node limit"><b>Default rate</b><span>The limit: bad rate 12.5%</span></div><div class="find"><p class="q">Do the loans that the scorecard adds default less?</p><p class="a"><b>Yes.</b> 23.6% vs. 25.1% for the loans it drops. The swap adds $8.3M.</p></div></li><li><div class="node "><b>Recoveries after default</b></div><div class="find"><p class="q">Does a recovery model add dollars?</p><p class="a"><b>No.</b> The top 20% by balance holds 45.5% of recovery dollars. A model reaches 46.2%.</p></div></li></ul></li><li><div class="node "><b>Operating cost</b><span>Funds 3% a year, servicing 1% of payments, acquisition $300 a loan</span></div><div class="find"><p class="q">Does the gain hold if these costs change?</p><p class="a"><b>Yes.</b> +$5.1M to +$8.4M across all cost cases.</p></div></li></ul></li></ul></li></ul></div>
-      <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p></section><section class="part" id="method"><h2>Both policies run on the same 2015 applicants, and every number is an actual outcome</h2><div class="swap" role="img" aria-label="Diagram. Both policies approve the same number of the 2015 applicants. The scorecard drops 24,426 loans with a default rate of 25.1% and adds 24,426 loans with a default rate of 23.6%.">
-  <div class="sw-flow"><span>Learn: loans from 2013–2014</span><i></i><span>Test: loans from 2015, never seen by the model</span></div>
-  <div class="sw-grid">
-    <p class="sw-row">Current policy</p><div class="sw on"></div><div class="sw on"></div><div class="sw off"></div><div class="sw off"></div>
-    <p class="sw-row">Scorecard</p><div class="sw on"></div><div class="sw off drop"></div><div class="sw add"></div><div class="sw off"></div>
-    <p class="sw-row"></p>
-    <p class="sw-lab">Approved by both</p>
-    <p class="sw-lab"><b>Dropped by the scorecard</b>24,426 loans<br>default rate 25.1%</p>
-    <p class="sw-lab add"><b>Added by the scorecard</b>24,426 loans<br>default rate 23.6%</p>
-    <p class="sw-lab">Declined by both</p>
-  </div>
-  <p class="sw-note">The 2015 applicants, from low risk to high risk. Not to scale. Filled = approved. The swap adds $8.3M of realized NPV.</p>
-</div></section><section class="part" id="recommendation"><h2>Recommendation</h2>
-      <div class="rec">
-        <div class="rec-col"><p class="rec-head">Actions</p><ol class="acts"><li class="main"><b>Test the scorecard cutoff</b><span>on a random 10% of applications</span></li><li class=""><b>Test a higher price</b><span>for grades A to C: 1 point or less</span></li><li class=""><b>Plan losses with lifetime defaults</b><span>12.8% forecast, not 2.7% to date</span></li><li class=""><b>Rank collections by balance</b><span>no recovery model</span></li></ol></div>
-        <div class="rec-col"><p class="rec-head">Risks and controls</p><table class="rk"><thead><tr><th scope="col">Risk</th><th scope="col">Control</th></tr></thead><tbody><tr><td>Declined applicants are riskier than the booked loans</td><td>About 1,000 random approvals below the cutoff measure their default rate</td></tr><tr><td>Defaults rise in the test</td><td>Stop if the 12-month default rate is 1 point above the current policy</td></tr><tr><td>2015 prices do not pay for the risk</td><td>The pricing test for grades A to C runs with the cutoff test</td></tr></tbody></table></div>
-      </div></section><section class="part" id="deck"><h2>Board deck</h2>
+    <section id="deck">
       <div class="deck">
         <div class="stage" tabindex="0" aria-roledescription="slide deck" aria-label="Board deck, 8 slides. Use the arrow keys to change slide."><section class="slide" data-part="Summary">
   <h3>A scorecard cutoff approves 85.7% vs. 84.5% at the same bad rate and adds $7.1M</h3>
@@ -207,30 +180,30 @@
   </div>
   <p class="s-src">Both costs need confirmation from Finance. Source: Lending Club 36-month loans, 2013–2015; analysis.</p>
 </section>
-
-<section class="slide" data-part="Test plan">
+<section class="slide" data-part="Recommendation">
   <h3>Run the scorecard cutoff on 10% of applications; stop if 12-month defaults rise 1 point</h3>
-  <div class="s-body">
-    <div class="phases">
-      <div class="phase"><p class="ph-when">Month 0</p><p class="ph-name">Launch</p><p class="ph-text">A random 10% of applications go to the scorecard cutoff. The pricing test for grades A–C starts.</p></div>
-      <div class="phase"><p class="ph-when">Months 1–12</p><p class="ph-name">Monitor</p><p class="ph-text">Each month: score stability, and predicted against actual default rate.</p></div>
-      <div class="phase gate"><p class="ph-when">Month 12</p><p class="ph-name">Gate</p><p class="ph-text">Stop if the default rate is more than 1 point above the current policy.</p></div>
-      <div class="phase"><p class="ph-when">Month 36</p><p class="ph-name">Decide</p><p class="ph-text">Roll out if the bad rate held and the realized NPV went up.</p></div>
-    </div>
-    <table class="risks">
-      <thead><tr><th>Top risk</th><th>Control</th></tr></thead>
-      <tbody>
-        <tr><td>Declined applicants are riskier than the booked loans</td><td>About 1,000 random approvals below the cutoff measure their default rate</td></tr>
-        <tr><td>2015 prices do not pay for the risk</td><td>The pricing test for grades A–C</td></tr>
-        <tr><td>Applicants change after 2015</td><td>The stability limit and the stop rule</td></tr>
-      </tbody>
-    </table>
+  <div class="s-body halves">
+    <div><p class="s-bar">Actions</p><ol class="s-acts"><li class="main"><b>Test the scorecard cutoff</b><span>on a random 10% of applications</span></li><li class=""><b>Test a higher price</b><span>for grades A to C: 1 point or less</span></li><li class=""><b>Plan losses with lifetime defaults</b><span>12.8% forecast, not 2.7% to date</span></li><li class=""><b>Rank collections by balance</b><span>no recovery model</span></li></ol></div>
+    <div><p class="s-bar">Risks and controls</p><table class="s-risks"><tbody><tr><td>Declined applicants are riskier than the booked loans</td><td>About 1,000 random approvals below the cutoff measure their default rate</td></tr><tr><td>Defaults rise in the test</td><td>Stop if the 12-month default rate is 1 point above the current policy</td></tr><tr><td>2015 prices do not pay for the risk</td><td>The pricing test for grades A to C runs with the cutoff test</td></tr></tbody></table></div>
   </div>
-  <p class="s-src">The 12-month default rate is an early estimate of the lifetime rate. Source: analysis.</p>
-</section>
-</div>
+  <p class="s-src">Source: analysis. Public data; illustrative results.</p>
+</section></div>
         <div class="deckbar"><button type="button" class="prev" aria-label="Previous slide">Previous</button><span class="count" aria-live="polite">1 / 8</span><button type="button" class="next" aria-label="Next slide">Next</button><button type="button" class="full">Full screen</button></div>
-      </div></section>
+      </div></section><section class="part" id="tree"><h2>Realized NPV splits into volume, revenue and cost, with one tested question on each branch</h2>
+      <div class="ltree-scroll"><ul class="ltree"><li><div class="node root"><b>Realized NPV of the loan book</b><span>2015 loans: –$32.9M</span></div><ul><li><div class="node "><b>Loans approved</b><span>Volume</span></div><ul><li><div class="node fixed"><b>Applicants</b><span>Fixed: the 2015 applicants</span></div></li><li><div class="node lever"><b>Approval rate</b><span>The lever of this case: the cutoff</span></div><div class="find"><p class="q">Can a new score approve more applicants at the same bad rate?</p><p class="a"><b>Yes.</b> 85.7% vs. 84.5%.</p></div></li></ul></li><li><div class="node "><b>Revenue for each loan</b></div><ul><li><div class="node fixed"><b>Loan amount</b><span>Fixed: set by the application</span></div></li><li><div class="node "><b>Interest rate</b><span>Fell from 13.4% to 11.3%</span></div><div class="find"><p class="q">Did the 2015 prices pay for the risk?</p><p class="a"><b>No.</b> 32 of 35 sub-grades lost money. Grades A to C need 1 point or less to break even, so test a higher price.</p></div></li></ul></li><li><div class="node "><b>Cost for each loan</b></div><ul><li><div class="node "><b>Credit loss</b></div><ul><li><div class="node limit"><b>Default rate</b><span>The limit: bad rate 12.5%</span></div><div class="find"><p class="q">Do the loans that the scorecard adds default less?</p><p class="a"><b>Yes.</b> 23.6% vs. 25.1% for the loans it drops. The swap adds $8.3M.</p></div></li><li><div class="node "><b>Recoveries after default</b></div><div class="find"><p class="q">Does a recovery model add dollars?</p><p class="a"><b>No.</b> The top 20% by balance holds 45.5% of recovery dollars. A model reaches 46.2%.</p></div></li></ul></li><li><div class="node "><b>Operating cost</b><span>Funds 3% a year, servicing 1% of payments, acquisition $300 a loan</span></div><div class="find"><p class="q">Does the gain hold if these costs change?</p><p class="a"><b>Yes.</b> +$5.1M to +$8.4M across all cost cases.</p></div></li></ul></li></ul></li></ul></div>
+      <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p></section><section class="part" id="method"><h2>Both policies run on the same 2015 applicants, and every number is an actual outcome</h2><div class="swap" role="img" aria-label="Diagram. Both policies approve the same number of the 2015 applicants. The scorecard drops 24,426 loans with a default rate of 25.1% and adds 24,426 loans with a default rate of 23.6%.">
+  <div class="sw-flow"><span>Learn: loans from 2013–2014</span><i></i><span>Test: loans from 2015, never seen by the model</span></div>
+  <div class="sw-grid">
+    <p class="sw-row">Current policy</p><div class="sw on"></div><div class="sw on"></div><div class="sw off"></div><div class="sw off"></div>
+    <p class="sw-row">Scorecard</p><div class="sw on"></div><div class="sw off drop"></div><div class="sw add"></div><div class="sw off"></div>
+    <p class="sw-row"></p>
+    <p class="sw-lab">Approved by both</p>
+    <p class="sw-lab"><b>Dropped by the scorecard</b>24,426 loans<br>default rate 25.1%</p>
+    <p class="sw-lab add"><b>Added by the scorecard</b>24,426 loans<br>default rate 23.6%</p>
+    <p class="sw-lab">Declined by both</p>
+  </div>
+  <p class="sw-note">The 2015 applicants, from low risk to high risk. Not to scale. Filled = approved. The swap adds $8.3M of realized NPV.</p>
+</div></section>
     <nav class="pager" aria-label="More projects"><span></span><a class="next" href="/projects/fraud-transaction-policy/"><span>Next project</span><b>Transaction policy for card fraud</b></a></nav>
   </div></div>
 </main>

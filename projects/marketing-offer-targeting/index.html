@@ -19,25 +19,110 @@
   <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / Offer targeting for an email campaign</p>
     <h1>Offer targeting for an email campaign</h1>
     <div class="case-facts"><p class="facts">Hillstrom public email test data</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/r.svg)" aria-hidden="true"></i>R</span></div></div>
-    <div class="dls"><a class="dl" href="brief/"><i class="ico" style="--i:url(/assets/icons/doc.svg)" aria-hidden="true"></i><span><b>Technical document</b><em>Method and results</em></span></a><a class="dl" href="notebook/"><i class="ico" style="--i:url(/assets/icons/notebook.svg)" aria-hidden="true"></i><span><b>Full notebook</b><em>Every step, with code</em></span></a></div>
+    <div class="dls"><a class="dl" href="#deck"><i class="ico" style="--i:url(/assets/icons/deck.svg)" aria-hidden="true"></i><span><b>Board deck</b><em>For leadership</em></span></a><a class="dl" href="brief/"><i class="ico" style="--i:url(/assets/icons/doc.svg)" aria-hidden="true"></i><span><b>Technical document</b><em>Method, results, notebook and files</em></span></a></div>
   </div></div>
-  <nav class="subnav" aria-label="On this page"><div class="wrap"><a href="#question">Question</a><a href="#answer">Answer</a><a href="#tree">Issue tree</a><a href="#recommendation">Recommendation</a></div></nav>
   <div class="body"><div class="wrap">
-    <section id="question" class="scq">
-      <div><h2>Situation</h2><p>A retailer sent an email to customers who bought in the last year. Each customer went at random into one of three groups: the men's email, the women's email or no email. Visits, conversions and spend were measured for 2 weeks.</p></div>
-      <div><h2>Complication</h2><p>Each email has a contact cost. Most customers buy nothing in the test window, so the spend data is noisy, and the mean effect can hide customers where the email loses money.</p></div>
-      <div class="q"><h2>Question</h2><p>Which email version do we send, and to which customers, for the most incremental profit?</p></div>
-    </section><section id="answer">
-      <h2 class="answer">Send the men&#x27;s email to all customers and keep a 10% holdout. It earns $13k per campaign of 100,000 customers.</h2>
-      <p class="why">Why? Three reasons, strongest first</p>
-      <ol class="keyline"><li><h3>The email raises spend</h3><ul class="pts"><li>Spend effect against the no-email group: <b>+$0.77</b> for each customer in 2 weeks (95% CI $0.49 to $1.05).</li><li>The three groups differ only by the email: the randomization check passes.</li><li>The men's email gives <b>$10,362</b> more than the women's email for each campaign.</li></ul></li><li><h3>The extra margin is larger than the contact cost</h3><ul class="pts"><li>30% margin on $0.77, less $0.10 for each email: <b>$13,095</b> for each 100,000 customers (95% CI $4,554 to $21,635).</li><li>The email pays at any contact cost below <b>$0.23</b>.</li></ul></li><li><h3>A targeting model adds nothing at this cost</h3><ul class="pts"><li>At <b>$0.10</b> an email, no targeting rule and no uplift model beats an email to all customers.</li><li>A shorter list (the top 25% by purchase history) pays only if the full contact cost is <b>$0.25</b> or more.</li><li>A 10% holdout confirms each campaign and costs $1,309.</li></ul></li></ol>
-    </section><section class="part" id="tree"><h2>Campaign profit splits into audience, margin and contact cost</h2>
+    <section id="deck">
+      <div class="deck">
+        <div class="stage" tabindex="0" aria-roledescription="slide deck" aria-label="Board deck, 6 slides. Use the arrow keys to change slide."><section class="slide" data-part="Summary">
+  <h3>The men's email to all customers earns $13k for each campaign of 100,000 customers</h3>
+  <div class="s-body">
+    <div class="kpis">
+      <div><p class="k-label">Incremental spend</p><p class="k-num point">+$0.77</p><p class="k-sub">for each customer, in 2 weeks</p></div>
+      <div><p class="k-label">Incremental profit</p><p class="k-num point">$13,095</p><p class="k-sub">for each 100,000 customers</p></div>
+      <div><p class="k-label">Holdout</p><p class="k-num">10%</p><p class="k-sub">confirms the effect in each campaign</p></div>
+    </div>
+    <div class="ask"><b>Decision:</b> send the men's email to all customers, with a 10% holdout.</div>
+  </div>
+  <p class="s-src">Source: Hillstrom email test, 64,000 customers; analysis. Public data; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Situation and complication">
+  <h3>A randomized test gives a clean answer: the three groups differ only by the email</h3>
+  <div class="s-body">
+    <div class="pillars three">
+      <div class="pillar main"><p class="p-step">Men's email</p><p class="p-num">21,306</p><p class="p-sub">customers, chosen at random</p></div>
+      <div class="pillar"><p class="p-step">Women's email</p><p class="p-num">21,306</p><p class="p-sub">customers, chosen at random</p></div>
+      <div class="pillar"><p class="p-step">No email</p><p class="p-num">21,306</p><p class="p-sub">customers: the control group</p></div>
+    </div>
+    <div class="ask"><b>Complication:</b> each email has a contact cost, and most customers buy nothing in 2 weeks, so the spend data is noisy.</div>
+  </div>
+  <p class="s-src">Spend, visits and conversions were measured for 2 weeks after the email. Source: Hillstrom email test, 64,000 customers; analysis. Public data; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Evidence">
+  <h3>The men's email adds $0.77 of spend for each customer, above the $0.33 break-even</h3>
+  <div class="s-body two">
+    <div class="s-main">
+      <p class="c-title">Spend effect of the men's email against no email</p>
+      <p class="c-unit">$ for each customer, 2 weeks after the email</p>
+      <div class="hbars">
+        <div class="hrow"><span>Measured effect</span><div class="h-track"><div class="h-fill point" style="width:58.7%"></div><b class="point">+$0.77</b></div></div>
+        <div class="hrow"><span>Low end of the 95% interval</span><div class="h-track"><div class="h-fill gray" style="width:37.3%"></div><b>+$0.49</b></div></div>
+        <div class="hrow"><span>Break-even effect</span><div class="h-track"><div class="h-fill gray" style="width:25.1%"></div><b>$0.33</b></div></div>
+      </div>
+    </div>
+    <div class="s-side">
+      <p class="s-head">Why the result holds</p>
+      <ul>
+        <li>The groups match before the email: the randomization check passes</li>
+        <li>21,306 customers in each group; 5,988 are enough for 80% power</li>
+        <li>A bootstrap gives the same interval</li>
+      </ul>
+    </div>
+  </div>
+  <p class="s-src">Break-even = contact cost of $0.10 divided by a 30% margin. Source: Hillstrom email test, 64,000 customers; analysis. Public data; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Business case">
+  <h3>At $0.10 an email, the campaign earns $13,095 and pays at any cost below $0.23</h3>
+  <div class="s-body two">
+    <div class="s-main">
+      <p class="c-title">Incremental profit for each campaign of 100,000 customers</p>
+      <p class="c-unit">$, margin on incremental spend less the contact cost</p>
+      <div class="vbars" style="height:300px">
+        <div class="vbar"><p class="b-val point">$13,095</p><div class="b-fill point" style="height:240px"></div><p class="b-cat">Men's email</p></div>
+        <div class="vbar"><p class="b-val gray">$2,733</p><div class="b-fill gray" style="height:50px"></div><p class="b-cat">Women's email</p></div>
+      </div>
+    </div>
+    <div class="s-side">
+      <p class="k-num point">$0.13</p>
+      <p class="k-sub">profit for each customer emailed</p>
+      <p class="s-head">How the profit adds up</p>
+      <ul>
+        <li>30% margin on $0.77 of spend: $0.23</li>
+        <li>Less the contact cost: $0.10</li>
+        <li>95% interval for the campaign: $4,554 to $21,635</li>
+      </ul>
+    </div>
+  </div>
+  <p class="s-src">Margin and contact cost are assumptions. Women's email = $10,362 less than the men's email. Source: Hillstrom email test, 64,000 customers; analysis. Public data; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Targeting">
+  <h3>A targeting model adds nothing at this cost; a shorter list pays only at $0.25 or more</h3>
+  <div class="s-body">
+    <div class="phases three">
+      <div class="phase gate"><p class="ph-when">Contact cost below $0.23</p><p class="ph-name">Send to all</p><p class="ph-text">No rule and no model earns more. Today's assumption is $0.10.</p></div>
+      <div class="phase"><p class="ph-when">Contact cost of $0.25 or more</p><p class="ph-name">Top 25% only</p><p class="ph-text">Rank customers by purchase history and send to the top quarter.</p></div>
+      <div class="phase"><p class="ph-when">Uplift models</p><p class="ph-name">Not used</p><p class="ph-text">Two models did not beat the simple ranking by purchase history.</p></div>
+    </div>
+    <div class="ask">The full contact cost decides the rule, so Marketing must confirm it before the launch.</div>
+  </div>
+  <p class="s-src">Source: Hillstrom email test, 64,000 customers; analysis. Public data; illustrative results.</p>
+</section>
+<section class="slide" data-part="Recommendation">
+  <h3>Send the men&#x27;s email to all customers, and keep a 10% holdout</h3>
+  <div class="s-body halves">
+    <div><p class="s-bar">Actions</p><ol class="s-acts"><li class="main"><b>Send the men&#x27;s email to all customers</b><span>$13,095 for each 100,000 customers</span></li><li class=""><b>Keep a 10% holdout</b><span>costs $1,309 a campaign, 87% power</span></li><li class=""><b>Confirm the full contact cost</b><span>before the launch</span></li></ol></div>
+    <div><p class="s-bar">Risks and controls</p><table class="s-risks"><tbody><tr><td>The full contact cost is higher than $0.10: above $0.23, an email to all loses money</td><td>At $0.25 or more, send only to the top 25% by purchase history</td></tr><tr><td>The effect falls after the launch</td><td>If incremental spend stays below $0.33 for two campaigns, switch to the top 25%</td></tr></tbody></table></div>
+  </div>
+  <p class="s-src">Source: analysis. Public data; illustrative results.</p>
+</section></div>
+        <div class="deckbar"><button type="button" class="prev" aria-label="Previous slide">Previous</button><span class="count" aria-live="polite">1 / 6</span><button type="button" class="next" aria-label="Next slide">Next</button><button type="button" class="full">Full screen</button></div>
+      </div></section><section class="part" id="tree"><h2>Campaign profit splits into audience, margin and contact cost</h2>
       <div class="ltree-scroll"><ul class="ltree"><li><div class="node root"><b>Incremental profit of a campaign</b><span>$13,095 for 100,000 customers</span></div><ul><li><div class="node lever"><b>Customers who get the email</b><span>The lever: all customers, or a targeted list</span></div><div class="find"><p class="q">Does a targeted list beat an email to all customers?</p><p class="a"><b>No.</b> At $0.10 an email, no rule and no uplift model beats send-to-all. The top 25% by purchase history pays only at $0.25 or more.</p></div></li><li><div class="node "><b>Profit for each customer emailed</b></div><ul><li><div class="node "><b>Incremental margin</b></div><ul><li><div class="node "><b>Incremental spend</b><span>Measured by the randomized test</span></div><div class="find"><p class="q">Does the email raise spend?</p><p class="a"><b>Yes.</b> +$0.77 for each customer (95% CI $0.49 to $1.05).</p></div></li><li><div class="node fixed"><b>Margin on spend</b><span>Fixed: assumed 30%</span></div></li></ul></li><li><div class="node limit"><b>Contact cost</b><span>The limit: assumed $0.10 an email</span></div><div class="find"><p class="q">Does the email pay at the assumed cost?</p><p class="a"><b>Yes.</b> It pays at any cost below $0.23 an email.</p></div></li></ul></li></ul></li></ul></div>
-      <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p></section><section class="part" id="recommendation"><h2>Recommendation</h2>
-      <div class="rec">
-        <div class="rec-col"><p class="rec-head">Actions</p><ol class="acts"><li class="main"><b>Send the men&#x27;s email to all customers</b><span>$13,095 for each 100,000 customers</span></li><li class=""><b>Keep a 10% holdout</b><span>costs $1,309 a campaign, 87% power</span></li><li class=""><b>Confirm the full contact cost</b><span>before the launch</span></li></ol></div>
-        <div class="rec-col"><p class="rec-head">Risks and controls</p><table class="rk"><thead><tr><th scope="col">Risk</th><th scope="col">Control</th></tr></thead><tbody><tr><td>The full contact cost is higher than $0.10: above $0.23, an email to all loses money</td><td>At $0.25 or more, send only to the top 25% by purchase history</td></tr><tr><td>The effect falls after the launch</td><td>If incremental spend stays below $0.33 for two campaigns, switch to the top 25%</td></tr></tbody></table></div>
-      </div></section>
+      <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p></section>
     <nav class="pager" aria-label="More projects"><a href="/projects/fraud-transaction-policy/"><span>Previous project</span><b>Transaction policy for card fraud</b></a><a class="next" href="/projects/leetcode-sql-50/"><span>Next project</span><b>LeetCode SQL 50</b></a></nav>
   </div></div>
 </main>

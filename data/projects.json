@@ -317,6 +317,12 @@
      "2015 prices do not pay for the risk",
      "The pricing test for grades A to C runs with the cutoff test"
     ]
+   ],
+   "rec_title": "Run the scorecard cutoff on 10% of applications; stop if 12-month defaults rise 1 point",
+   "industry": "banking",
+   "tasks": [
+    "risk",
+    "model"
    ]
   },
   {
@@ -554,6 +560,11 @@
      "The score loses 15% of its PR-AUC after month 4",
      "Monthly retrain, and a check of the PR-AUC each month"
     ]
+   ],
+   "rec_title": "Test the new policy on 10% of transactions, with the 3% limit as a stop rule",
+   "industry": "payments",
+   "tasks": [
+    "risk"
    ]
   },
   {
@@ -723,6 +734,11 @@
      "The effect falls after the launch",
      "If incremental spend stays below $0.33 for two campaigns, switch to the top 25%"
     ]
+   ],
+   "rec_title": "Send the men's email to all customers, and keep a 10% holdout",
+   "industry": "retail",
+   "tasks": [
+    "experiment"
    ]
   },
   {
@@ -731,7 +747,11 @@
    "period": "2025",
    "title": "One renewal workflow across 25K insurance policies",
    "result": "Standardized renewal workflows and documented 90/60/30-day outreach, task routing and response tracking. Churn fell from about 25% to about 20%.",
-   "tools": []
+   "tools": [],
+   "industry": "insurance",
+   "tasks": [
+    "process"
+   ]
   },
   {
    "type": "work",
@@ -739,7 +759,11 @@
    "period": "2025",
    "title": "Self-service KPI dashboards for 3 portfolio firms",
    "result": "Launched self-service Applied Epic dashboards on churn, producer revenue and KPIs for 15+ users. Weekly report preparation fell from about 10 hours to about 7 hours.",
-   "tools": []
+   "tools": [],
+   "industry": "insurance",
+   "tasks": [
+    "reporting"
+   ]
   },
   {
    "type": "work",
@@ -749,6 +773,10 @@
    "result": "Tested 3 demand hypotheses in SQL against a control and traced the drop to zero-margin gold vouchers. A pilot fee lifted the margin to 18%.",
    "tools": [
     "sql"
+   ],
+   "industry": "loyalty",
+   "tasks": [
+    "diagnosis"
    ]
   },
   {
@@ -757,7 +785,12 @@
    "period": "2022–2024",
    "title": "Pricing model for the Vietnam Airlines loyalty redesign",
    "result": "Modeled point-balance segments and pricing. The projected redemption uplift of about 30% won partner approval for the Cash & Miles launch.",
-   "tools": []
+   "tools": [],
+   "industry": "loyalty",
+   "tasks": [
+    "pricing",
+    "model"
+   ]
   },
   {
    "type": "work",
@@ -765,7 +798,11 @@
    "period": "2022–2024",
    "title": "Customer discount tiers across 15 categories and 50K SKUs",
    "result": "Rebuilt the tiers against supplier rebate economics. Gross spread widened by about 1 point on 10+ major renewals.",
-   "tools": []
+   "tools": [],
+   "industry": "loyalty",
+   "tasks": [
+    "pricing"
+   ]
   },
   {
    "type": "work",
@@ -775,6 +812,10 @@
    "result": "Persuaded the CEO, the CFO and business teams with Excel demos to adopt the engine, and translated client KPIs into logic later used by 90% of loyalty clients.",
    "tools": [
     "excel"
+   ],
+   "industry": "loyalty",
+   "tasks": [
+    "process"
    ]
   },
   {
@@ -783,7 +824,11 @@
    "period": "2022–2024",
    "title": "Market sizing for a voucher-based salary advance",
    "result": "Sized the market by industrial zone, worker eligibility and usage frequency. The new business line launched and signed its first 2 employer clients.",
-   "tools": []
+   "tools": [],
+   "industry": "loyalty",
+   "tasks": [
+    "model"
+   ]
   },
   {
    "type": "work",
@@ -791,7 +836,11 @@
    "period": "2022–2024",
    "title": "Request intake and prioritization across 4 teams",
    "result": "Ran a 2-week Jira cycle for 10 to 20 requests, balanced developer capacity and reported weekly to the CEO and CFO. On-time delivery rose from about 50% to about 70%.",
-   "tools": []
+   "tools": [],
+   "industry": "loyalty",
+   "tasks": [
+    "process"
+   ]
   },
   {
    "type": "work",
@@ -799,7 +848,11 @@
    "period": "2022–2024",
    "title": "Finance transformation across 10+ clients and 4 departments",
    "result": "Led a 2-year program with Product and Engineering that automated transaction verification and saved an estimated 10,000 hours each year.",
-   "tools": []
+   "tools": [],
+   "industry": "loyalty",
+   "tasks": [
+    "process"
+   ]
   },
   {
    "type": "work",
@@ -807,7 +860,11 @@
    "period": "2021–2022",
    "title": "In-web wallet and expiry alerts for multi-card users",
    "result": "Segmented web users by gift-card holdings and expiry data, and pitched the two features to the CEO. Mobile-app users grew 50% in 12 months.",
-   "tools": []
+   "tools": [],
+   "industry": "loyalty",
+   "tasks": [
+    "experiment"
+   ]
   },
   {
    "type": "work",
@@ -815,7 +872,11 @@
    "period": "2021–2022",
    "title": "Annual budget for a $60M+ operating plan",
    "result": "Owned the budget across revenue, operating expense, headcount and margin, and set KPIs for monthly CFO reviews. The cash conversion cycle fell 15% in 12 months.",
-   "tools": []
+   "tools": [],
+   "industry": "loyalty",
+   "tasks": [
+    "model"
+   ]
   },
   {
    "type": "work",
@@ -825,6 +886,10 @@
    "result": "Standardized the Tableau reporting. Executives got sales, cost and margin variance by business line and channel 5 business days faster.",
    "tools": [
     "tableau"
+   ],
+   "industry": "loyalty",
+   "tasks": [
+    "reporting"
    ]
   },
   {
@@ -833,7 +898,11 @@
    "period": "2019–2021",
    "title": "Revenue and margin bridge for a steel-pipe business",
    "result": "Directed a bridge across price, volume, mix, cost, rebate and timing. It traced Q4 export rebates and supported a revenue adjustment of about $430K.",
-   "tools": []
+   "tools": [],
+   "industry": "industrial",
+   "tasks": [
+    "diagnosis"
+   ]
   },
   {
    "type": "work",
@@ -841,7 +910,11 @@
    "period": "2019–2021",
    "title": "Cost-monitoring framework for a manufacturing client",
    "result": "Analyzed COGS drivers with client management and identified $300K of annual savings opportunities.",
-   "tools": []
+   "tools": [],
+   "industry": "industrial",
+   "tasks": [
+    "diagnosis"
+   ]
   },
   {
    "type": "work",
@@ -852,6 +925,10 @@
    "tools": [
     "excel",
     "vba"
+   ],
+   "industry": "industrial",
+   "tasks": [
+    "reporting"
    ]
   },
   {
@@ -860,7 +937,11 @@
    "period": "2015–2019",
    "title": "Revenue recognition timing on an EPC contract",
    "result": "Challenged the timing against the contract terms. The treatment moved to percentage-of-completion, with a downward adjustment of about $500K that the client adopted.",
-   "tools": []
+   "tools": [],
+   "industry": "industrial",
+   "tasks": [
+    "diagnosis"
+   ]
   },
   {
    "slug": "leetcode-sql-50",
@@ -944,6 +1025,62 @@
    "title": "StoryLilt.app",
    "result": "Shipped the app and built a multi-agent translator with quality checks. About 30 books translated.",
    "tools": []
+  }
+ ],
+ "industries": [
+  {
+   "id": "banking",
+   "name": "Banking and lending"
+  },
+  {
+   "id": "payments",
+   "name": "Payments"
+  },
+  {
+   "id": "retail",
+   "name": "Retail and e-commerce"
+  },
+  {
+   "id": "insurance",
+   "name": "Insurance"
+  },
+  {
+   "id": "loyalty",
+   "name": "Loyalty and rewards"
+  },
+  {
+   "id": "industrial",
+   "name": "Industrial and energy"
+  }
+ ],
+ "tasks": [
+  {
+   "id": "model",
+   "name": "Financial modeling and planning"
+  },
+  {
+   "id": "pricing",
+   "name": "Pricing"
+  },
+  {
+   "id": "risk",
+   "name": "Risk strategy"
+  },
+  {
+   "id": "experiment",
+   "name": "Experiments and customer analytics"
+  },
+  {
+   "id": "diagnosis",
+   "name": "Diagnosis"
+  },
+  {
+   "id": "reporting",
+   "name": "Reporting and dashboards"
+  },
+  {
+   "id": "process",
+   "name": "Process improvement"
   }
  ]
 }

@@ -19,25 +19,111 @@
   <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / Transaction policy for card fraud</p>
     <h1>Transaction policy for card fraud</h1>
     <div class="case-facts"><p class="facts">IEEE-CIS public transaction data</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/python.svg)" aria-hidden="true"></i>Python</span><span class="tool"><i class="ico" style="--i:url(/assets/icons/sql.svg)" aria-hidden="true"></i>SQL</span></div></div>
-    <div class="dls"><a class="dl" href="brief/"><i class="ico" style="--i:url(/assets/icons/doc.svg)" aria-hidden="true"></i><span><b>Technical document</b><em>Method and results</em></span></a><a class="dl" href="notebook/"><i class="ico" style="--i:url(/assets/icons/notebook.svg)" aria-hidden="true"></i><span><b>Full notebook</b><em>Every step, with code</em></span></a></div>
+    <div class="dls"><a class="dl" href="#deck"><i class="ico" style="--i:url(/assets/icons/deck.svg)" aria-hidden="true"></i><span><b>Board deck</b><em>For leadership</em></span></a><a class="dl" href="brief/"><i class="ico" style="--i:url(/assets/icons/doc.svg)" aria-hidden="true"></i><span><b>Technical document</b><em>Method, results, notebook and files</em></span></a></div>
   </div></div>
-  <nav class="subnav" aria-label="On this page"><div class="wrap"><a href="#question">Question</a><a href="#answer">Answer</a><a href="#tree">Issue tree</a><a href="#recommendation">Recommendation</a></div></nav>
   <div class="body"><div class="wrap">
-    <section id="question" class="scq">
-      <div><h2>Situation</h2><p>An online merchant accepts card payments. A set of fixed rules approves, reviews or declines each transaction.</p></div>
-      <div><h2>Complication</h2><p>Fraud loss goes up. Stricter rules decline more good customers, and each false decline costs margin and goodwill. The analyst team can examine only 120 alerts each day, and fixed rules lose value as fraud patterns change.</p></div>
-      <div class="q"><h2>Question</h2><p>Which policy gives the lowest total cost of fraud loss, false declines and reviews, with the same review capacity?</p></div>
-    </section><section id="answer">
-      <h2 class="answer">A three-tier policy (approve, review, decline) on a fraud score cuts the total monthly cost by at least $64k, with false declines inside the 3% limit.</h2>
-      <p class="why">Why? Three reasons, strongest first</p>
-      <ol class="keyline"><li><h3>It stops almost twice the fraud dollars</h3><ul class="pts"><li>Share of fraud dollars stopped: <b>71.2%</b> vs. 38.4% for the current rules.</li><li>The score ranks fraud better than the rules: PR-AUC <b>0.486</b> vs. 0.269.</li></ul></li><li><h3>The total cost falls under every comparison</h3><ul class="pts"><li>Total cost each month: <b>$172,612</b> vs. $299,432 for the base current policy (down 42%).</li><li>Against the strongest current policy tested, the decrease is <b>$64,274</b> each month.</li><li>The decrease is at least <b>$53,544</b> under every cost assumption tested.</li></ul></li><li><h3>False declines rise, but stay inside the limit</h3><ul class="pts"><li>Good transactions declined: <b>2.46%</b> vs. 0.28% today. Limit: 3%.</li><li>Finance and Marketing confirm the cost of a false decline and the limit before the test.</li><li>The test runs on a random <b>10%</b> of transactions for about 16 days, with stop rules.</li></ul></li></ol>
-    </section><section class="part" id="tree"><h2>Total cost splits into three parts, and the policy must lower the sum</h2>
+    <section id="deck">
+      <div class="deck">
+        <div class="stage" tabindex="0" aria-roledescription="slide deck" aria-label="Board deck, 6 slides. Use the arrow keys to change slide."><section class="slide" data-part="Summary">
+  <h3>A three-tier policy on a fraud score cuts the monthly cost of fraud by at least $64k</h3>
+  <div class="s-body">
+    <div class="kpis">
+      <div><p class="k-label">Total cost each month</p><p class="k-num point">–$64k</p><p class="k-sub">at least; $127k against the base rules</p></div>
+      <div><p class="k-label">Fraud dollars stopped</p><p class="k-num point">71.2%</p><p class="k-sub">vs. 38.4% with the current rules</p></div>
+      <div><p class="k-label">Good transactions declined</p><p class="k-num">2.46%</p><p class="k-sub">inside the 3% limit; 0.28% today</p></div>
+    </div>
+    <div class="ask"><b>Decision:</b> approve a test on 10% of transactions.</div>
+  </div>
+  <p class="s-src">Source: IEEE-CIS card transactions; analysis. Public data; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Situation and complication">
+  <h3>Fixed rules stop only 38.4% of fraud dollars, and stricter rules decline good customers</h3>
+  <div class="s-body">
+    <p class="s-bar">Total cost each month with the current rules: $299,432</p>
+    <div class="pillars three">
+      <div class="pillar"><p class="p-step">Fraud loss that gets through</p><p class="p-num">38.4%</p><p class="p-sub">of fraud dollars stopped today</p></div>
+      <div class="pillar"><p class="p-step">Cost of false declines</p><p class="p-num">3% + $10</p><p class="p-sub">lost margin and goodwill for each good customer declined</p></div>
+      <div class="pillar"><p class="p-step">Cost of reviews</p><p class="p-num">120</p><p class="p-sub">alerts a day: the capacity of 3 analysts</p></div>
+    </div>
+  </div>
+  <p class="s-src">The current rules and the costs are assumptions. Source: IEEE-CIS card transactions; analysis. Public data; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Answer">
+  <p class="s-kicker">Q: Which policy gives the lowest total cost with the same review team?</p>
+  <h3>Score each transaction, then approve, review or decline by its expected cost</h3>
+  <div class="s-body">
+    <div class="phases three">
+      <div class="phase"><p class="ph-when">Tier 1</p><p class="ph-name">Approve</p><p class="ph-text">The lowest expected cost. No friction for the customer.</p></div>
+      <div class="phase"><p class="ph-when">Tier 2</p><p class="ph-name">Review</p><p class="ph-text">The middle tier, inside the capacity of 120 alerts a day.</p></div>
+      <div class="phase gate"><p class="ph-when">Tier 3</p><p class="ph-name">Decline</p><p class="ph-text">The highest expected cost. Limit: 3% of good transactions.</p></div>
+    </div>
+    <div class="ask">Expected cost in dollars sets the tier, not the fraud score alone.</div>
+  </div>
+  <p class="s-src">Source: IEEE-CIS card transactions; analysis. Public data; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Evidence">
+  <h3>On the test months the new policy stops 71.2% of fraud dollars and costs 42% less</h3>
+  <div class="s-body two">
+    <div class="s-main">
+      <p class="c-title">New policy against the current rules</p>
+      <p class="c-unit">Later months that the score never saw; same review team</p>
+      <div class="hbars">
+        <p class="h-group">Share of fraud dollars stopped</p>
+        <div class="hrow"><span>New policy</span><div class="h-track"><div class="h-fill point" style="width:71.2%"></div><b class="point">71.2%</b></div></div>
+        <div class="hrow"><span>Current rules</span><div class="h-track"><div class="h-fill gray" style="width:38.4%"></div><b>38.4%</b></div></div>
+        <p class="h-group">Total cost each month</p>
+        <div class="hrow"><span>New policy</span><div class="h-track"><div class="h-fill point" style="width:43.2%"></div><b class="point">$172,612</b></div></div>
+        <div class="hrow"><span>Current rules</span><div class="h-track"><div class="h-fill gray" style="width:75%"></div><b>$299,432</b></div></div>
+      </div>
+    </div>
+    <div class="s-side">
+      <p class="k-num point">–42%</p>
+      <p class="k-sub">total cost, against the base current rules</p>
+      <p class="s-head">The price of the saving</p>
+      <ul>
+        <li>Good transactions declined: 2.46% vs. 0.28% today</li>
+        <li>The limit is 3%</li>
+      </ul>
+    </div>
+  </div>
+  <p class="s-src">Source: IEEE-CIS card transactions; analysis. Public data; illustrative results.</p>
+</section>
+
+<section class="slide" data-part="Business case">
+  <h3>The saving stays above $53k a month under every assumption we tested</h3>
+  <div class="s-body two">
+    <div class="s-main">
+      <p class="c-title">Decrease in total cost each month</p>
+      <p class="c-unit">$, new policy against the current rules</p>
+      <div class="vbars" style="height:300px">
+        <div class="vbar"><p class="b-val gray">$126,820</p><div class="b-fill gray" style="height:240px"></div><p class="b-cat">Base rules</p></div>
+        <div class="vbar"><p class="b-val point">$64,274</p><div class="b-fill point" style="height:122px"></div><p class="b-cat">Strongest rules</p></div>
+        <div class="vbar"><p class="b-val gray">$53,544</p><div class="b-fill gray" style="height:101px"></div><p class="b-cat">Lowest case</p></div>
+      </div>
+    </div>
+    <div class="s-side">
+      <p class="k-num point">$64k</p>
+      <p class="k-sub">each month: the figure we report</p>
+      <div class="sowhat"><b>So what:</b> the current rules are an assumption, so the result against the strongest rules is the one we can defend.</div>
+    </div>
+  </div>
+  <p class="s-src">Lowest case = the lowest result across the cost assumptions tested. Source: IEEE-CIS card transactions; analysis. Public data; illustrative results.</p>
+</section>
+<section class="slide" data-part="Recommendation">
+  <h3>Test the new policy on 10% of transactions, with the 3% limit as a stop rule</h3>
+  <div class="s-body halves">
+    <div><p class="s-bar">Actions</p><ol class="s-acts"><li class="main"><b>Test the new policy</b><span>on a random 10% of transactions, about 16 days</span></li><li class=""><b>Retrain the score each month</b><span>mean PR-AUC 0.576 vs. 0.487</span></li><li class=""><b>Keep the team at 3 analysts</b><span>a fourth saves only $1,534 a month</span></li></ol></div>
+    <div><p class="s-bar">Risks and controls</p><table class="s-risks"><tbody><tr><td>More good customers are declined: 2.46% vs. 0.28% today</td><td>The 3% limit is a stop rule of the test</td></tr><tr><td>The cost of a false decline is an assumption</td><td>Finance and Marketing confirm it before the test; it sets the size of the decline tier</td></tr><tr><td>The score loses 15% of its PR-AUC after month 4</td><td>Monthly retrain, and a check of the PR-AUC each month</td></tr></tbody></table></div>
+  </div>
+  <p class="s-src">Source: analysis. Public data; illustrative results.</p>
+</section></div>
+        <div class="deckbar"><button type="button" class="prev" aria-label="Previous slide">Previous</button><span class="count" aria-live="polite">1 / 6</span><button type="button" class="next" aria-label="Next slide">Next</button><button type="button" class="full">Full screen</button></div>
+      </div></section><section class="part" id="tree"><h2>Total cost splits into three parts, and the policy must lower the sum</h2>
       <div class="ltree-scroll"><ul class="ltree"><li><div class="node root"><b>Total cost each month</b><span>Current rules: $299,432</span></div><ul><li><div class="node "><b>Fraud loss that gets through</b></div><ul><li><div class="node fixed"><b>Fraud dollars attempted</b><span>Fixed: the test months</span></div></li><li><div class="node lever"><b>Share of fraud dollars stopped</b><span>The lever: the score and the three tiers</span></div><div class="find"><p class="q">Does the new policy stop more fraud dollars?</p><p class="a"><b>Yes.</b> 71.2% vs. 38.4%.</p></div></li></ul></li><li><div class="node "><b>Cost of false declines</b></div><ul><li><div class="node limit"><b>Good transactions declined</b><span>The limit: 3% of good transactions</span></div><div class="find"><p class="q">Does the decline rate of good customers stay inside the limit?</p><p class="a"><b>Yes.</b> 2.46%, up from 0.28% today.</p></div></li><li><div class="node "><b>Cost of each false decline</b><span>3% margin on the amount, plus $10 of friction</span></div><div class="find"><p class="q">Does the saving hold if this cost changes?</p><p class="a"><b>Yes.</b> At least $53,544 each month under every cost assumption.</p></div></li></ul></li><li><div class="node "><b>Cost of reviews</b></div><ul><li><div class="node "><b>Alerts reviewed each day</b><span>Capacity: 3 analysts, 120 alerts</span></div><div class="find"><p class="q">Does a larger team pay?</p><p class="a"><b>No.</b> 4 analysts is the lowest-cost team, but only $1,534 each month below today. No change before the test.</p></div></li><li><div class="node fixed"><b>Cost of an analyst day</b><span>Fixed: $300</span></div></li></ul></li></ul></li></ul></div>
-      <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p></section><section class="part" id="recommendation"><h2>Recommendation</h2>
-      <div class="rec">
-        <div class="rec-col"><p class="rec-head">Actions</p><ol class="acts"><li class="main"><b>Test the new policy</b><span>on a random 10% of transactions, about 16 days</span></li><li class=""><b>Retrain the score each month</b><span>mean PR-AUC 0.576 vs. 0.487</span></li><li class=""><b>Keep the team at 3 analysts</b><span>a fourth saves only $1,534 a month</span></li></ol></div>
-        <div class="rec-col"><p class="rec-head">Risks and controls</p><table class="rk"><thead><tr><th scope="col">Risk</th><th scope="col">Control</th></tr></thead><tbody><tr><td>More good customers are declined: 2.46% vs. 0.28% today</td><td>The 3% limit is a stop rule of the test</td></tr><tr><td>The cost of a false decline is an assumption</td><td>Finance and Marketing confirm it before the test; it sets the size of the decline tier</td></tr><tr><td>The score loses 15% of its PR-AUC after month 4</td><td>Monthly retrain, and a check of the PR-AUC each month</td></tr></tbody></table></div>
-      </div></section>
+      <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p></section>
     <nav class="pager" aria-label="More projects"><a href="/projects/credit-approval-cutoff/"><span>Previous project</span><b>Approval cutoff for a consumer lender</b></a><a class="next" href="/projects/marketing-offer-targeting/"><span>Next project</span><b>Offer targeting for an email campaign</b></a></nav>
   </div></div>
 </main>

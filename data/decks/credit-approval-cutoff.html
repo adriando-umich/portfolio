@@ -154,24 +154,3 @@
   </div>
   <p class="s-src">Both costs need confirmation from Finance. Source: Lending Club 36-month loans, 2013–2015; analysis.</p>
 </section>
-
-<section class="slide" data-part="Test plan">
-  <h3>Run the scorecard cutoff on 10% of applications; stop if 12-month defaults rise 1 point</h3>
-  <div class="s-body">
-    <div class="phases">
-      <div class="phase"><p class="ph-when">Month 0</p><p class="ph-name">Launch</p><p class="ph-text">A random 10% of applications go to the scorecard cutoff. The pricing test for grades A–C starts.</p></div>
-      <div class="phase"><p class="ph-when">Months 1–12</p><p class="ph-name">Monitor</p><p class="ph-text">Each month: score stability, and predicted against actual default rate.</p></div>
-      <div class="phase gate"><p class="ph-when">Month 12</p><p class="ph-name">Gate</p><p class="ph-text">Stop if the default rate is more than 1 point above the current policy.</p></div>
-      <div class="phase"><p class="ph-when">Month 36</p><p class="ph-name">Decide</p><p class="ph-text">Roll out if the bad rate held and the realized NPV went up.</p></div>
-    </div>
-    <table class="risks">
-      <thead><tr><th>Top risk</th><th>Control</th></tr></thead>
-      <tbody>
-        <tr><td>Declined applicants are riskier than the booked loans</td><td>About 1,000 random approvals below the cutoff measure their default rate</td></tr>
-        <tr><td>2015 prices do not pay for the risk</td><td>The pricing test for grades A–C</td></tr>
-        <tr><td>Applicants change after 2015</td><td>The stability limit and the stop rule</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="s-src">The 12-month default rate is an early estimate of the lifetime rate. Source: analysis.</p>
-</section>

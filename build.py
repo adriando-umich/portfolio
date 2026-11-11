@@ -108,20 +108,52 @@ def home():
     page("/", f"{R['name']}: strategy and analytics", R["claim"], "/", body)
 
 
+IND = {x["id"]: x["name"] for x in P.get("industries", [])}
+TASK = {x["id"]: x["name"] for x in P.get("tasks", [])}
+
+
+def tags(p):
+    out = ""
+    if p.get("industry"):
+        out += f'<span class="tag ind">{e(IND[p["industry"]])}</span>'
+    for t in p.get("tasks", []):
+        out += f'<span class="tag">{e(TASK[t])}</span>'
+    return f'<p class="tags">{out}</p>' if out else ""
+
+
+def data_attrs(p):
+    return f'data-tools="{" ".join(p["tools"])}" data-industry="{p.get("industry", "")}" data-tasks="{" ".join(p.get("tasks", []))}"'
+
+
 def project_row(p):
     head = f'<a href="{url(p)}">{e(p["title"])}</a>' if p.get("slug") else e(p["title"])
     meta = f'<b>{e(p["org"])}</b>{e(p.get("period", ""))}' if p.get("org") else "<b>Practice set</b>"
     return (
-        f'<li class="prow" data-tools="{" ".join(p["tools"])}"><div class="meta">{meta}</div>'
-        f'<div><h3>{head}</h3><p>{e(p["result"])}</p></div>{tools(p["tools"]) or "<div></div>"}</li>'
+        f'<li class="prow" {data_attrs(p)}><div class="meta">{meta}</div>'
+        f'<div><h3>{head}</h3><p>{e(p["result"])}</p>{tags(p)}</div>{tools(p["tools"]) or "<div></div>"}</li>'
     )
+
+
+def matrix():
+    tagged = [p for p in PROJECTS if p.get("industry")]
+    head = "".join(f'<th scope="col"><button type="button" data-f="industry" data-v="{i}">{e(n)}</button></th>' for i, n in IND.items())
+    rows = ""
+    for t, tn in TASK.items():
+        cells = ""
+        for i in IND:
+            n = len([p for p in tagged if p["industry"] == i and t in p["tasks"]])
+            cells += f'<td><button type="button" class="cell" data-i="{i}" data-t="{t}" aria-label="{n} projects: {e(tn)}, {e(IND[i])}">{n}</button></td>' if n else '<td class="none">–</td>'
+        total = len([p for p in tagged if t in p["tasks"]])
+        rows += f'<tr><th scope="row"><button type="button" data-f="task" data-v="{t}">{e(tn)}</button></th>{cells}<td class="tot">{total}</td></tr>'
+    foot = "".join(f'<td class="tot">{len([p for p in tagged if p["industry"] == i])}</td>' for i in IND)
+    return f"""<div class="table-scroll"><table class="matrix">
+      <thead><tr><th scope="col" class="corner">Task / Industry</th>{head}<th scope="col" class="tot">All</th></tr></thead>
+      <tbody>{rows}<tr><th scope="row" class="tot">All</th>{foot}<td class="tot">{len(tagged)}</td></tr></tbody></table></div>"""
 
 
 def projects_index():
     used = [t for t in TOOLS if any(t in p["tools"] for p in PROJECTS)]
-    buttons = '<button type="button" data-tool="" aria-pressed="true">All</button>' + "".join(
-        f'<button type="button" data-tool="{t}" aria-pressed="false">{ico(t)}{e(TOOLS[t])}</button>' for t in used
-    )
+    buttons = "".join(f'<button type="button" data-f="tool" data-v="{t}" aria-pressed="false">{ico(t)}{e(TOOLS[t])}</button>' for t in used)
     groups = ""
     for t in P["types"]:
         items = [p for p in PROJECTS if p["type"] == t["id"]]
@@ -129,28 +161,27 @@ def projects_index():
             continue
         if t["id"] == "case":
             inner = '<div class="cards">' + "".join(
-                f'<a class="card" href="{url(p)}" data-tools="{" ".join(p["tools"])}"><span class="name">{e(p["title"])}</span>'
+                f'<a class="card" href="{url(p)}" {data_attrs(p)}><span class="name">{e(p["title"])}</span>'
                 f'<span class="num">{e(p["num"])}</span><span class="what">{e(p["what"])}</span>'
-                f'<span class="q">Q: {e(p["question"])}</span>{tools(p["tools"])}<span class="go">Open the case</span></a>'
+                f'{tags(p)}{tools(p["tools"])}<span class="go">Open the case</span></a>'
                 for p in items
             ) + "</div>"
         else:
             inner = '<ul class="rows">' + "".join(project_row(p) for p in items) + "</ul>"
-        note = f'<p class="note">{e(t["note"])}</p>' if t["note"] else ""
-        groups += f'<section class="group" id="{t["id"]}"><h2>{e(t["name"])}</h2>{note}{inner}</section>'
-    n_work = len([p for p in PROJECTS if p["type"] == "work"])
+        groups += f'<section class="group" id="{t["id"]}"><h2>{e(t["name"])}</h2>{inner}</section>'
     body = f"""<main>
   <div class="pagehead"><div class="wrap">
     <h1>Projects</h1>
-    <p class="sub">{len(CASES)} case studies with a recommendation and its dollar effect, {n_work} results from work, and practice sets in SQL and Python.</p>
+    <p class="sub">Work by task and industry. Select a number to filter the list.</p>
   </div></div>
   <div class="body"><div class="wrap">
-    <div class="filter" role="group" aria-label="Filter projects by tool"><span class="label">Filter by tool</span>{buttons}</div>
+    {matrix()}
+    <div class="filter" role="group" aria-label="Filter projects"><span class="label">Tool</span>{buttons}<span class="active" aria-live="polite"></span><button type="button" class="clear" hidden>Clear filters</button></div>
     {groups}
-    <p class="empty">No project uses this tool yet.</p>
+    <p class="empty">No project matches these filters.</p>
   </div></div>
 </main>"""
-    page("/projects/", f"Projects: {R['name']}", "Case studies, results from work and practice sets.", "/projects/", body)
+    page("/projects/", f"Projects: {R['name']}", "Projects by industry, task and tool.", "/projects/", body)
 
 
 CHART = """<div class="exhibit">
@@ -204,84 +235,53 @@ def evaluation(p):
 def deliverables(p, has_deck, has_brief):
     items = []
     if has_deck:
-        items.append(("deck", "Board deck", "Slides", "#deck"))
+        items.append(("deck", "Board deck", "For leadership", "#deck"))
     if has_brief:
-        items.append(("doc", "Technical document", "Method and results", "brief/"))
-    if p.get("excel"):
-        items.append(("excel", "P&L model", "Excel workbook", p["excel"]))
-    if os.path.exists(f"projects/{p['slug']}/notebook/index.html"):
-        items.append(("notebook", "Full notebook", "Every step, with code", "notebook/"))
+        items.append(("doc", "Technical document", "Method, results, notebook and files", "brief/"))
     cards = "".join(
         f'<a class="dl" href="{href}">{ico(i)}<span><b>{e(t)}</b><em>{e(s)}</em></span></a>' for i, t, s, href in items
     )
     return f'<div class="dls">{cards}</div>' if cards else ""
 
 
+def rec_slide(p):
+    acts = "".join(f'<li class="{"main" if i == 0 else ""}"><b>{e(r[0])}</b><span>{e(r[1])}</span></li>' for i, r in enumerate(p["recs"]))
+    risks = "".join(f"<tr><td>{e(r[0])}</td><td>{e(r[1])}</td></tr>" for r in p.get("risks", []))
+    return f"""<section class="slide" data-part="Recommendation">
+  <h3>{e(p['rec_title'])}</h3>
+  <div class="s-body halves">
+    <div><p class="s-bar">Actions</p><ol class="s-acts">{acts}</ol></div>
+    <div><p class="s-bar">Risks and controls</p><table class="s-risks"><tbody>{risks}</tbody></table></div>
+  </div>
+  <p class="s-src">Source: analysis. Public data; illustrative results.</p>
+</section>"""
+
+
 def case_page(p, crumb):
     slug = p["slug"]
     deck_file = f"data/decks/{slug}.html"
-    brief_file = f"data/briefs/{slug}.html"
-    has_deck, has_brief = os.path.exists(deck_file), os.path.exists(brief_file)
-    nav, parts = [], ""
-
-    if p.get("scqa"):
-        nav.append(("question", "Question"))
-        s, c, q = (r[2] for r in p["scqa"][:3])
-        parts += f"""<section id="question" class="scq">
-      <div><h2>Situation</h2><p>{s}</p></div>
-      <div><h2>Complication</h2><p>{c}</p></div>
-      <div class="q"><h2>Question</h2><p>{q.replace("Q: ", "")}</p></div>
-    </section>"""
-
-    nav.append(("answer", "Answer"))
-    key = ""
-    for k in p["keyline"]:
-        pts = "".join(f"<li>{x}</li>" for x in k.get("pts", []))
-        key += f'<li><h3>{e(k["h"])}</h3><ul class="pts">{pts}</ul></li>'
-    parts += f"""<section id="answer">
-      <h2 class="answer">{e(p['answer'])}</h2>
-      <p class="why">{e(p['why'])}</p>
-      <ol class="keyline">{key}</ol>
-    </section>"""
-
-    if p.get("tree"):
-        nav.append(("tree", "Issue tree"))
-        parts += f"""<section class="part" id="tree"><h2>{e(p['tree_h'])}</h2>
-      <div class="ltree-scroll"><ul class="ltree"><li>{tree_node(p['tree'])}</li></ul></div>
-      <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p></section>"""
-
-    if p.get("method", {}).get("viz"):
-        nav.append(("method", "Method"))
-        parts += f'<section class="part" id="method"><h2>{e(p["method"]["h"])}</h2>{SWAP}</section>'
-
-    if p.get("recs"):
-        nav.append(("recommendation", "Recommendation"))
-        acts = "".join(f'<li class="{"main" if i == 0 else ""}"><b>{e(r[0])}</b><span>{e(r[1])}</span></li>' for i, r in enumerate(p["recs"]))
-        risks = "".join(f"<tr><td>{e(r[0])}</td><td>{e(r[1])}</td></tr>" for r in p.get("risks", []))
-        parts += f"""<section class="part" id="recommendation"><h2>Recommendation</h2>
-      <div class="rec">
-        <div class="rec-col"><p class="rec-head">Actions</p><ol class="acts">{acts}</ol></div>
-        <div class="rec-col"><p class="rec-head">Risks and controls</p><table class="rk"><thead><tr><th scope="col">Risk</th><th scope="col">Control</th></tr></thead><tbody>{risks}</tbody></table></div>
-      </div></section>"""
-
+    has_deck, has_brief = os.path.exists(deck_file), os.path.exists(f"data/briefs/{slug}.html")
+    parts = ""
     if has_deck:
-        nav.append(("deck", "Board deck"))
-        deck = open(deck_file, encoding="utf-8").read()
+        deck = open(deck_file, encoding="utf-8").read() + (rec_slide(p) if p.get("recs") else "")
         n = deck.count('<section class="slide"')
-        parts += f"""<section class="part" id="deck"><h2>Board deck</h2>
+        parts += f"""<section id="deck">
       <div class="deck">
         <div class="stage" tabindex="0" aria-roledescription="slide deck" aria-label="Board deck, {n} slides. Use the arrow keys to change slide.">{deck}</div>
         <div class="deckbar"><button type="button" class="prev" aria-label="Previous slide">Previous</button><span class="count" aria-live="polite">1 / {n}</span><button type="button" class="next" aria-label="Next slide">Next</button><button type="button" class="full">Full screen</button></div>
       </div></section>"""
-
-    sub = "".join(f'<a href="#{i}">{n}</a>' for i, n in nav)
+    if p.get("tree"):
+        parts += f"""<section class="part" id="tree"><h2>{e(p['tree_h'])}</h2>
+      <div class="ltree-scroll"><ul class="ltree"><li>{tree_node(p['tree'])}</li></ul></div>
+      <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p></section>"""
+    if p.get("method", {}).get("viz"):
+        parts += f'<section class="part" id="method"><h2>{e(p["method"]["h"])}</h2>{SWAP}</section>'
     return f"""<main>
   <div class="pagehead"><div class="wrap">{crumb}
     <h1>{e(p['title'])}</h1>
     <div class="case-facts"><p class="facts">{e(p['data'])}</p>{tools(p['tools'])}</div>
     {deliverables(p, has_deck, has_brief)}
   </div></div>
-  <nav class="subnav" aria-label="On this page"><div class="wrap">{sub}</div></nav>
   <div class="body"><div class="wrap">
     {parts}
     {pager(p)}
@@ -316,10 +316,11 @@ def brief_page(p):
     if p.get("uses"):
         us = "".join(f'<tr><td><b>{e(x[0])}</b></td><td>{e(x[1])}</td></tr>' for x in p["uses"])
         parts += f'<section class="part"><h2>What each tool does in this case</h2><div class="table-scroll"><table><tbody>{us}</tbody></table></div></section>'
+    xl = f'<a class="dl" href="../{e(p["excel"])}">{ico("excel")}<span><b>P&amp;L model</b><em>Excel workbook</em></span></a>' if p.get("excel") else ""
     body = f"""<main>
   <div class="pagehead"><div class="wrap">{crumb}
     <h1>{e(p['title'])}: technical document</h1>
-    <div class="dls"><a class="dl" href="../notebook/">{ico("notebook")}<span><b>Full notebook</b><em>Every step, with code</em></span></a><a class="dl" href="{url(p)}">{ico("deck")}<span><b>Case summary</b><em>Answer, issue tree, recommendation</em></span></a></div>
+    <div class="dls"><a class="dl" href="../notebook/">{ico("notebook")}<span><b>Full notebook</b><em>Every step, with code</em></span></a>{xl}<a class="dl" href="{url(p)}#deck">{ico("deck")}<span><b>Board deck</b><em>For leadership</em></span></a></div>
   </div></div>
   <div class="body"><div class="wrap">{parts}</div></div>
 </main>"""
