@@ -1534,7 +1534,7 @@
      "analysis.R"
     ]
    ],
-   "title": "How many rooms a hotel can overbook when it knows which bookings will cancel",
+   "title": "How many rooms a hotel can overbook, given the cancellation risk of each booking",
    "industry": "travel",
    "tasks": [
     "ml",

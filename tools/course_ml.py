@@ -82,7 +82,7 @@ def hotel():
           "The reservation status, the assigned room and later booking changes are not model inputs: the hotel does not know them when the booking is made."])}
 </section>"""
     out(slug, html)
-    E_[slug] = dict(title="How many rooms a hotel can overbook when it knows which bookings will cancel", industry="travel", tasks=["ml", "pricing"], tools=["r"],
+    E_[slug] = dict(title="How many rooms a hotel can overbook, given the cancellation risk of each booking", industry="travel", tasks=["ml", "pricing"], tools=["r"],
         result=f'A model of cancellation risk recovers {lg["recovered"]:,.0f} cancelled bookings in the test period and turns away {lg["walked"]:.0f} guests. A flat-rate rule turns away {fl["walked"]:.0f}.',
         method="Cancellation models in R on 119,390 public hotel bookings, tested on a later year",
         scq=["Two hotels took about 119,000 bookings in two years. 37% of the bookings were cancelled.", "A cancelled booking leaves an empty room. The hotels can overbook, but with one average cancellation rate they turn away guests on the days when few bookings cancel.", "How many bookings can a hotel accept above capacity on each day?"],
