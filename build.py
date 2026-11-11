@@ -168,7 +168,7 @@ def matrix():
     return f"""<div class="table-scroll"><table class="matrix">
       <thead><tr><th scope="col" class="corner">Task / Industry</th>{head}<th scope="col" class="tot">All</th></tr></thead>
       <tbody>{rows}<tr><th scope="row" class="tot">All</th>{foot}<td class="tot">{len(tagged)}</td></tr></tbody></table></div>
-    <p class="legend"><span class="k work">3</span> work experience <span class="k self">1</span> self-built case study on public data</p>"""
+    <p class="legend"><span class="k work">3</span> work experience <span class="k self">1</span> self-built case study or course project</p>"""
 
 
 def projects_index():
@@ -193,11 +193,11 @@ def projects_index():
     body = f"""<main>
   <div class="pagehead"><div class="wrap">
     <h1>Projects</h1>
-    <p class="sub">Work experience and self-built case studies, by task and industry. Select a number to filter the list.</p>
+    <p class="sub">Work experience, self-built case studies and course projects, by task and industry. Select a number to filter the list.</p>
   </div></div>
   <div class="body"><div class="wrap">
     {matrix()}
-    <div class="filter" role="group" aria-label="Filter projects"><span class="label">Show</span><button type="button" data-f="type" data-v="work" aria-pressed="false">Work experience</button><button type="button" data-f="type" data-v="case" aria-pressed="false">Self-built case studies</button><span class="label gap">Tool</span>{buttons}<span class="active" aria-live="polite"></span><button type="button" class="clear" hidden>Clear filters</button></div>
+    <div class="filter" role="group" aria-label="Filter projects"><span class="label">Show</span><button type="button" data-f="type" data-v="work" aria-pressed="false">Work experience</button><button type="button" data-f="type" data-v="case" aria-pressed="false">Self-built case studies</button><button type="button" data-f="type" data-v="course" aria-pressed="false">Course projects</button><span class="label gap">Tool</span>{buttons}<span class="active" aria-live="polite"></span><button type="button" class="clear" hidden>Clear filters</button></div>
     {groups}
     <p class="empty">No project matches these filters.</p>
   </div></div>
@@ -348,6 +348,25 @@ def brief_page(p):
     page(url(p) + "brief/", f"{p['title']}: technical document", p["result"], "/projects/", body)
 
 
+def course_page(p, crumb):
+    frag = open(f"data/course/{p['slug']}.html", encoding="utf-8").read()
+    cards = "".join(
+        f'<a class="dl" href="{e(href)}">{ico(i)}<span><b>{e(t)}</b><em>{e(s)}</em></span></a>' for i, t, s, href in p.get("files", [])
+    )
+    return f"""<main>
+  <div class="pagehead"><div class="wrap">{crumb}
+    <h1>{e(p['headline'])}</h1>
+    <div class="case-facts"><p class="facts"><b>Course project, Michigan Ross MBA.</b> {e(p['method'])}. Not client or employer work.</p>{tools(p['tools'])}</div>
+    <div class="dls">{cards}</div>
+  </div></div>
+  <div class="body"><div class="wrap cp">
+    <p class="question">{e(p['question'])}</p>
+    {frag}
+    {pager(p)}
+  </div></div>
+</main>"""
+
+
 def pager(p):
     i = PAGES.index(p)
     prev = PAGES[i - 1] if i > 0 else None
@@ -363,6 +382,8 @@ def project_pages():
         if p["type"] == "case":
             body = case_page(p, crumb)
             brief_page(p)
+        elif p["type"] == "course":
+            body = course_page(p, crumb)
         else:
             rows = "".join(
                 f'<tr><td><a href="{e(p["repo"])}/{g[2]}">{e(g[0])}</a></td><td class="n">{g[1]}</td></tr>' for g in p["groups"]

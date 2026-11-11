@@ -47,6 +47,12 @@
    "note": "Cases that I built on my own with public data. They are not client or employer work."
   },
   {
+   "id": "course",
+   "name": "Course projects, Michigan Ross MBA",
+   "tag": "Course project",
+   "note": "Analytics coursework from the MBA program, rebuilt in my own format. They are not client or employer work."
+  },
+  {
    "id": "practice",
    "name": "Practice and personal projects",
    "tag": "Practice",
@@ -745,6 +751,71 @@
    ]
   },
   {
+   "slug": "fire-station-siting",
+   "type": "course",
+   "title": "Fire station siting",
+   "org": "Michigan Ross MBA",
+   "industry": "public",
+   "tasks": [
+    "optimize"
+   ],
+   "tools": [
+    "excel",
+    "python"
+   ],
+   "question": "Which of six candidate sites must a city open so that each of its six regions has a fire station within 12 minutes, at the lowest cost?",
+   "headline": "Two stations, at sites 1 and 3, reach every region within 12 minutes for $700,000",
+   "result": "Two of six sites cover every region within 12 minutes for $700,000. One minute less costs 64% more.",
+   "method": "Set-covering integer program in Excel Solver, checked by full enumeration in Python",
+   "files": [
+    [
+     "excel",
+     "Excel model",
+     "Solver model with the cost for each response-time limit",
+     "fire_station_model.xlsx"
+    ],
+    [
+     "python",
+     "Python check",
+     "All 64 plans, enumerated",
+     "check_model.py"
+    ]
+   ]
+  },
+  {
+   "slug": "supplier-bid-selection",
+   "type": "course",
+   "title": "Supplier bid selection",
+   "org": "Michigan Ross MBA",
+   "industry": "consumer",
+   "tasks": [
+    "optimize",
+    "pricing"
+   ],
+   "tools": [
+    "excel",
+    "python"
+   ],
+   "question": "Which of 12 bundled bids must a confectionery company accept to buy all 12 packaging items at the lowest cost, and what does each sourcing policy cost?",
+   "headline": "Four bids from four suppliers buy all 12 items for $4,470, which is $169 less than the one-supplier bundle",
+   "result": "Four of 12 bids cover every item for $4,470. A strategic-partner policy adds 27%; a local-supplier policy adds nothing.",
+   "method": "Set-covering integer program in Excel Solver, checked by full enumeration in Python",
+   "files": [
+    [
+     "excel",
+     "Excel model",
+     "Solver model with the cost of each sourcing policy",
+     "bid_selection_model.xlsx"
+    ],
+    [
+     "python",
+     "Python check",
+     "All 4,096 plans, enumerated",
+     "check_model.py"
+    ]
+   ]
+  },
+  {
    "type": "work",
    "org": "Embedded Capital",
    "period": "2025",
@@ -1066,6 +1137,14 @@
   {
    "id": "industrial",
    "name": "Industrial and energy"
+  },
+  {
+   "id": "consumer",
+   "name": "Consumer goods and technology"
+  },
+  {
+   "id": "public",
+   "name": "Public sector"
   }
  ],
  "tasks": [
@@ -1096,6 +1175,10 @@
   {
    "id": "process",
    "name": "Process improvement"
+  },
+  {
+   "id": "optimize",
+   "name": "Optimization and simulation"
   }
  ]
 }
