@@ -19,13 +19,18 @@
   <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / Transaction policy for card fraud</p>
     <h1>Transaction policy for card fraud</h1>
   </div></div>
+  <nav class="subnav" aria-label="On this page"><div class="wrap"><a href="#summary">Summary</a><a href="#tools">Tools</a></div></nav>
   <div class="body"><div class="wrap">
+    <section id="summary">
     <div class="case-head"><p class="facts">IEEE-CIS public transaction data</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/python.svg)" aria-hidden="true"></i>Python</span><span class="tool"><i class="ico" style="--i:url(/assets/icons/sql.svg)" aria-hidden="true"></i>SQL</span></div></div>
     <p class="question">Q: Which policy gives the lowest total cost of fraud, false declines and reviews?</p>
-    <h2 class="answer">The lowest-cost policy cuts the total monthly cost by $64k and keeps false declines under the 3% cap.</h2>
+    <h2 class="answer">A three-tier policy (approve, review, decline) on a fraud score cuts the total monthly cost by $64k and keeps false declines under the 3% cap.</h2>
     <p class="why">Why? Three reasons, strongest first</p>
-    <ol class="keyline"><li><h3>It lowers the cost that matters, not only fraud loss</h3><p>Total monthly cost = fraud loss that gets through + cost of false declines + cost of reviews. Decrease: <b>$64,274</b> per month.</p></li><li><h3>The saving is the low end of the estimate</h3><p>The decrease is <b>$64k to $127k</b> per month, depending on the baseline. I report the lowest figure.</p></li><li><h3>Good customers stay protected</h3><p>False decline rate (share of good transactions declined): <b>2.46%</b>, under the cap of <b>3%</b>.</p></li></ol>
+    <ol class="keyline"><li><h3>It stops almost twice the fraud dollars</h3><p>Share of fraud dollars stopped: <b>71.2%</b> vs. 38.4% for a fixed rule set.</p></li><li><h3>The total cost falls, not only the fraud loss</h3><p>Total monthly cost = fraud loss that gets through + cost of false declines + cost of reviews. Decrease: <b>$64k to $127k</b> per month, depending on the baseline. $64k is the lowest figure.</p></li><li><h3>Good customers stay protected</h3><p>False decline rate (share of good transactions declined): <b>2.46%</b>, under the cap of <b>3%</b>.</p></li></ol>
     
+    </section>
+    <section class="part" id="tools"><h2>What each tool does in this case</h2>
+      <div class="table-scroll"><table><tbody><tr><td><b>SQL</b></td><td>Joins the transaction table and the identity table, with DuckDB.</td></tr><tr><td><b>Python</b></td><td>Runs the whole analysis in one notebook that gives the same result on each run.</td></tr><tr><td><b>Machine learning</b></td><td>Scores fraud with gradient boosting, ranks transactions by expected cost, and sets the three tiers.</td></tr><tr><td><b>Statistics</b></td><td>Validates over time, tracks drift with the population stability index, and tests the sensitivity to costs.</td></tr></tbody></table></div></section>
     <nav class="pager" aria-label="More projects"><a href="/projects/credit-approval-cutoff/"><span>Previous project</span><b>Approval cutoff for a consumer lender</b></a><a class="next" href="/projects/marketing-offer-targeting/"><span>Next project</span><b>Offer targeting for an email campaign</b></a></nav>
   </div></div>
 </main>

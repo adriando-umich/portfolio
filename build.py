@@ -179,17 +179,52 @@ def project_pages():
         crumb = f'<p class="crumb"><a href="/projects/">Projects</a> / {e(p["title"])}</p>'
         if p["type"] == "case":
             key = "".join(f'<li><h3>{e(k["h"])}</h3><p>{k["p"]}</p></li>' for k in p["keyline"])
+            nav, extra = [("summary", "Summary")], ""
+            if p.get("scqa"):
+                nav.append(("framework", "Framework"))
+                pr = p["problem"]
+                rows = "".join(f'<tr class="{r[0].lower()}"><th scope="row">{r[0]}<span>{e(r[1])}</span></th><td>{r[2]}</td></tr>' for r in p["scqa"])
+                tree = "".join(f'<li><p class="tq">{e(t[0])}</p><p class="ta"><b>{t[1]}.</b> {e(t[2])}</p></li>' for t in p["tree"])
+                extra += f"""<section class="part" id="framework"><h2>The framework behind the answer</h2>
+      <h3 class="sub3">The problem</h3>
+      <div class="strip"><div class="scene"><span>Starting point</span><p>{e(pr['scene'])}</p></div><div class="now"><span>Result now</span><p>{e(pr['now'])}</p></div><div class="want"><span>Result wanted</span><p>{e(pr['want'])}</p></div></div>
+      <h3 class="sub3">The story in four lines</h3>
+      <table class="scqa"><tbody>{rows}</tbody></table>
+      <h3 class="sub3">The questions that the analysis must answer</h3>
+      <p class="treeq">{e(p['tree_q'])}</p>
+      <ol class="tree">{tree}</ol></section>"""
+            if p.get("method"):
+                nav.append(("method", "Method"))
+                mt = p["method"]
+                st = "".join(f'<li><h3>{e(x[0])}</h3><p>{e(x[1])}</p></li>' for x in mt["steps"])
+                notes = "".join(f"<li>{e(x)}</li>" for x in mt["notes"])
+                outline = "".join(f'<tr><td class="n">{i}</td><td><b>{e(x[0])}</b></td><td>{e(x[1])}</td></tr>' for i, x in enumerate(p["steps"], 1))
+                extra += f"""<section class="part" id="method"><h2>{e(mt['h'])}</h2>
+      <ol class="steps3">{st}</ol><ul class="notes">{notes}</ul>
+      <h3 class="sub3">The analysis in {len(p['steps'])} steps</h3>
+      <div class="table-scroll"><table><thead><tr><th scope="col" class="n">Step</th><th scope="col">What it does</th><th scope="col">Question it answers</th></tr></thead><tbody>{outline}</tbody></table></div></section>"""
+            if p.get("uses"):
+                nav.append(("tools", "Tools"))
+                us = "".join(f'<tr><td><b>{e(x[0])}</b></td><td>{e(x[1])}</td></tr>' for x in p["uses"])
+                extra += f"""<section class="part" id="tools"><h2>What each tool does in this case</h2>
+      <div class="table-scroll"><table><tbody>{us}</tbody></table></div></section>"""
+            sub = "".join(f'<a href="#{i}">{n}</a>' for i, n in nav) if len(nav) > 1 else ""
+            subnav = f'<nav class="subnav" aria-label="On this page"><div class="wrap">{sub}</div></nav>' if sub else ""
             body = f"""<main>
   <div class="pagehead"><div class="wrap">{crumb}
     <h1>{e(p['title'])}</h1>
   </div></div>
+  {subnav}
   <div class="body"><div class="wrap">
+    <section id="summary">
     <div class="case-head"><p class="facts">{e(p['data'])}</p>{tools(p['tools'])}</div>
     <p class="question">Q: {e(p['question'])}</p>
     <h2 class="answer">{e(p['answer'])}</h2>
     <p class="why">{e(p['why'])}</p>
     <ol class="keyline">{key}</ol>
     {CHART if p.get('exhibit') == 'credit' else ''}
+    </section>
+    {extra}
     {pager(p)}
   </div></div>
 </main>"""

@@ -19,13 +19,18 @@
   <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / Offer targeting for an email campaign</p>
     <h1>Offer targeting for an email campaign</h1>
   </div></div>
+  <nav class="subnav" aria-label="On this page"><div class="wrap"><a href="#summary">Summary</a><a href="#tools">Tools</a></div></nav>
   <div class="body"><div class="wrap">
+    <section id="summary">
     <div class="case-head"><p class="facts">Hillstrom public email test data</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/r.svg)" aria-hidden="true"></i>R</span></div></div>
     <p class="question">Q: Which customers do we send the offer to, for the best return?</p>
     <h2 class="answer">Send the men&#x27;s email to all customers and keep a 10% holdout. It earns $13k per campaign of 100,000 customers.</h2>
     <p class="why">Why? Three reasons, strongest first</p>
-    <ol class="keyline"><li><h3>The email raises spend</h3><p>Spend effect against the no-email group: <b>+$0.77</b> per customer in the 2 weeks after the email.</p></li><li><h3>The extra margin is larger than the contact cost</h3><p>30% margin on $0.77, less $0.10 for each email, gives <b>$13,095</b> of profit per 100,000 customers.</p></li><li><h3>A targeting model adds nothing at this cost</h3><p>At <b>$0.10</b> per email, no model-picked segment earns more than an email to all customers.</p></li></ol>
+    <ol class="keyline"><li><h3>The email raises spend</h3><p>Spend effect against the no-email group: <b>+$0.77</b> per customer in the 2 weeks after the email.</p></li><li><h3>The extra margin is larger than the contact cost</h3><p>30% margin on $0.77, less $0.10 for each email, gives <b>$13,095</b> of profit per 100,000 customers. The email pays back at any cost below <b>$0.23</b>.</p></li><li><h3>A targeting model adds nothing at this cost</h3><p>Two uplift models did not beat a simple ranking by purchase history, and at <b>$0.10</b> per email no segment earns more than an email to all customers.</p></li></ol>
     
+    </section>
+    <section class="part" id="tools"><h2>What each tool does in this case</h2>
+      <div class="table-scroll"><table><tbody><tr><td><b>R</b></td><td>Runs the whole analysis in one notebook in base R.</td></tr><tr><td><b>Statistics</b></td><td>Designs and reads the experiment: power and sample size, Welch t-test, bootstrap, CUPED and the Holm correction.</td></tr><tr><td><b>Machine learning</b></td><td>Tests two uplift models (T-learner and uplift tree). They do not beat the ranking by purchase history, so the recommendation does not use them.</td></tr></tbody></table></div></section>
     <nav class="pager" aria-label="More projects"><a href="/projects/fraud-transaction-policy/"><span>Previous project</span><b>Transaction policy for card fraud</b></a><a class="next" href="/projects/leetcode-sql-50/"><span>Next project</span><b>LeetCode SQL 50</b></a></nav>
   </div></div>
 </main>

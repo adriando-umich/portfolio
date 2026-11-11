@@ -82,7 +82,136 @@
      "p": "Start on <b>10%</b> of applications. Stop if 12-month defaults rise <b>1 point</b>."
     }
    ],
-   "exhibit": "credit"
+   "exhibit": "credit",
+   "problem": {
+    "scene": "A consumer lender offers unsecured 36-month loans. A risk grade puts each applicant in a sub-grade from A1 to G5. The lender approves the best sub-grades and declines the others.",
+    "now": "The business wants more approvals, but Risk does not accept a higher bad rate. The loans from 2015 lost $32.9M.",
+    "want": "More approvals at the same bad rate of 12.5%, and more realized NPV from the same applicants."
+   },
+   "scqa": [
+    [
+     "Situation",
+     "What the reader knows",
+     "A consumer lender approves applicants by credit grade. Loans from 2013–2014: <b>realized NPV +$71.7M</b>."
+    ],
+    [
+     "Complication",
+     "What changed, and what it cost",
+     "In 2015, interest rates fell and default rates rose in every grade. Loans from 2015: <b>realized NPV –$32.9M</b>."
+    ],
+    [
+     "Question",
+     "The decision",
+     "Q: How can the lender approve more customers with no increase in losses?"
+    ],
+    [
+     "Answer",
+     "The recommendation and its effect",
+     "Replace the credit grade with a risk scorecard. <b>Approval rate 84.5% → 85.7%</b> at a bad rate of 12.5%. <b>Realized NPV +$7.1M</b>. Next step: a test on 10% of applications."
+    ]
+   ],
+   "tree_q": "Is the new cutoff good enough to test on real applications?",
+   "tree": [
+    [
+     "Does the scorecard approve more applicants at the same bad rate?",
+     "Yes",
+     "Approval rate 85.7% vs. 84.5%, bad rate 12.5% for both."
+    ],
+    [
+     "Do the swapped applicants make money?",
+     "Yes",
+     "The applicants that the scorecard approves in place of others add $8.3M of realized NPV."
+    ],
+    [
+     "Does the gain hold when the cost assumptions change?",
+     "Yes",
+     "At least +$5.1M under every cost assumption tested."
+    ],
+    [
+     "Is a more complex model worth it?",
+     "No",
+     "A gradient boosting model ranks risk only 1.5 KS points better, below the 2-point rule set before the test. The scorecard stays, and it gives a reason for each decline."
+    ],
+    [
+     "Does the cutoff alone fix the loss on the 2015 loans?",
+     "No",
+     "The cutoff recovers $7.1M of a $32.9M loss. A pricing test for grades A to C must go with it."
+    ]
+   ],
+   "method": {
+    "h": "Both policies run on the same 2015 applicants, and every number is an actual outcome",
+    "steps": [
+     [
+      "Define the current policy on booked loans",
+      "The current policy approves the best sub-grades, up to about 85% of the 2015 applicants."
+     ],
+     [
+      "Use the declined group as the check group",
+      "The lender booked loans in the lowest sub-grades too. Each of these loans has a real outcome: default or no default, and the cash it returned."
+     ],
+     [
+      "Compare the two policies on actual outcomes",
+      "The scorecard approves the same number of applicants in a different order. The comparison uses the actual default rate and the realized NPV of the applicants that change sides."
+     ]
+    ],
+    "notes": [
+     "The scorecard learns from the loans of 2013–2014 and is tested on the loans of 2015, which it never saw.",
+     "Grade, sub-grade and interest rate are not inputs to the scorecard, because they are results of the lender's own policy.",
+     "The current policy is my assumption. The public data shows only booked loans, not the lender's approval rule. The result shows a method and the likely size of the gain. The test on 10% of applications measures the gain against the real policy."
+    ]
+   },
+   "steps": [
+    [
+     "Get the data",
+     "Which data shows the actual outcome of each applicant?"
+    ],
+    [
+     "Clean and prepare",
+     "Which loans, which target and which columns are allowed? What did the current policy return?"
+    ],
+    [
+     "Split the data",
+     "How do we test the model on a period that it never saw?"
+    ],
+    [
+     "Build the score",
+     "Which columns and which model type rank applicants by risk best?"
+    ],
+    [
+     "Calibrate and explain",
+     "Is the probability of default at the right level, and is there a reason for each decline?"
+    ],
+    [
+     "Compare the policies",
+     "Is the new policy better than the current one, in model metrics and in dollars?"
+    ],
+    [
+     "Set the cutoff and the test",
+     "Where does the cutoff go, and how do we test it with real applicants?"
+    ]
+   ],
+   "uses": [
+    [
+     "SQL",
+     "Reads the data and filters the 36-month loans, with DuckDB."
+    ],
+    [
+     "Python",
+     "Runs the whole analysis in one notebook that gives the same result on each run."
+    ],
+    [
+     "Machine learning",
+     "Scores risk with a scorecard (weight of evidence and logistic regression). Gradient boosting is the benchmark only."
+    ],
+    [
+     "Statistics",
+     "Validates on a later period, tests the sensitivity to cost assumptions, and forecasts loss by loan year."
+    ],
+    [
+     "Excel",
+     "Holds the P&L model: NPV by policy and the sensitivity chart."
+    ]
+   ]
   },
   {
    "slug": "fraud-transaction-policy",
@@ -98,21 +227,39 @@
    ],
    "data": "IEEE-CIS public transaction data",
    "question": "Which policy gives the lowest total cost of fraud, false declines and reviews?",
-   "answer": "The lowest-cost policy cuts the total monthly cost by $64k and keeps false declines under the 3% cap.",
+   "answer": "A three-tier policy (approve, review, decline) on a fraud score cuts the total monthly cost by $64k and keeps false declines under the 3% cap.",
    "why": "Why? Three reasons, strongest first",
    "keyline": [
     {
-     "h": "It lowers the cost that matters, not only fraud loss",
-     "p": "Total monthly cost = fraud loss that gets through + cost of false declines + cost of reviews. Decrease: <b>$64,274</b> per month."
+     "h": "It stops almost twice the fraud dollars",
+     "p": "Share of fraud dollars stopped: <b>71.2%</b> vs. 38.4% for a fixed rule set."
     },
     {
-     "h": "The saving is the low end of the estimate",
-     "p": "The decrease is <b>$64k to $127k</b> per month, depending on the baseline. I report the lowest figure."
+     "h": "The total cost falls, not only the fraud loss",
+     "p": "Total monthly cost = fraud loss that gets through + cost of false declines + cost of reviews. Decrease: <b>$64k to $127k</b> per month, depending on the baseline. $64k is the lowest figure."
     },
     {
      "h": "Good customers stay protected",
      "p": "False decline rate (share of good transactions declined): <b>2.46%</b>, under the cap of <b>3%</b>."
     }
+   ],
+   "uses": [
+    [
+     "SQL",
+     "Joins the transaction table and the identity table, with DuckDB."
+    ],
+    [
+     "Python",
+     "Runs the whole analysis in one notebook that gives the same result on each run."
+    ],
+    [
+     "Machine learning",
+     "Scores fraud with gradient boosting, ranks transactions by expected cost, and sets the three tiers."
+    ],
+    [
+     "Statistics",
+     "Validates over time, tracks drift with the population stability index, and tests the sensitivity to costs."
+    ]
    ]
   },
   {
@@ -137,12 +284,26 @@
     },
     {
      "h": "The extra margin is larger than the contact cost",
-     "p": "30% margin on $0.77, less $0.10 for each email, gives <b>$13,095</b> of profit per 100,000 customers."
+     "p": "30% margin on $0.77, less $0.10 for each email, gives <b>$13,095</b> of profit per 100,000 customers. The email pays back at any cost below <b>$0.23</b>."
     },
     {
      "h": "A targeting model adds nothing at this cost",
-     "p": "At <b>$0.10</b> per email, no model-picked segment earns more than an email to all customers."
+     "p": "Two uplift models did not beat a simple ranking by purchase history, and at <b>$0.10</b> per email no segment earns more than an email to all customers."
     }
+   ],
+   "uses": [
+    [
+     "R",
+     "Runs the whole analysis in one notebook in base R."
+    ],
+    [
+     "Statistics",
+     "Designs and reads the experiment: power and sample size, Welch t-test, bootstrap, CUPED and the Holm correction."
+    ],
+    [
+     "Machine learning",
+     "Tests two uplift models (T-learner and uplift tree). They do not beat the ranking by purchase history, so the recommendation does not use them."
+    ]
    ]
   },
   {
