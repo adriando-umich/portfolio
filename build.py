@@ -90,7 +90,7 @@ def home():
   <div class="wrap">
     <p class="role">{e(R['role'])}</p>
     <h1>{e(R['claim'])}</h1>
-    <p class="background">{e(R['background'])}</p>
+    <p class="background">{" ".join(e(s) for s in R.get('story', [R['background']]))}</p>
     <p class="actions"><a class="btn solid" href="/projects/">See all projects</a><a class="btn" href="/resume/">Read the resume</a></p>
     <p class="proofs-head">Results from work experience</p>
     <ul class="proofs">{proofs}</ul>

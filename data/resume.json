@@ -111,5 +111,10 @@
   "Scrum Master Certified (SMC)",
   "Lean Six Sigma Green Belt"
  ],
- "other_tools": "SAP, Oracle"
+ "other_tools": "SAP, Oracle",
+ "story": [
+  "Ten years in the numbers: audit at KPMG and Grant Thornton, then Senior Manager of Strategy and Business Operations at UrBox.",
+  "At Michigan Ross (MBA, 2026) I rebuilt my toolkit for a strategy and operations role: SQL, Python, R and optimization, on 16 projects.",
+  "Each project runs the same way: start from the decision, break it into a tree, test each branch with data, and end with a number."
+ ]
 }
