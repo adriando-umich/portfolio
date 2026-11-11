@@ -799,3 +799,8 @@ html:not(.js) .deckbar { display: none; }
 .s-grid th:first-child { text-align: left; font-weight: 700; }
 .s-grid td.point { background: #E9EEFF; color: var(--blue); font-weight: 700; }
 .s-grid tbody th { background: none; color: var(--ink); }
+
+/* SCQA table at the top of a case page */
+.case-scqa { margin-bottom: 44px; }
+.case-scqa th { width: 190px; }
+@media (max-width: 760px) { .case-scqa th { width: 110px; } }

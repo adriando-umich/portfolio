@@ -319,15 +319,23 @@ def case_page(p, crumb):
       <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p></section>"""
     if p.get("method", {}).get("viz"):
         parts += f'<section class="part" id="method"><h2>{e(p["method"]["h"])}</h2>{SWAP}</section>'
+    scqa, sub = "", f'<p class="sub result">{e(p["result"])}</p>'
+    if p.get("scqa"):
+        # The Answer row gives the result, so the page head does not repeat it.
+        rows = "".join(
+            f'<tr class="{r[0].lower()}"><th scope="row">{e(r[0])}<span>{e(r[1])}</span></th><td>{r[2]}</td></tr>' for r in p["scqa"]
+        )
+        scqa, sub = f'<table class="scqa cp-scqa case-scqa">{rows}</table>', ""
     return f"""<main>
   <div class="pagehead"><div class="wrap">{crumb}
     {kw(p)}
     <h1>{e(p['title'])}</h1>
-    <p class="sub result">{e(p['result'])}</p>
+    {sub}
     <div class="case-facts"><p class="facts"><b>Self-built case study.</b> {e(p['data'])}. Not client or employer work.</p>{tools(p['tools'])}</div>
     {deliverables(p, has_deck, has_brief)}
   </div></div>
   <div class="body"><div class="wrap">
+    {scqa}
     {parts}
     {pager(p)}
   </div></div>
