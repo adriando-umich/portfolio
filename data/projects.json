@@ -847,70 +847,80 @@
    ],
    "tree": {
     "t": "5-year NPV of the owned ATM at one location",
-    "s": "Volume x value of each transaction, minus cost",
+    "s": "Value of the ATM, minus its cost",
     "k": "root",
     "q": "",
     "a": "",
     "ev": "",
     "c": [
      {
-      "t": "Transactions each month",
-      "s": "Assumption: 2,600 at a branch, 1,200 stand-alone, scaled by residents in 2 miles",
-      "k": "",
-      "q": "Is the volume above break-even at each location?",
-      "a": "No",
-      "ev": "34 of 75 locations are below, with the base values.",
-      "c": []
-     },
-     {
-      "t": "Value of each transaction",
-      "s": "",
+      "t": "Value of the ATM each month",
+      "s": "Transactions x value of each transaction",
       "k": "",
       "q": "",
       "a": "",
       "ev": "",
       "c": [
        {
-        "t": "Fee from non-customers",
-        "s": "$3 a withdrawal; 20% of withdrawals (assumption)",
+        "t": "Transactions each month",
+        "s": "Assumption: 2,600 at a branch, 1,200 stand-alone, scaled by residents in 2 miles",
         "k": "",
-        "q": "Does fee income pay the ATM cost alone?",
+        "q": "Is the volume above break-even at each location?",
         "a": "No",
-        "ev": "$1.03M a year against a cost of $1.66M. It is 52% of the value.",
+        "ev": "34 of 75 locations are below, with the base values.",
         "c": []
        },
        {
-        "t": "Cost avoided on customer withdrawals",
-        "s": "$0.60 for each withdrawal that moves to a partner ATM",
-        "k": "",
-        "q": "Is a partner ATM near for a withdrawal?",
-        "a": "Yes",
-        "ev": "In 0.5 miles of 69 of 75 locations. This item is 41% of the value.",
-        "c": []
-       },
-       {
-        "t": "Relationships of deposit customers",
-        "s": "The limit: residents near a deposit ATM",
-        "k": "limit",
-        "q": "Does each location have another deposit ATM in 2 miles?",
-        "a": "No",
-        "ev": "22 of 72 deposit locations have none. This item is 7% of the value.",
-        "c": []
-       },
-       {
-        "t": "Offers on the ATM screen",
-        "s": "Not known. The recommended test measures it.",
+        "t": "Value of each transaction",
+        "s": "By type of transaction",
         "k": "",
         "q": "",
         "a": "",
         "ev": "",
-        "c": []
+        "c": [
+         {
+          "t": "Fee from non-customers",
+          "s": "$3 a withdrawal; 20% of withdrawals (assumption)",
+          "k": "",
+          "q": "Does fee income pay the ATM cost alone?",
+          "a": "No",
+          "ev": "$1.03M a year against a cost of $1.66M. It is 52% of the value.",
+          "c": []
+         },
+         {
+          "t": "Cost avoided on customer withdrawals",
+          "s": "$0.60 for each withdrawal that moves to a partner ATM",
+          "k": "",
+          "q": "Is a partner ATM near for a withdrawal?",
+          "a": "Yes",
+          "ev": "In 0.5 miles of 69 of 75 locations. This item is 41% of the value.",
+          "c": []
+         },
+         {
+          "t": "Relationships of deposit customers",
+          "s": "The limit: residents near a deposit ATM",
+          "k": "limit",
+          "q": "Does each location have another deposit ATM in 2 miles?",
+          "a": "No",
+          "ev": "22 of 72 deposit locations have none. This item is 7% of the value.",
+          "c": []
+         },
+         {
+          "t": "Offers on the ATM screen",
+          "s": "Not known. The recommended test measures it.",
+          "k": "",
+          "q": "",
+          "a": "",
+          "ev": "",
+          "c": []
+         }
+        ]
        }
       ]
      },
      {
       "t": "Cost each month",
-      "s": "",
+      "s": "Does not change with volume",
       "k": "",
       "q": "",
       "a": "",
@@ -938,7 +948,7 @@
      }
     ]
    },
-   "tree_h": "The value of an owned ATM splits into volume, value of each transaction and cost",
+   "tree_h": "NPV is value minus cost, and value is volume times the value of each transaction",
    "evaluation": [
     [
      "1. Value",
