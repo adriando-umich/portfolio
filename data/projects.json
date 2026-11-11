@@ -64,8 +64,8 @@
    "slug": "credit-approval-cutoff",
    "type": "case",
    "short": "Credit case",
-   "title": "Approval cutoff for a consumer lender",
-   "result": "+$7.1M realized NPV from a new approval cutoff, at the same bad rate",
+   "title": "Where to set the approval cutoff for a consumer lender",
+   "result": "A scorecard cutoff approves more applicants at the same bad rate and adds $7.1M of realized NPV.",
    "num": "+$7.1M",
    "what": "realized NPV from a new approval cutoff, at the same bad rate",
    "tools": [
@@ -338,8 +338,8 @@
    "slug": "fraud-transaction-policy",
    "type": "case",
    "short": "Fraud case",
-   "title": "Transaction policy for card fraud",
-   "result": "$64k lower monthly cost of fraud, false declines and reviews",
+   "title": "Which card transactions to approve, review or decline",
+   "result": "A three-tier policy on a fraud score cuts the monthly cost of fraud, false declines and reviews by at least $64k.",
    "num": "$64k per month",
    "what": "lower total cost of fraud, false declines and reviews",
    "tools": [
@@ -580,8 +580,8 @@
    "slug": "marketing-offer-targeting",
    "type": "case",
    "short": "Marketing case",
-   "title": "Offer targeting for an email campaign",
-   "result": "$13k profit per campaign from an email to all customers, with no targeting model",
+   "title": "Which customers to send an email offer to",
+   "result": "Send the email to all customers and keep a 10% holdout. It earns $13k per campaign, with no targeting model.",
    "num": "$13k per campaign",
    "what": "profit from an email to all customers, with no targeting model",
    "tools": [
@@ -753,7 +753,7 @@
   {
    "slug": "fire-station-siting",
    "type": "course",
-   "title": "Fire station siting",
+   "title": "Where to build fire stations so every region is within 12 minutes",
    "org": "Michigan Ross MBA",
    "industry": "public",
    "tasks": [
@@ -763,9 +763,7 @@
     "excel",
     "python"
    ],
-   "question": "Which of six candidate sites must a city open so that each of its six regions has a fire station within 12 minutes, at the lowest cost?",
-   "headline": "Two stations, at sites 1 and 3, reach every region within 12 minutes for $700,000",
-   "result": "Two of six sites cover every region within 12 minutes for $700,000. One minute less costs 64% more.",
+   "result": "Two of six candidate sites are enough, for $700,000. One minute faster costs 64% more.",
    "method": "Set-covering integer program in Excel Solver, checked by full enumeration in Python",
    "files": [
     [
@@ -785,7 +783,7 @@
   {
    "slug": "supplier-bid-selection",
    "type": "course",
-   "title": "Supplier bid selection",
+   "title": "Which supplier bids to accept in a packaging auction",
    "org": "Michigan Ross MBA",
    "industry": "consumer",
    "tasks": [
@@ -796,9 +794,7 @@
     "excel",
     "python"
    ],
-   "question": "Which of 12 bundled bids must a confectionery company accept to buy all 12 packaging items at the lowest cost, and what does each sourcing policy cost?",
-   "headline": "Four bids from four suppliers buy all 12 items for $4,470, which is $169 less than the one-supplier bundle",
-   "result": "Four of 12 bids cover every item for $4,470. A strategic-partner policy adds 27%; a local-supplier policy adds nothing.",
+   "result": "Four of 12 bids buy every item for $4,470. A strategic-partner policy adds 27%; a local-supplier policy adds nothing.",
    "method": "Set-covering integer program in Excel Solver, checked by full enumeration in Python",
    "files": [
     [

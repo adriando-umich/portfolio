@@ -662,3 +662,6 @@ html:not(.js) .deckbar { display: none; }
   .cp-bar .t { grid-column: 1 / -1; order: 3; }
   .cp-bar .s { grid-column: 1 / -1; order: 4; }
 }
+
+.pagehead .sub.result { margin-top: 12px; max-width: 820px; font: 400 21px/1.4 var(--serif); color: var(--navy); }
+.cp > .cp-kpis:first-child { margin-top: 0; }

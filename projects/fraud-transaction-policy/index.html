@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Transaction policy for card fraud: Adrian Do</title>
-<meta name="description" content="$64k lower monthly cost of fraud, false declines and reviews">
+<title>Which card transactions to approve, review or decline: Adrian Do</title>
+<meta name="description" content="A three-tier policy on a fraud score cuts the monthly cost of fraud, false declines and reviews by at least $64k.">
 <link rel="stylesheet" href="/assets/site.css">
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -16,8 +16,9 @@
   </div>
 </nav>
 <main>
-  <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / Transaction policy for card fraud</p>
-    <h1>Transaction policy for card fraud</h1>
+  <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / Which card transactions to approve, review or decline</p>
+    <h1>Which card transactions to approve, review or decline</h1>
+    <p class="sub result">A three-tier policy on a fraud score cuts the monthly cost of fraud, false declines and reviews by at least $64k.</p>
     <div class="case-facts"><p class="facts"><b>Self-built case study.</b> IEEE-CIS public transaction data. Not client or employer work.</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/python.svg)" aria-hidden="true"></i>Python</span><span class="tool"><i class="ico" style="--i:url(/assets/icons/sql.svg)" aria-hidden="true"></i>SQL</span></div></div>
     <div class="dls"><a class="dl" href="#deck"><i class="ico" style="--i:url(/assets/icons/deck.svg)" aria-hidden="true"></i><span><b>Board deck</b><em>For leadership</em></span></a><a class="dl" href="brief/"><i class="ico" style="--i:url(/assets/icons/doc.svg)" aria-hidden="true"></i><span><b>Technical document</b><em>Method, results, notebook and files</em></span></a></div>
   </div></div>
@@ -124,7 +125,7 @@
       </div></section><section class="part" id="tree"><h2>Total cost splits into three parts, and the policy must lower the sum</h2>
       <div class="ltree-scroll"><ul class="ltree"><li><div class="node root"><b>Total cost each month</b><span>Current rules: $299,432</span></div><ul><li><div class="node "><b>Fraud loss that gets through</b></div><ul><li><div class="node fixed"><b>Fraud dollars attempted</b><span>Fixed: the test months</span></div></li><li><div class="node lever"><b>Share of fraud dollars stopped</b><span>The lever: the score and the three tiers</span></div><div class="find"><p class="q">Does the new policy stop more fraud dollars?</p><p class="a"><b>Yes.</b> 71.2% vs. 38.4%.</p></div></li></ul></li><li><div class="node "><b>Cost of false declines</b></div><ul><li><div class="node limit"><b>Good transactions declined</b><span>The limit: 3% of good transactions</span></div><div class="find"><p class="q">Does the decline rate of good customers stay inside the limit?</p><p class="a"><b>Yes.</b> 2.46%, up from 0.28% today.</p></div></li><li><div class="node "><b>Cost of each false decline</b><span>3% margin on the amount, plus $10 of friction</span></div><div class="find"><p class="q">Does the saving hold if this cost changes?</p><p class="a"><b>Yes.</b> At least $53,544 each month under every cost assumption.</p></div></li></ul></li><li><div class="node "><b>Cost of reviews</b></div><ul><li><div class="node "><b>Alerts reviewed each day</b><span>Capacity: 3 analysts, 120 alerts</span></div><div class="find"><p class="q">Does a larger team pay?</p><p class="a"><b>No.</b> 4 analysts is the lowest-cost team, but only $1,534 each month below today. No change before the test.</p></div></li><li><div class="node fixed"><b>Cost of an analyst day</b><span>Fixed: $300</span></div></li></ul></li></ul></li></ul></div>
       <p class="legend"><span class="k lever">Lever</span> what the recommendation changes <span class="k limit">Limit</span> what must not get worse <span class="k fixed">Fixed</span> outside the decision</p></section>
-    <nav class="pager" aria-label="More projects"><a href="/projects/credit-approval-cutoff/"><span>Previous project</span><b>Approval cutoff for a consumer lender</b></a><a class="next" href="/projects/marketing-offer-targeting/"><span>Next project</span><b>Offer targeting for an email campaign</b></a></nav>
+    <nav class="pager" aria-label="More projects"><a href="/projects/credit-approval-cutoff/"><span>Previous project</span><b>Where to set the approval cutoff for a consumer lender</b></a><a class="next" href="/projects/marketing-offer-targeting/"><span>Next project</span><b>Which customers to send an email offer to</b></a></nav>
   </div></div>
 </main>
 <footer>

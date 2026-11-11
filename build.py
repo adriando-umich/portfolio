@@ -300,6 +300,7 @@ def case_page(p, crumb):
     return f"""<main>
   <div class="pagehead"><div class="wrap">{crumb}
     <h1>{e(p['title'])}</h1>
+    <p class="sub result">{e(p['result'])}</p>
     <div class="case-facts"><p class="facts"><b>Self-built case study.</b> {e(p['data'])}. Not client or employer work.</p>{tools(p['tools'])}</div>
     {deliverables(p, has_deck, has_brief)}
   </div></div>
@@ -355,12 +356,12 @@ def course_page(p, crumb):
     )
     return f"""<main>
   <div class="pagehead"><div class="wrap">{crumb}
-    <h1>{e(p['headline'])}</h1>
+    <h1>{e(p['title'])}</h1>
+    <p class="sub result">{e(p['result'])}</p>
     <div class="case-facts"><p class="facts"><b>Course project, Michigan Ross MBA.</b> {e(p['method'])}. Not client or employer work.</p>{tools(p['tools'])}</div>
     <div class="dls">{cards}</div>
   </div></div>
   <div class="body"><div class="wrap cp">
-    <p class="question">{e(p['question'])}</p>
     {frag}
     {pager(p)}
   </div></div>
