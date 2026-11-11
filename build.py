@@ -368,7 +368,7 @@ def course_page(p, crumb):
     <h1>{e(p['title'])}</h1>
     <p class="sub result">{e(p['result'])}</p>
     <div class="case-facts"><p class="facts"><b>Course project, Michigan Ross MBA.</b> {e(p['method'])}. Not client or employer work.</p>{tools(p['tools'])}</div>
-    <div class="dls">{cards}</div>
+    {f'<div class="dls">{cards}</div>' if cards else ""}
   </div></div>
   <div class="body"><div class="wrap cp">
     {frag}
@@ -452,22 +452,30 @@ def resume():
 
 
 def skills():
-    cards, rest = "", []
+    rows, rest = "", []
     for t, name in TOOLS.items():
         items = [p for p in PROJECTS if t in p["tools"]]
         if not items:
             rest.append(t)
             continue
-        lis = ""
-        for p in items:
-            label = f'<a href="{url(p)}">{e(p["title"])}</a>' if p.get("slug") else e(p["title"])
-            where = f' <span>({e(p["org"])})</span>' if p.get("org") else (" <span>(self-built case study)</span>" if p["type"] == "case" else "")
-            lis += f"<li>{label}{where}</li>"
+        groups, mix = "", []
+        for ty in P["types"]:
+            sub = [p for p in items if p["type"] == ty["id"]]
+            if not sub:
+                continue
+            short = ty["name"].split(",")[0].lower()
+            mix.append(f"{len(sub)} {short}")
+            lis = ""
+            for p in sub:
+                label = f'<a href="{url(p)}">{e(p["title"])}</a>' if p.get("slug") else e(p["title"])
+                where = f' <span>({e(p["org"])})</span>' if ty["id"] == "work" and p.get("org") else ""
+                lis += f"<li>{label}{where}</li>"
+            groups += f'<h3>{e(ty["name"].split(",")[0])}</h3><ul>{lis}</ul>'
         n = len(items)
-        cards += (
-            f'<section class="skill" id="{t}"><div class="top">{ico(t)}<h2>{e(name)}</h2></div>'
-            f'<p class="count">{n} project{"s" if n > 1 else ""}</p><ul>{lis}</ul>'
-            f'<p class="count"><a href="/projects/#tool={t}">Show on the projects page</a></p></section>'
+        rows += (
+            f'<details class="skill" id="{t}"><summary>{ico(t)}<span class="name">{e(name)}</span>'
+            f'<span class="count">{n} project{"s" if n > 1 else ""}</span><span class="mix">{e(", ".join(mix))}</span></summary>'
+            f'<div class="inside">{groups}<p class="more"><a href="/projects/#tool={t}">Show on the projects page</a></p></div></details>'
         )
     also = ""
     if rest:
@@ -476,10 +484,10 @@ def skills():
     body = f"""<main>
   <div class="pagehead"><div class="wrap">
     <h1>Skills</h1>
-    <p class="sub">Each tool links to the projects that use it.</p>
+    <p class="sub">Select a tool to see the projects that use it.</p>
   </div></div>
   <div class="body"><div class="wrap">
-    <div class="skills">{cards}</div>
+    <div class="skills">{rows}</div>
     {also}
   </div></div>
 </main>"""

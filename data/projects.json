@@ -969,6 +969,40 @@
    ]
   },
   {
+   "slug": "lending-growth-and-losses",
+   "type": "course",
+   "title": "Where the growth and the credit losses of a marketplace lender come from",
+   "org": "Michigan Ross MBA",
+   "industry": "banking",
+   "tasks": [
+    "reporting",
+    "risk"
+   ],
+   "tools": [
+    "tableau"
+   ],
+   "result": "Loans grew 224 times from 2007 to 2013. The charge-off rate rises from 6% for grade A loans to 37% for grade G.",
+   "method": "Tableau views of 230,716 public Lending Club loan records",
+   "files": []
+  },
+  {
+   "slug": "classroom-crowdfunding",
+   "type": "course",
+   "title": "Which classroom projects get funded on a school crowdfunding site",
+   "org": "Michigan Ross MBA",
+   "industry": "public",
+   "tasks": [
+    "reporting",
+    "diagnosis"
+   ],
+   "tools": [
+    "tableau"
+   ],
+   "result": "70% of projects reach their goal. Price matters most: 90% of projects below $200 are funded, and 45% of projects above $1,500.",
+   "method": "Tableau views of 1.2 million public DonorsChoose project records",
+   "files": []
+  },
+  {
    "type": "work",
    "org": "Embedded Capital",
    "period": "2025",
@@ -1297,7 +1331,7 @@
   },
   {
    "id": "public",
-   "name": "Public sector and real estate"
+   "name": "Public sector, education and property"
   },
   {
    "id": "travel",

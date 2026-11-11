@@ -700,3 +700,26 @@ html:not(.js) .deckbar { display: none; }
 .cp-grid.heatgrid tbody th { font-weight: 700; text-align: center; padding-right: 10px; }
 .cp-grid.plan td { padding: 8px 6px; font-size: 14px; }
 .cp-grid.plan thead th { padding: 8px 6px; }
+
+/* Skills: one expandable row for each tool */
+.skills { display: block; margin-top: 8px; border-top: 2px solid var(--navy); }
+.skill { padding: 0; background: none; border-top: 0; border-bottom: 1px solid var(--gray-300); scroll-margin-top: calc(var(--bar) + 12px); }
+.skill summary { display: grid; grid-template-columns: 36px 180px 110px 1fr 24px; align-items: center; gap: 16px; padding: 16px 4px; cursor: pointer; list-style: none; }
+.skill summary::-webkit-details-marker { display: none; }
+.skill summary::after { content: ""; width: 10px; height: 10px; border-right: 2px solid var(--navy); border-bottom: 2px solid var(--navy); transform: rotate(45deg); justify-self: center; margin-top: -4px; }
+.skill[open] summary::after { transform: rotate(-135deg); margin-top: 4px; }
+.skill summary:hover { background: var(--gray-100); }
+.skill summary .ico { width: 30px; height: 30px; }
+.skill .name { font: 700 20px/1.2 var(--serif); color: var(--navy); }
+.skill summary .count { margin: 0; font-size: 15px; font-weight: 700; color: var(--ink); }
+.skill .mix { font-size: 14px; color: var(--muted); }
+.skill .inside { padding: 4px 4px 22px 56px; }
+.skill .inside h3 { margin-top: 16px; font: 700 14px/1.3 var(--sans); color: var(--ink-2); }
+.skill .inside ul { margin-top: 4px; }
+.skill .inside li { padding: 6px 0; font-size: 15px; line-height: 1.4; border-top: 1px solid var(--gray-300); }
+.skill .inside .more { margin-top: 14px; font-size: 14px; }
+@media (max-width: 760px) { .skill summary { grid-template-columns: 30px 1fr 24px; } .skill summary .count, .skill .mix { grid-column: 2; } .skill summary::after { grid-column: 3; grid-row: 1; } .skill .inside { padding-left: 4px; } }
+/* Course pages: Tableau figures */
+.cp-fig { margin: 24px 0 0; max-width: 940px; }
+.cp-fig img { display: block; width: 100%; height: auto; border: 1px solid var(--gray-300); }
+.cp-fig figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }

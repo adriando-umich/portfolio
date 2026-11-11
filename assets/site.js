@@ -49,6 +49,13 @@
     fit(); show(m ? parseInt(m[1], 10) - 1 : 0);
   });
 
+  // Skills page: open the tool named in the address
+  (function () {
+    var id = location.hash.slice(1);
+    var el = /^[a-z]+$/.test(id) ? document.getElementById(id) : null;
+    if (el && el.matches && el.matches('details.skill')) el.open = true;
+  })();
+
   // Projects page: filter by industry, task and tool
   var filter = document.querySelector('.filter');
   if (!filter) return;
