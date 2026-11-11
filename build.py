@@ -281,6 +281,8 @@ def deliverables(p, has_deck, has_brief):
         items.append(("deck", "Board deck", "For leadership", "#deck"))
     if has_brief:
         items.append(("doc", "Technical document", "Method, results and model code" if p.get("code") else "Method, results, notebook and files", "brief/"))
+    if p.get("tree"):
+        items.append(("tree", "Issue tree", "How the problem splits", "#tree"))
     cards = "".join(
         f'<a class="dl" href="{href}">{ico(i)}<span><b>{e(t)}</b><em>{e(s)}</em></span></a>' for i, t, s, href in items
     )
