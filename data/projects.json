@@ -814,6 +814,91 @@
    ]
   },
   {
+   "slug": "room-protection-pricing",
+   "type": "course",
+   "title": "How many rooms to hold back for late guests who pay more",
+   "org": "Michigan Ross MBA",
+   "industry": "travel",
+   "tasks": [
+    "pricing",
+    "optimize"
+   ],
+   "tools": [
+    "excel",
+    "python"
+   ],
+   "result": "Hold 4 of 10 cabins for a full rate of $260. Revenue per night rises 39% against one low rate for all cabins.",
+   "method": "Monte Carlo simulation of guest arrivals, in Excel and Python",
+   "files": [
+    [
+     "excel",
+     "Excel model",
+     "One simulated night and the table of results",
+     "room_protection_model.xlsx"
+    ],
+    [
+     "python",
+     "Python simulation",
+     "20,000 nights for each policy",
+     "simulate.py"
+    ]
+   ]
+  },
+  {
+   "slug": "seasonal-production-plan",
+   "type": "course",
+   "title": "How many workers to hire and when, for a factory with seasonal demand",
+   "org": "Michigan Ross MBA",
+   "industry": "industrial",
+   "tasks": [
+    "optimize",
+    "model"
+   ],
+   "tools": [
+    "excel",
+    "python"
+   ],
+   "result": "A mixed plan of hires, overtime and inventory costs $6.22M for the year, 8% less than a level workforce.",
+   "method": "Integer program for a 12-month production plan, in Excel Solver and Python",
+   "files": [
+    [
+     "excel",
+     "Excel model",
+     "Monthly plan with costs, and three strategies",
+     "production_plan_model.xlsx"
+    ],
+    [
+     "python",
+     "Python model",
+     "Integer program for the three strategies",
+     "plan.py"
+    ]
+   ]
+  },
+  {
+   "slug": "sealed-bid-decision",
+   "type": "course",
+   "title": "How much to bid in a sealed auction when a win needs a later approval",
+   "org": "Michigan Ross MBA",
+   "industry": "public",
+   "tasks": [
+    "optimize"
+   ],
+   "tools": [
+    "excel"
+   ],
+   "result": "Bid $4.11M, not the planned $5M. The expected value rises 35%, but the bid wins only 12% of the time.",
+   "method": "Decision tree with a win probability that depends on the bid, in Excel",
+   "files": [
+    [
+     "excel",
+     "Excel model",
+     "Decision tree and the table of bids",
+     "bid_model.xlsx"
+    ]
+   ]
+  },
+  {
    "slug": "telemarketing-call-list",
    "type": "course",
    "title": "Which customers to call in a bank telemarketing campaign",
@@ -1212,7 +1297,7 @@
   },
   {
    "id": "public",
-   "name": "Public sector"
+   "name": "Public sector and real estate"
   },
   {
    "id": "travel",

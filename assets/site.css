@@ -695,3 +695,8 @@ html:not(.js) .deckbar { display: none; }
 .cp-bar.neg .t i { background: var(--negative); }
 .cp-bars.feats .cp-bar { grid-template-columns: 220px 1fr 80px 230px; }
 @media (max-width: 760px) { .filter .label.gap { margin-left: 0; width: 64px; } .filter select { min-width: 0; flex: 1; } .cp-bars.feats .cp-bar { grid-template-columns: 1fr 90px; } }
+.cp-grid.heatgrid td { color: var(--ink); text-align: right; }
+.cp-grid.heatgrid td.best { outline: 2px solid var(--navy); outline-offset: -2px; font-weight: 700; }
+.cp-grid.heatgrid tbody th { font-weight: 700; text-align: center; padding-right: 10px; }
+.cp-grid.plan td { padding: 8px 6px; font-size: 14px; }
+.cp-grid.plan thead th { padding: 8px 6px; }

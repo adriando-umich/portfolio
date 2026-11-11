@@ -32,7 +32,7 @@
   <div class="cp-model"><div><h3>Decision</h3><p>Call or do not call each customer, from data that the bank has before the call.</p></div><div><h3>Objective</h3><p>The highest profit: $5 for each sale, less $1 for each call with no sale.</p></div><div><h3>Method</h3><p>Six classifiers and a stacked model. Data split: 50% to train, 25% to choose the cutoffs and fit the stacked model, 25% to test.</p></div></div>
   <ul class="notes"><li>The plain logistic regression has the highest profit. In 2,000 resamples of the test customers, it is ahead of each other model more than 99% of the time.</li><li>The stacked model does not add profit here. The six models make similar errors, so there is little for a second level to correct.</li><li>The cutoff of the logistic regression (17%) is the same as the break-even probability. Its probabilities are well calibrated; those of the SVM are not.</li><li>Call duration is not a model input. It is known only after the call.</li></ul>
 </section>
-    <nav class="pager" aria-label="More projects"><a href="/projects/supplier-bid-selection/"><span>Previous project</span><b>Which supplier bids to accept in a packaging auction</b></a><a class="next" href="/projects/product-line-pricing/"><span>Next project</span><b>How to reprice 15 products when price sensitivity differs by product</b></a></nav>
+    <nav class="pager" aria-label="More projects"><a href="/projects/sealed-bid-decision/"><span>Previous project</span><b>How much to bid in a sealed auction when a win needs a later approval</b></a><a class="next" href="/projects/product-line-pricing/"><span>Next project</span><b>How to reprice 15 products when price sensitivity differs by product</b></a></nav>
   </div></div>
 </main>
 <footer>
