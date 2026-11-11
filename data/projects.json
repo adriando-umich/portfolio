@@ -207,44 +207,44 @@
       ]
      },
      {
-      "t": "Revenue for each loan",
-      "s": "",
+      "t": "Realized NPV for each loan",
+      "s": "Revenue minus cost",
       "k": "",
       "q": "",
       "a": "",
       "ev": "",
       "c": [
        {
-        "t": "Loan amount",
-        "s": "Fixed: set by the application",
-        "k": "fixed",
+        "t": "Revenue for each loan",
+        "s": "",
+        "k": "",
         "q": "",
         "a": "",
         "ev": "",
-        "c": []
+        "c": [
+         {
+          "t": "Loan amount",
+          "s": "Fixed: set by the application",
+          "k": "fixed",
+          "q": "",
+          "a": "",
+          "ev": "",
+          "c": []
+         },
+         {
+          "t": "Interest rate",
+          "s": "Fell from 13.4% to 11.3%",
+          "k": "",
+          "q": "Did the 2015 prices pay for the risk?",
+          "a": "No",
+          "ev": "32 of 35 sub-grades lost money. Grades A to C need 1 point or less to break even, so test a higher price.",
+          "c": []
+         }
+        ]
        },
        {
-        "t": "Interest rate",
-        "s": "Fell from 13.4% to 11.3%",
-        "k": "",
-        "q": "Did the 2015 prices pay for the risk?",
-        "a": "No",
-        "ev": "32 of 35 sub-grades lost money. Grades A to C need 1 point or less to break even, so test a higher price.",
-        "c": []
-       }
-      ]
-     },
-     {
-      "t": "Cost for each loan",
-      "s": "",
-      "k": "",
-      "q": "",
-      "a": "",
-      "ev": "",
-      "c": [
-       {
-        "t": "Credit loss",
-        "s": "",
+        "t": "Cost for each loan",
+        "s": "Credit loss after recoveries, plus operating cost",
         "k": "",
         "q": "",
         "a": "",
@@ -267,23 +267,23 @@
           "a": "No",
           "ev": "The top 20% by balance holds 45.5% of recovery dollars. A model reaches 46.2%.",
           "c": []
+         },
+         {
+          "t": "Operating cost",
+          "s": "Funds 3% a year, servicing 1% of payments, acquisition $300 a loan",
+          "k": "",
+          "q": "Does the gain hold if these costs change?",
+          "a": "Yes",
+          "ev": "+$5.1M to +$8.4M across all cost cases.",
+          "c": []
          }
         ]
-       },
-       {
-        "t": "Operating cost",
-        "s": "Funds 3% a year, servicing 1% of payments, acquisition $300 a loan",
-        "k": "",
-        "q": "Does the gain hold if these costs change?",
-        "a": "Yes",
-        "ev": "+$5.1M to +$8.4M across all cost cases.",
-        "c": []
        }
       ]
      }
     ]
    },
-   "tree_h": "Realized NPV splits into volume, revenue and cost, with one tested question on each branch",
+   "tree_h": "Realized NPV is the loans approved times the NPV of each loan, with one tested question on each branch",
    "evaluation": [
     [
      "1. Order of risk",
