@@ -1,0 +1,126 @@
+{
+  "rows": 119390,
+  "train_rows": 78703,
+  "test_rows": 40687,
+  "cancel_rate": 37.041628,
+  "test_cancel_rate": 38.697864,
+  "train_cancel_rate": 36.185406,
+  "models": [
+    {
+      "model": "Logistic regression",
+      "auc": 0.85355,
+      "accuracy": 77.110625,
+      "mae": 5.191981,
+      "bias": -0.112636,
+      "overbooked": 12188,
+      "recovered": 12093,
+      "walked": 95,
+      "days": 486,
+      "days_walked": 23,
+      "cancels": 15745,
+      "bookings": 40687
+    },
+    {
+      "model": "Decision tree",
+      "auc": 0.836429,
+      "accuracy": 77.874997,
+      "mae": 5.969838,
+      "bias": -0.142736,
+      "overbooked": 11772,
+      "recovered": 11665,
+      "walked": 107,
+      "days": 486,
+      "days_walked": 30,
+      "cancels": 15745,
+      "bookings": 40687
+    },
+    {
+      "model": "Random forest",
+      "auc": 0.854666,
+      "accuracy": 78.5386,
+      "mae": 4.849067,
+      "bias": -0.073497,
+      "overbooked": 12865,
+      "recovered": 12657,
+      "walked": 208,
+      "days": 486,
+      "days_walked": 49,
+      "cancels": 15745,
+      "bookings": 40687
+    },
+    {
+      "model": "Flat rate by hotel",
+      "auc": 0.554185,
+      "accuracy": 61.302136,
+      "mae": 9.212762,
+      "bias": -0.058078,
+      "overbooked": 12563,
+      "recovered": 11695,
+      "walked": 868,
+      "days": 486,
+      "days_walked": 142,
+      "cancels": 15745,
+      "bookings": 40687
+    }
+  ],
+  "importance": {
+    "deposit_type": 15,
+    "country": 14.3,
+    "lead_time": 12.7,
+    "adr": 8.1,
+    "market_segment": 7.4,
+    "total_of_special_requests": 7,
+    "previous_cancellations": 6.8,
+    "arrival_date_month": 6.3,
+    "stays_in_week_nights": 3.4,
+    "customer_type": 3.2,
+    "required_car_parking_spaces": 2.7,
+    "stays_in_weekend_nights": 2.2,
+    "reserved_room_type": 2,
+    "meal": 1.8,
+    "distribution_channel": 1.6,
+    "adults": 1.4,
+    "hotel": 1.4,
+    "has_agent": 0.8,
+    "children": 0.6,
+    "previous_bookings_not_canceled": 0.5,
+    "has_company": 0.4,
+    "is_repeated_guest": 0.3,
+    "babies": 0.1
+  },
+  "by_lead": {
+    "0 to 7 days": 9.6,
+    "8 to 30 days": 27.9,
+    "31 to 90 days": 37.7,
+    "91 to 180 days": 44.7,
+    "More than 180 days": 57
+  },
+  "by_deposit": {
+    "No Deposit": 28.4,
+    "Non Refund": 99.4,
+    "Refundable": 22.2
+  },
+  "by_requests": {
+    "0": 47.7,
+    "1": 22,
+    "2": 22.1,
+    "3": 16.8
+  },
+  "by_segment": {
+    "Aviation": 21.9,
+    "Complementary": 13.1,
+    "Corporate": 18.7,
+    "Direct": 15.3,
+    "Groups": 61.1,
+    "Offline TA/TO": 34.3,
+    "Online TA": 36.7,
+    "Undefined": 100
+  },
+  "lead_n": {
+    "0 to 7 days": 19746,
+    "8 to 30 days": 18960,
+    "31 to 90 days": 29553,
+    "91 to 180 days": 26439,
+    "More than 180 days": 24692
+  }
+}

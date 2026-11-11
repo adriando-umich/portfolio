@@ -88,8 +88,9 @@ T = {
       N("Poverty level of the school", "Fixed", "fixed", "Are the poorest schools funded less?", "No", "73% for the highest poverty level, 67% to 68% for the others."),
       N("Year", "Fixed", "fixed", "Did the rate fall as the site grew?", "No", "Near 70% from 2010 to 2016.")])])),
 }
-d = json.load(open("data/projects.json", encoding="utf-8"))
-for p in d["projects"]:
-    if p.get("slug") in T: p["tree_h"], p["tree"] = T[p["slug"]]
-json.dump(d, open("data/projects.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-print(sum(1 for p in d["projects"] if p["type"] == "course" and p.get("tree")), "of", sum(1 for p in d["projects"] if p["type"] == "course"))
+if __name__ == "__main__":
+  d = json.load(open("data/projects.json", encoding="utf-8"))
+  for p in d["projects"]:
+      if p.get("slug") in T: p["tree_h"], p["tree"] = T[p["slug"]]
+  json.dump(d, open("data/projects.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+  print(sum(1 for p in d["projects"] if p["type"] == "course" and p.get("tree")), "of", sum(1 for p in d["projects"] if p["type"] == "course"))

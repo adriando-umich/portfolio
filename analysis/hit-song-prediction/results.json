@@ -1,0 +1,135 @@
+{
+  "rows": 289941,
+  "train_rows": 266761,
+  "test_rows": 23180,
+  "hit_rate": 25.982183,
+  "test_hit_rate": 25.858499,
+  "cutoff": {
+    "2000": 17,
+    "2001": 17,
+    "2002": 18,
+    "2003": 19,
+    "2004": 20,
+    "2005": 21,
+    "2006": 20,
+    "2007": 21,
+    "2008": 21,
+    "2009": 22,
+    "2010": 23,
+    "2011": 24,
+    "2012": 25,
+    "2013": 26,
+    "2014": 28,
+    "2015": 30,
+    "2016": 32,
+    "2017": 34,
+    "2018": 35,
+    "2019": 37,
+    "2020": 38,
+    "2021": 40,
+    "2022": 44,
+    "2023": 33
+  },
+  "artists": 45228,
+  "genres": 82,
+  "models": [
+    {
+      "model": "Sound only",
+      "auc": 0.680682,
+      "picks": 2318,
+      "hits": 1118,
+      "precision": 48.231234,
+      "lift": 1.865199,
+      "found": 18.651985,
+      "precision_top1": 56.034483
+    },
+    {
+      "model": "Sound and genre",
+      "auc": 0.817962,
+      "picks": 2318,
+      "hits": 1695,
+      "precision": 73.123382,
+      "lift": 2.827828,
+      "found": 28.278278,
+      "precision_top1": 90.948276
+    },
+    {
+      "model": "Sound, genre and the record of the artist",
+      "auc": 0.839726,
+      "picks": 2318,
+      "hits": 1760,
+      "precision": 75.927524,
+      "lift": 2.93627,
+      "found": 29.362696,
+      "precision_top1": 90.517241
+    },
+    {
+      "model": "Random forest, all inputs",
+      "auc": 0.842781,
+      "picks": 2318,
+      "hits": 1778,
+      "precision": 76.704055,
+      "lift": 2.9663,
+      "found": 29.662996,
+      "precision_top1": 88.793103
+    }
+  ],
+  "importance": {
+    "genre_hit_rate": 28.7,
+    "artist_hit_share": 10.4,
+    "minutes": 6,
+    "loudness": 5.9,
+    "danceability": 5.8,
+    "acousticness": 5.7,
+    "tempo": 5.6,
+    "valence": 5.6,
+    "speechiness": 5.5,
+    "liveness": 5.5,
+    "energy": 5.5,
+    "instrumentalness": 5.2,
+    "artist_tracks": 3.2,
+    "mode": 0.8,
+    "new_artist": 0.6
+  },
+  "by_artist": [
+    {
+      "group": "New artist",
+      "tracks": 3803,
+      "hit_rate": 26.163555
+    },
+    {
+      "group": "No earlier hit",
+      "tracks": 6689,
+      "hit_rate": 8.551353
+    },
+    {
+      "group": "Up to 25% hits",
+      "tracks": 4893,
+      "hit_rate": 12.732475
+    },
+    {
+      "group": "25% to 50% hits",
+      "tracks": 2993,
+      "hit_rate": 28.232543
+    },
+    {
+      "group": "More than 50% hits",
+      "tracks": 4802,
+      "hit_rate": 61.620158
+    }
+  ],
+  "top_genres": {
+    "hip-hop": 91.1,
+    "dance": 89.8,
+    "pop": 89.1,
+    "indie-pop": 87.2,
+    "electro": 85
+  },
+  "bottom_genres": {
+    "dubstep": 0,
+    "grindcore": 0,
+    "power-pop": 0,
+    "romance": 0,
+    "tango": 0
+  }
+}

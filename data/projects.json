@@ -1419,6 +1419,301 @@
    }
   },
   {
+   "slug": "employee-retention-targeting",
+   "type": "course",
+   "org": "Michigan Ross MBA",
+   "files": [
+    [
+     "r",
+     "R script",
+     "Models and the business result",
+     "analysis.R"
+    ]
+   ],
+   "title": "Which employees to approach with a retention offer",
+   "industry": "general",
+   "tasks": [
+    "ml"
+   ],
+   "tools": [
+    "r"
+   ],
+   "result": "Approach the 15% of employees with a leave risk above 67%. The offers reach 92% of the leavers and save $2.6M for 3,598 employees.",
+   "method": "Logistic regression and a random forest in R, scored by the saving of a retention program",
+   "scq": [
+    "About 1 employee in 6 leaves the company. To replace an employee costs about $25,000.",
+    "A retention offer costs $10,000 and does not always work, so the company cannot make an offer to all employees. It does not know who will leave.",
+    "Which employees must get an offer?"
+   ],
+   "tree_h": "The saving depends on who gets an offer; the model and the cutoff are the two levers",
+   "tree": {
+    "t": "Saving of the retention program",
+    "s": "$2.56M on the test employees",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Replacement cost avoided",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Leavers who get an offer",
+        "s": "The lever: the model that ranks employees",
+        "k": "lever",
+        "q": "Does the model find the leavers?",
+        "a": "Yes",
+        "ev": "92% of them, with a random forest.",
+        "c": []
+       },
+       {
+        "t": "Success of an offer",
+        "s": "Fixed: 60% (assumption)",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       },
+       {
+        "t": "Cost to replace an employee",
+        "s": "Fixed: $25,000 (assumption)",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Cost of the offers",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Offers made",
+        "s": "The lever: the risk cutoff",
+        "k": "lever",
+        "q": "Above which risk does an offer pay?",
+        "a": "67%",
+        "ev": "$10,000 divided by 60% of $25,000.",
+        "c": []
+       },
+       {
+        "t": "Offers to employees who would stay",
+        "s": "The limit: wasted cost",
+        "k": "limit",
+        "q": "How many offers are wasted?",
+        "a": "6 of 529",
+        "ev": "99% of the offers go to a leaver.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "slug": "hotel-cancellation-overbooking",
+   "type": "course",
+   "org": "Michigan Ross MBA",
+   "files": [
+    [
+     "r",
+     "R script",
+     "Models and the business result",
+     "analysis.R"
+    ]
+   ],
+   "title": "How many rooms a hotel can overbook when it knows which bookings will cancel",
+   "industry": "travel",
+   "tasks": [
+    "ml",
+    "pricing"
+   ],
+   "tools": [
+    "r"
+   ],
+   "result": "A model of cancellation risk recovers 12,093 cancelled bookings in the test period and turns away 95 guests. A flat-rate rule turns away 868.",
+   "method": "Cancellation models in R on 119,390 public hotel bookings, tested on a later year",
+   "scq": [
+    "Two hotels took about 119,000 bookings in two years. 37% of the bookings were cancelled.",
+    "A cancelled booking leaves an empty room. The hotels can overbook, but with one average cancellation rate they turn away guests on the days when few bookings cancel.",
+    "How many bookings can a hotel accept above capacity on each day?"
+   ],
+   "tree_h": "Overbooking trades empty rooms against guests with no room; a better forecast improves the two at the same time",
+   "tree": {
+    "t": "Cost of cancellations",
+    "s": "",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Rooms left empty",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Bookings accepted above capacity",
+        "s": "The lever: expected cancellations less a safety margin",
+        "k": "lever",
+        "q": "How many cancellations does overbooking recover?",
+        "a": "77%",
+        "ev": "12,093 of 15,745 in the test period.",
+        "c": []
+       },
+       {
+        "t": "Cancellations",
+        "s": "Fixed: 37% of bookings",
+        "k": "fixed",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Guests with no room",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Forecast of cancellations for one day",
+        "s": "The lever: the risk of each booking",
+        "k": "lever",
+        "q": "Is a model better than one flat rate?",
+        "a": "Yes",
+        "ev": "Error of 5.2 cancellations a day against 9.2.",
+        "c": []
+       },
+       {
+        "t": "Guests turned away",
+        "s": "The limit",
+        "k": "limit",
+        "q": "How many guests have no room?",
+        "a": "95",
+        "ev": "On 23 of 486 hotel-days; 868 with the flat rate.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "slug": "hit-song-prediction",
+   "type": "course",
+   "org": "Michigan Ross MBA",
+   "files": [
+    [
+     "r",
+     "R script",
+     "Models and the business result",
+     "analysis.R"
+    ]
+   ],
+   "title": "Which new tracks a music label must promote first",
+   "industry": "consumer",
+   "tasks": [
+    "ml"
+   ],
+   "tools": [
+    "r"
+   ],
+   "result": "A model picks a top 10% of new tracks in which 77% are hits, against 26% for all tracks. Genre and the record of the artist decide; the sound adds little.",
+   "method": "Hit prediction models in R on 289,941 public Spotify tracks, tested on later release years",
+   "scq": [
+    "A music label releases many tracks each year and has promotion money for a small part of them.",
+    "About 1 track in 4 becomes a hit. The label must choose which tracks to promote at release, before there are streaming numbers.",
+    "Can a model find the hits at release, and what does it use?"
+   ],
+   "tree_h": "The return on promotion depends on the share of hits among the picks; three kinds of information can raise it",
+   "tree": {
+    "t": "Hits among the tracks promoted",
+    "s": "77% in the answer",
+    "k": "root",
+    "q": "",
+    "a": "",
+    "ev": "",
+    "c": [
+     {
+      "t": "Tracks picked",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Promotion budget",
+        "s": "The limit: the top 10% of new tracks",
+        "k": "limit",
+        "q": "",
+        "a": "",
+        "ev": "",
+        "c": []
+       }
+      ]
+     },
+     {
+      "t": "Information at release",
+      "s": "",
+      "k": "",
+      "q": "",
+      "a": "",
+      "ev": "",
+      "c": [
+       {
+        "t": "Sound of the track",
+        "s": "Eleven audio measures",
+        "k": "",
+        "q": "Does the sound predict a hit?",
+        "a": "A little",
+        "ev": "48% hits among the picks, against 26% at random.",
+        "c": []
+       },
+       {
+        "t": "Genre",
+        "s": "",
+        "k": "",
+        "q": "Does genre add to the sound?",
+        "a": "Yes",
+        "ev": "73% hits among the picks.",
+        "c": []
+       },
+       {
+        "t": "Record of the artist",
+        "s": "The lever: earlier tracks and earlier hits",
+        "k": "lever",
+        "q": "Does the record add more?",
+        "a": "Yes",
+        "ev": "77% with all inputs. Artists with more than 50% earlier hits: 62% of new tracks are hits.",
+        "c": []
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
    "slug": "product-line-pricing",
    "type": "course",
    "title": "How to reprice 15 products when price sensitivity differs by product",
@@ -2149,6 +2444,10 @@
   {
    "id": "travel",
    "name": "Travel and hospitality"
+  },
+  {
+   "id": "general",
+   "name": "Cross-industry"
   }
  ],
  "tasks": [

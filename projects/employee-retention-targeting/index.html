@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which employees to approach with a retention offer: Adrian Do</title>
+<meta name="description" content="Approach the 15% of employees with a leave risk above 67%. The offers reach 92% of the leavers and save $2.6M for 3,598 employees.">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<nav class="bar" aria-label="Main">
+  <div class="wrap">
+    <a class="home" href="/">Adrian Do</a>
+    <ul><li><a href="/">Home</a></li><li><a href="/projects/" aria-current="page">Projects</a></li><li><a href="/resume/">Resume</a></li><li><a href="/skills/">Skills</a></li><li><a href="/contact/">Contact</a></li></ul>
+  </div>
+</nav>
+<main>
+  <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / Which employees to approach with a retention offer</p>
+    <h1>Which employees to approach with a retention offer</h1>
+    <div class="case-facts"><p class="facts"><b>Course project, Michigan Ross MBA.</b> Logistic regression and a random forest in R, scored by the saving of a retention program. Not client or employer work.</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/r.svg)" aria-hidden="true"></i>R</span></div></div>
+    <div class="dls"><a class="dl" href="analysis.R"><i class="ico" style="--i:url(/assets/icons/r.svg)" aria-hidden="true"></i><span><b>R script</b><em>Models and the business result</em></span></a></div>
+  </div></div>
+  <div class="body"><div class="wrap cp">
+    <table class="scqa cp-scqa">
+      <tr><th scope="row">Situation</th><td>About 1 employee in 6 leaves the company. To replace an employee costs about $25,000.</td></tr>
+      <tr><th scope="row">Complication</th><td>A retention offer costs $10,000 and does not always work, so the company cannot make an offer to all employees. It does not know who will leave.</td></tr>
+      <tr class="question"><th scope="row">Question</th><td>Which employees must get an offer?</td></tr>
+      <tr class="answer"><th scope="row">Answer</th><td>Approach the 15% of employees with a leave risk above 67%. The offers reach 92% of the leavers and save $2.6M for 3,598 employees.</td></tr>
+    </table>
+    <section class="part cp-tree"><h2>The saving depends on who gets an offer; the model and the cutoff are the two levers</h2>
+      <div class="ltree-scroll"><ul class="ltree"><li><div class="node root"><b>Saving of the retention program</b><span>$2.56M on the test employees</span></div><ul><li><div class="node "><b>Replacement cost avoided</b></div><ul><li><div class="node lever"><b>Leavers who get an offer</b><span>The lever: the model that ranks employees</span></div><div class="find"><p class="q">Does the model find the leavers?</p><p class="a"><b>Yes.</b> 92% of them, with a random forest.</p></div></li><li><div class="node fixed"><b>Success of an offer</b><span>Fixed: 60% (assumption)</span></div></li><li><div class="node fixed"><b>Cost to replace an employee</b><span>Fixed: $25,000 (assumption)</span></div></li></ul></li><li><div class="node "><b>Cost of the offers</b></div><ul><li><div class="node lever"><b>Offers made</b><span>The lever: the risk cutoff</span></div><div class="find"><p class="q">Above which risk does an offer pay?</p><p class="a"><b>67%.</b> $10,000 divided by 60% of $25,000.</p></div></li><li><div class="node limit"><b>Offers to employees who would stay</b><span>The limit: wasted cost</span></div><div class="find"><p class="q">How many offers are wasted?</p><p class="a"><b>6 of 529.</b> 99% of the offers go to a leaver.</p></div></li></ul></li></ul></li></ul></div>
+      <p class="legend"><span class="k lever">Lever</span> what the decision changes <span class="k limit">Limit</span> what the answer must respect <span class="k fixed">Fixed</span> outside the decision</p></section>
+    <div class="cp-kpis"><div><p class="k">Saving from the retention offers</p><p class="v">$2.56M</p><p class="s">for 3,598 test employees, against no program</p></div><div><p class="k">Employees who get an offer</p><p class="v">15%</p><p class="s">those with a risk of 67% or more; 99% of them are leavers</p></div><div><p class="k">Leavers that the offers reach</p><p class="v">92%</p><p class="s">523 of 566</p></div></div>
+<section class="part"><h2>A model that sees curves and combinations saves $2.6M; a straight-line model loses money</h2>
+  <div class="cp-bars" role="img" aria-label="Saving of the retention program by model."><div class="cp-bar wide on"><span class="c"><b>Random forest</b>finds 92% of the leavers; 99% of the offers go to a leaver</span><span class="t"><i style="width:100.0%"></i></span><span class="v">$2,555,000</span><span class="s">529 offers</span></div><div class="cp-bar wide"><span class="c"><b>Logistic regression with curves and interactions</b>finds 81% of the leavers; 92% of the offers go to a leaver</span><span class="t"><i style="width:74.6%"></i></span><span class="v">$1,905,000</span><span class="s">495 offers</span></div><div class="cp-bar wide neg"><span class="c"><b>Logistic regression, main effects</b>finds 3% of the leavers; 30% of the offers go to a leaver</span><span class="t"><i style="width:0.5%"></i></span><span class="v">-$345,000</span><span class="s">63 offers</span></div><div class="cp-bar wide neg"><span class="c"><b>An offer to all employees</b>no model</span><span class="t"><i style="width:0.5%"></i></span><span class="v">-$27.5M</span><span class="s">3,598 offers</span></div></div>
+  <p class="cp-note">Assumptions: to replace an employee costs $25,000. A retention offer costs $10,000 and keeps 60% of the employees who would leave. An offer pays when the risk is above 67%.</p>
+</section>
+<section class="part"><h2>Three groups hold almost all the leavers, and each has a different cause</h2>
+  <div class="cp-bars" role="img" aria-label="Share of employees who leave, by group."><div class="cp-bar wide on"><span class="c"><b>Low load, low rating</b>944 employees</span><span class="t"><i style="width:100.0%"></i></span><span class="v">88%</span><span class="s">leave</span></div><div class="cp-bar wide"><span class="c"><b>Strong performers at 5 to 6 years</b>514 employees</span><span class="t"><i style="width:96.1%"></i></span><span class="v">85%</span><span class="s">leave</span></div><div class="cp-bar wide"><span class="c"><b>Overloaded</b>1,521 employees</span><span class="t"><i style="width:45.3%"></i></span><span class="v">40%</span><span class="s">leave</span></div><div class="cp-bar wide"><span class="c"><b>All other employees</b>9,012 employees</span><span class="t"><i style="width:1.4%"></i></span><span class="v">1%</span><span class="s">leave</span></div></div>
+  <p class="cp-note">Low load, low rating: 2 projects or fewer, low satisfaction and a low evaluation. Overloaded: 6 projects or more, or 270 hours a month or more. Strong performers: 5 to 6 years of tenure with a high evaluation and high satisfaction.</p>
+</section>
+<section class="part"><h2>The model</h2>
+  <div class="cp-model"><div><h3>Decision</h3><p>Which employees get a retention offer.</p></div><div><h3>Objective</h3><p>The highest saving: replacement cost avoided, less the cost of the offers.</p></div><div><h3>Method</h3><p>Logistic regression and a random forest in R on 11,991 employee profiles: 70% to train, 30% to test.</p></div></div>
+  <ul class="notes"><li>Risk is not a straight line: employees with too little work and employees with too much work both leave. This is why the main-effects model fails (AUC 0.83) and the forest does not (AUC 0.99).</li><li>One offer does not fit all three groups. The overloaded group needs less work, not a bonus. Outside the three groups, only 1% of employees leave.</li><li>The file has 14,999 rows but only 11,991 different profiles. The repeats were removed before the split, so that the same profile is not in the training and the test data.</li><li>The saving depends on the three assumptions. With a lower success rate of the offer, the cutoff goes up and fewer employees get an offer.</li></ul>
+</section>
+    <nav class="pager" aria-label="More projects"><a href="/projects/telemarketing-call-list/"><span>Previous project</span><b>Which customers to call in a bank telemarketing campaign</b></a><a class="next" href="/projects/hotel-cancellation-overbooking/"><span>Next project</span><b>How many rooms a hotel can overbook when it knows which bookings will cancel</b></a></nav>
+  </div></div>
+</main>
+<footer>
+  <div class="wrap">
+    <p class="links"><a href="mailto:adriando@umich.edu">adriando@umich.edu</a><a href="https://www.linkedin.com/in/dzungdotran/">LinkedIn</a><a href="https://github.com/adriando-umich">GitHub</a></p>
+    <p class="note">The case studies use public data sets, not data from an employer or a client.</p>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

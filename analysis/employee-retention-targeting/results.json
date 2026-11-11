@@ -1,0 +1,87 @@
+{
+  "dup": {
+    "rows": 14999,
+    "unique": 11991,
+    "left_raw": 0.238083,
+    "left_unique": 0.166041
+  },
+  "test_rows": 3598,
+  "test_leavers": 566,
+  "cutoff": 0.666667,
+  "replace": 25000,
+  "offer": 10000,
+  "keep": 0.6,
+  "offer_all": -27490000,
+  "models": [
+    {
+      "model": "Logistic regression, main effects",
+      "auc": 0.827295,
+      "flagged": 63,
+      "leavers_found": 19,
+      "false_alarms": 44,
+      "recall": 3.35689,
+      "precision": 30.15873,
+      "saving": -345000
+    },
+    {
+      "model": "Logistic regression with curves and interactions",
+      "auc": 0.974898,
+      "flagged": 495,
+      "leavers_found": 457,
+      "false_alarms": 38,
+      "recall": 80.742049,
+      "precision": 92.323232,
+      "saving": 1905000
+    },
+    {
+      "model": "Random forest",
+      "auc": 0.985314,
+      "flagged": 529,
+      "leavers_found": 523,
+      "false_alarms": 6,
+      "recall": 92.402827,
+      "precision": 98.865784,
+      "saving": 2555000
+    }
+  ],
+  "inflate": {
+    "accuracy_with_repeats": 0.992667,
+    "accuracy_unique": 0.987215,
+    "logit_with_repeats": 0.788222,
+    "logit_unique": 0.841857
+  },
+  "importance": {
+    "satisfaction": 35.4,
+    "projects": 18.4,
+    "tenure": 15.5,
+    "hours": 14.9,
+    "evaluation": 12.9,
+    "department": 1.7,
+    "salary": 0.7,
+    "accident": 0.4,
+    "promoted": 0.1
+  },
+  "groups": [
+    {
+      "group": "All other employees",
+      "n": 9012,
+      "rate": 1.220595
+    },
+    {
+      "group": "Low load, low rating",
+      "n": 944,
+      "rate": 88.45339
+    },
+    {
+      "group": "Overloaded",
+      "n": 1521,
+      "rate": 40.039448
+    },
+    {
+      "group": "Strong performers at 5 to 6 years",
+      "n": 514,
+      "rate": 85.019455
+    }
+  ],
+  "curve_terms": ["satisfaction", "evaluation", "projects", "hours", "tenure", "accident", "promoted", "salary", "I(tenure^2)", "I(projects^2)", "I(evaluation^2)", "evaluation:projects", "projects:hours", "satisfaction:tenure", "projects:tenure", "satisfaction:evaluation", "evaluation:hours", "satisfaction:projects"]
+}
