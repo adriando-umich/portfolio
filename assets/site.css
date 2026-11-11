@@ -595,3 +595,20 @@ html:not(.js) .deckbar { display: none; }
 .card .tags { margin: 16px 0 14px; padding-top: 14px; border-top: 1px solid var(--gray-300); }
 
 [hidden] { display: none !important; }
+
+/* Work experience against self-built case studies */
+.proofs-head { margin-top: 52px; font-size: 15px; font-weight: 700; color: #fff; }
+.proofs-head + .proofs { margin-top: 12px; }
+.tag.type { font-weight: 700; }
+.tag.type.work { background: var(--navy); border-color: var(--navy); color: #fff; }
+.tag.type.case { background: #fff; border: 1px dashed var(--navy); color: var(--navy); }
+.tag.type.practice { color: var(--muted); }
+.matrix .cell.self { background: #fff; border: 2px solid #fff; outline: 1px dashed var(--navy); outline-offset: -4px; }
+.matrix .cell.self:hover { background: var(--navy); color: #fff; }
+.legend .k.work { background: var(--gray-100); color: var(--navy); font-family: var(--serif); }
+.legend .k.self { color: var(--navy); outline: 1px dashed var(--navy); font-family: var(--serif); }
+.filter .label.gap { margin-left: 18px; }
+.case-facts .facts b { color: var(--ink); }
+.section .cards { margin-top: 28px; }
+.section .lede { margin-top: 10px; }
+.group > .note { max-width: 760px; }

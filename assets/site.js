@@ -54,7 +54,7 @@
   if (!filter) return;
   var NAMES = {};
   Array.prototype.forEach.call(document.querySelectorAll('[data-f]'), function (b) { NAMES[b.getAttribute('data-f') + ':' + b.getAttribute('data-v')] = b.textContent.trim(); });
-  var state = { industry: '', task: '', tool: '' };
+  var state = { type: '', industry: '', task: '', tool: '' };
   var items = Array.prototype.slice.call(document.querySelectorAll('[data-tools]'));
   var groups = Array.prototype.slice.call(document.querySelectorAll('.group'));
   var empty = document.querySelector('.empty'), clear = filter.querySelector('.clear'), active = filter.querySelector('.active');
@@ -62,7 +62,7 @@
   function apply() {
     var shown = 0;
     items.forEach(function (el) {
-      var on = (!state.industry || el.getAttribute('data-industry') === state.industry) &&
+      var on = (!state.type || el.getAttribute('data-type') === state.type) && (!state.industry || el.getAttribute('data-industry') === state.industry) &&
         (!state.task || has(el.getAttribute('data-tasks'), state.task)) &&
         (!state.tool || has(el.getAttribute('data-tools'), state.tool));
       el.hidden = !on;
@@ -77,14 +77,14 @@
       b.setAttribute('aria-pressed', String(state.industry === b.getAttribute('data-i') && state.task === b.getAttribute('data-t')));
     });
     var parts = [];
-    ['task', 'industry', 'tool'].forEach(function (k) { if (state[k]) parts.push(NAMES[k + ':' + state[k]]); });
+    ['type', 'task', 'industry', 'tool'].forEach(function (k) { if (state[k]) parts.push(NAMES[k + ':' + state[k]]); });
     active.textContent = parts.length ? shown + ' shown: ' + parts.join(', ') : '';
     clear.hidden = !parts.length;
   }
   document.addEventListener('click', function (ev) {
     var b = ev.target.closest ? ev.target.closest('[data-f], .matrix .cell, .filter .clear') : null;
     if (!b) return;
-    if (b.classList.contains('clear')) { state = { industry: '', task: '', tool: '' }; }
+    if (b.classList.contains('clear')) { state = { type: '', industry: '', task: '', tool: '' }; }
     else if (b.classList.contains('cell')) {
       var same = state.industry === b.getAttribute('data-i') && state.task === b.getAttribute('data-t');
       state.industry = same ? '' : b.getAttribute('data-i');

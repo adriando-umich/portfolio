@@ -69,9 +69,15 @@ def page(path, title, desc, current, body):
 
 
 def home():
+    hl = [p for p in PROJECTS if p.get("highlight")]
     proofs = "".join(
-        f'<li><a href="{url(p)}"><span class="name">{e(p["short"])}</span><span class="num">{e(p["num"])}</span>'
-        f'<span class="what">{e(p["what"])}</span><span class="go">Open the {e(p["short"].lower())}</span></a></li>'
+        f'<li><a href="/projects/#type=work"><span class="name">{e(p["org"])}, {e(p["period"])}</span><span class="num">{e(p["highlight"][0])}</span>'
+        f'<span class="what">{e(p["highlight"][1])}</span></a></li>'
+        for p in hl
+    )
+    cases = "".join(
+        f'<a class="card" href="{url(p)}"><span class="name">{e(p["title"])}</span><span class="num">{e(p["num"])}</span>'
+        f'<span class="what">{e(p["what"])}</span><span class="go">Open the case</span></a>'
         for p in CASES
     )
     strip = "".join(f'<a href="/skills/#{t}">{ico(t)}{e(n)}</a>' for t, n in TOOLS.items())
@@ -86,10 +92,18 @@ def home():
     <h1>{e(R['claim'])}</h1>
     <p class="background">{e(R['background'])}</p>
     <p class="actions"><a class="btn solid" href="/projects/">See all projects</a><a class="btn" href="/resume/">Read the resume</a></p>
+    <p class="proofs-head">Results from work experience</p>
     <ul class="proofs">{proofs}</ul>
   </div>
 </header>
 <main>
+  <section class="section">
+    <div class="wrap">
+      <h2>Three case studies that I built on my own, with public data</h2>
+      <p class="lede">They show how I work on a credit, a fraud and a marketing decision. They are not client or employer work.</p>
+      <div class="cards">{cases}</div>
+    </div>
+  </section>
   <section class="section">
     <div class="wrap">
       <h2>Ten years of work across audit, business operations and strategy</h2>
@@ -112,8 +126,11 @@ IND = {x["id"]: x["name"] for x in P.get("industries", [])}
 TASK = {x["id"]: x["name"] for x in P.get("tasks", [])}
 
 
+TYPE = {x["id"]: x for x in P["types"]}
+
+
 def tags(p):
-    out = ""
+    out = f'<span class="tag type {p["type"]}">{e(TYPE[p["type"]]["tag"])}</span>' 
     if p.get("industry"):
         out += f'<span class="tag ind">{e(IND[p["industry"]])}</span>'
     for t in p.get("tasks", []):
@@ -122,7 +139,7 @@ def tags(p):
 
 
 def data_attrs(p):
-    return f'data-tools="{" ".join(p["tools"])}" data-industry="{p.get("industry", "")}" data-tasks="{" ".join(p.get("tasks", []))}"'
+    return f'data-type="{p["type"]}" data-tools="{" ".join(p["tools"])}" data-industry="{p.get("industry", "")}" data-tasks="{" ".join(p.get("tasks", []))}"'
 
 
 def project_row(p):
@@ -141,14 +158,17 @@ def matrix():
     for t, tn in TASK.items():
         cells = ""
         for i in IND:
-            n = len([p for p in tagged if p["industry"] == i and t in p["tasks"]])
-            cells += f'<td><button type="button" class="cell" data-i="{i}" data-t="{t}" aria-label="{n} projects: {e(tn)}, {e(IND[i])}">{n}</button></td>' if n else '<td class="none">–</td>'
+            inside = [p for p in tagged if p["industry"] == i and t in p["tasks"]]
+            n = len(inside)
+            kind = "" if any(p["type"] == "work" for p in inside) else " self"
+            cells += f'<td><button type="button" class="cell{kind}" data-i="{i}" data-t="{t}" aria-label="{n} projects: {e(tn)}, {e(IND[i])}">{n}</button></td>' if n else '<td class="none">–</td>'
         total = len([p for p in tagged if t in p["tasks"]])
         rows += f'<tr><th scope="row"><button type="button" data-f="task" data-v="{t}">{e(tn)}</button></th>{cells}<td class="tot">{total}</td></tr>'
     foot = "".join(f'<td class="tot">{len([p for p in tagged if p["industry"] == i])}</td>' for i in IND)
     return f"""<div class="table-scroll"><table class="matrix">
       <thead><tr><th scope="col" class="corner">Task / Industry</th>{head}<th scope="col" class="tot">All</th></tr></thead>
-      <tbody>{rows}<tr><th scope="row" class="tot">All</th>{foot}<td class="tot">{len(tagged)}</td></tr></tbody></table></div>"""
+      <tbody>{rows}<tr><th scope="row" class="tot">All</th>{foot}<td class="tot">{len(tagged)}</td></tr></tbody></table></div>
+    <p class="legend"><span class="k work">3</span> work experience <span class="k self">1</span> self-built case study on public data</p>"""
 
 
 def projects_index():
@@ -168,15 +188,16 @@ def projects_index():
             ) + "</div>"
         else:
             inner = '<ul class="rows">' + "".join(project_row(p) for p in items) + "</ul>"
-        groups += f'<section class="group" id="{t["id"]}"><h2>{e(t["name"])}</h2>{inner}</section>'
+        note = f'<p class="note">{e(t["note"])}</p>' if t["note"] else ""
+        groups += f'<section class="group" id="{t["id"]}"><h2>{e(t["name"])}</h2>{note}{inner}</section>'
     body = f"""<main>
   <div class="pagehead"><div class="wrap">
     <h1>Projects</h1>
-    <p class="sub">Work by task and industry. Select a number to filter the list.</p>
+    <p class="sub">Work experience and self-built case studies, by task and industry. Select a number to filter the list.</p>
   </div></div>
   <div class="body"><div class="wrap">
     {matrix()}
-    <div class="filter" role="group" aria-label="Filter projects"><span class="label">Tool</span>{buttons}<span class="active" aria-live="polite"></span><button type="button" class="clear" hidden>Clear filters</button></div>
+    <div class="filter" role="group" aria-label="Filter projects"><span class="label">Show</span><button type="button" data-f="type" data-v="work" aria-pressed="false">Work experience</button><button type="button" data-f="type" data-v="case" aria-pressed="false">Self-built case studies</button><span class="label gap">Tool</span>{buttons}<span class="active" aria-live="polite"></span><button type="button" class="clear" hidden>Clear filters</button></div>
     {groups}
     <p class="empty">No project matches these filters.</p>
   </div></div>
@@ -279,7 +300,7 @@ def case_page(p, crumb):
     return f"""<main>
   <div class="pagehead"><div class="wrap">{crumb}
     <h1>{e(p['title'])}</h1>
-    <div class="case-facts"><p class="facts">{e(p['data'])}</p>{tools(p['tools'])}</div>
+    <div class="case-facts"><p class="facts"><b>Self-built case study.</b> {e(p['data'])}. Not client or employer work.</p>{tools(p['tools'])}</div>
     {deliverables(p, has_deck, has_brief)}
   </div></div>
   <div class="body"><div class="wrap">
@@ -409,7 +430,7 @@ def skills():
         lis = ""
         for p in items:
             label = f'<a href="{url(p)}">{e(p["title"])}</a>' if p.get("slug") else e(p["title"])
-            where = f' <span>({e(p["org"])})</span>' if p.get("org") else ""
+            where = f' <span>({e(p["org"])})</span>' if p.get("org") else (" <span>(self-built case study)</span>" if p["type"] == "case" else "")
             lis += f"<li>{label}{where}</li>"
         n = len(items)
         cards += (
