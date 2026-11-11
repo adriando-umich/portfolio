@@ -1,0 +1,68 @@
+{
+  "name": "Adrian Do",
+  "role": "Strategy and analytics",
+  "claim": "I turn data into decisions a leadership team can approve: a clear recommendation, its dollar effect and a safe way to test it.",
+  "background": "MBA from Michigan Ross. Before that, strategy and analytics lead at UrBox, and audit senior at KPMG and Grant Thornton.",
+  "email": "adriando@umich.edu",
+  "linkedin": "https://www.linkedin.com/in/dzungdotran/",
+  "github": "https://github.com/adriando-umich",
+  "experience": [
+    {
+      "org": "Embedded Capital", "about": "Private equity firm that invests in P&C insurance", "place": "Alpharetta, GA", "period": "2025",
+      "roles": [
+        {"title": "MBA Consultant", "bullets": [
+          "Developed custom Applied Epic dashboards for churn, producer revenue and KPI tracking across 3 portfolio companies, cutting report preparation time by 30%",
+          "Standardized the Applied Epic renewal workflow across 3 insurance portfolio companies, cutting churn by 5% across 25K policies"
+        ]}
+      ]
+    },
+    {
+      "org": "UrBox", "about": "Vietnam B2B e-reward startup, pre-Series A", "place": "Hanoi, Vietnam", "period": "2021–2024",
+      "roles": [
+        {"title": "Senior Manager, Strategy & Analytics", "note": "Managed a team of 10+, 2022–2024", "bullets": [
+          "Modeled partnership ROI and pricing with Vietnam Airlines and internal leaders, projecting a redemption uplift of about 30% and shaping the Cash & Miles launch",
+          "Redesigned renewal pricing tiers across 15 categories and 50K SKUs, supporting client negotiations and lifting spread by about 1 point across 10+ renewals",
+          "Built a 3 to 5 year fundraising model, reclassifying campaign revenue and lowering the valuation assumptions used in the investor deck",
+          "Translated loyalty-program KPIs, margin rules and supplier constraints into optimization logic for an engine later used by 90% of clients",
+          "Created transfer mappings and audit trails for loyalty balances, preserving contract-level traceability on about $0.5M of annual campaign transfers"
+        ]},
+        {"title": "Manager, Finance & Operations", "note": "Managed a team of 3+, 2021–2022", "bullets": [
+          "Owned the annual budget and forecast for a $60M+ operating plan across revenue, operating expense, headcount and margin, improving the cash conversion cycle by 15%",
+          "Standardized monthly reporting for a $60M segment, using Tableau for P&L variance tracking and delivering KPI insights 5 business days faster",
+          "Modernized SQL-based reporting automation for sales, finance and operations teams, documenting ambiguous logic and reducing process time by 30%",
+          "Led a 2-year finance transformation program across 10+ major clients and 4 departments, digitizing transaction verification and saving 10,000 hours each year"
+        ]}
+      ]
+    },
+    {
+      "org": "Grant Thornton", "about": "Public accounting, external audit", "place": "Hanoi, Vietnam", "period": "2019–2021",
+      "roles": [
+        {"title": "Senior Assurance Associate", "note": "Led audit teams of 6+", "bullets": [
+          "Designed the close workflow for a new solar-energy entity, reconciling the parent reporting package to the statutory financial statements and cutting the reporting cycle by 2 to 3 weeks",
+          "Led a 12-month revenue and margin bridge for a steel-pipe business across 4 product groups and 2 channels, explaining more than 85% of the variance and isolating 3 audit risks"
+        ]}
+      ]
+    },
+    {
+      "org": "KPMG", "about": "Public accounting, external audit", "place": "Hanoi, Vietnam", "period": "2015–2019",
+      "roles": [
+        {"title": "Audit Senior", "note": "Led audit teams of 6+", "bullets": [
+          "Prepared the annual budget and financial plan in SAP and Excel for 5 Vietnam branches of a global Japanese client with annual sales above VND 200B (about $7.6M)",
+          "Built CFO dashboards in Excel and VBA across 5 branches and 4 functions, cutting monthly budget package preparation from 2 days to the same day",
+          "Analyzed EPC contract revenue timing, challenging policy assumptions and driving a downward adjustment of about $500K through audit review"
+        ]}
+      ]
+    }
+  ],
+  "education": [
+    {"school": "University of Michigan, Stephen M. Ross School of Business", "place": "Ann Arbor, MI", "degree": "Master of Business Administration, May 2026", "bullets": [
+      "Dean's Fellow: full merit-based tuition scholarship",
+      "Concentration: Artificial Intelligence",
+      "Director of Operations and Events, Asian American Business Association"
+    ]},
+    {"school": "Academy of Finance", "place": "Hanoi, Vietnam", "degree": "Bachelor of Business Administration, October 2015", "bullets": [
+      "Dean's List (top 10% of students)"
+    ]}
+  ],
+  "certifications": ["CFA Level I", "Certified ScrumMaster", "Lean Six Sigma Green Belt"]
+}

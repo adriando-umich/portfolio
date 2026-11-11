@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approval cutoff for a consumer lender: Adrian Do</title>
+<meta name="description" content="+$7.1M realized NPV from a new approval cutoff, at the same bad rate">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<nav class="bar" aria-label="Main">
+  <div class="wrap">
+    <a class="home" href="/">Adrian Do</a>
+    <ul><li><a href="/">Home</a></li><li><a href="/projects/" aria-current="page">Projects</a></li><li><a href="/resume/">Resume</a></li><li><a href="/skills/">Skills</a></li><li><a href="/contact/">Contact</a></li></ul>
+  </div>
+</nav>
+<main>
+  <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / Approval cutoff for a consumer lender</p>
+    <h1>Approval cutoff for a consumer lender</h1>
+  </div></div>
+  <div class="body"><div class="wrap">
+    <div class="case-head"><p class="facts">Lending Club public loan data</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/python.svg)" aria-hidden="true"></i>Python</span><span class="tool"><i class="ico" style="--i:url(/assets/icons/sql.svg)" aria-hidden="true"></i>SQL</span><span class="tool"><i class="ico" style="--i:url(/assets/icons/excel.svg)" aria-hidden="true"></i>Excel</span></div></div>
+    <p class="question">Q: Can a new approval cutoff increase approvals at the same bad rate?</p>
+    <h2 class="answer">Yes. A scorecard cutoff approves more applicants at the same bad rate and adds $7.1M of realized NPV on the 2015 loans.</h2>
+    <p class="why">Why? Three reasons, strongest first</p>
+    <ol class="keyline"><li><h3>It approves more applicants with no more defaults</h3><p>Approval rate: <b>85.7%</b> vs. 84.5% today. Bad rate (default rate of approved loans): <b>12.5%</b>, held equal.</p></li><li><h3>The gain holds under every cost assumption tested</h3><p>Realized NPV against the current policy: <b>+$7.1M</b>. Lowest result in the stress test: <b>+$5.1M</b>.</p></li><li><h3>A small test limits the risk of the change</h3><p>Start on <b>10%</b> of applications. Stop if 12-month defaults rise <b>1 point</b>.</p></li></ol>
+    <div class="exhibit">
+  <p class="title">The 2015 loans lost money under the current policy; the new cutoff recovers $7.1M</p>
+  <p class="unit">Realized NPV, $M</p>
+  <div class="build" id="chart" role="img" aria-label="Bar chart. Loans from 2013 to 2014 under the current policy: plus 71.7 million dollars. Loans from 2015 under the current policy: minus 32.9 million dollars. Gain from the new cutoff on the 2015 loans: plus 7.1 million dollars.">
+    <div class="row"><div class="label">Loans from 2013–2014, current policy</div><div class="track"><div class="fill pos context" style="width:59.75%"></div><div class="value inside" style="right:6.92%">+$71.7M</div></div></div>
+    <div class="row"><div class="label">Loans from 2015, current policy</div><div class="track"><div class="fill neg loss" style="width:27.42%"></div><div class="value is-loss" style="left:33.33%">–$32.9M</div></div></div>
+    <div class="row"><div class="label">Loans from 2015, gain from the new cutoff</div><div class="track"><div class="fill pos point" style="width:5.92%"></div><div class="value is-point" style="left:39.25%">+$7.1M</div></div></div>
+  </div>
+  <p class="source">Source: Lending Club public loan data; analysis. The gain is measured against the current policy on the same 2015 loans.</p>
+</div>
+    <nav class="pager" aria-label="More projects"><span></span><a class="next" href="/projects/fraud-transaction-policy/"><span>Next project</span><b>Transaction policy for card fraud</b></a></nav>
+  </div></div>
+</main>
+<footer>
+  <div class="wrap">
+    <p class="links"><a href="mailto:adriando@umich.edu">adriando@umich.edu</a><a href="https://www.linkedin.com/in/dzungdotran/">LinkedIn</a><a href="https://github.com/adriando-umich">GitHub</a></p>
+    <p class="note">The case studies use public data sets, not data from an employer or a client.</p>
+  </div>
+</footer>
+<script src="/assets/site.js"></script>
+</body>
+</html>

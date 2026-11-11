@@ -4,417 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Adrian Do: strategy and analytics</title>
-<meta name="description" content="Three business cases on credit, fraud and marketing decisions. Each case gives a recommendation, its dollar effect and a test plan.">
-<style>
-  :root {
-    --navy: #051C2C;
-    --blue: #2251FF;
-    --gray-500: #8C8C8C;
-    --gray-300: #D0D0D0;
-    --gray-100: #F0F0F0;
-    --negative: #C8102E;
-    --ink: #1A1A1A;
-    --ink-2: #4A4A4A;
-    --muted: #6B6B6B;
-    --serif: Georgia, "Times New Roman", serif;
-    --sans: Arial, Helvetica, sans-serif;
-    --page: 1080px;
-    --bar: 56px;
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--bar) + 24px); }
-  body { margin: 0; background: #fff; color: var(--ink); font: 17px/1.55 var(--sans); }
-  h1, h2, h3, p, ol, ul, dl, dd { margin: 0; padding: 0; }
-  a { color: var(--blue); text-underline-offset: 3px; text-decoration-thickness: 1px; }
-  a:hover { text-decoration-thickness: 2px; }
-  a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-  .wrap { max-width: var(--page); margin: 0 auto; padding: 0 28px; }
-
-  /* Top bar: the map of the page */
-  .bar { position: sticky; top: 0; z-index: 10; height: var(--bar); background: #fff; border-bottom: 1px solid var(--gray-300); }
-  .bar .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .bar .home { font: 700 18px/1 var(--serif); color: var(--navy); text-decoration: none; white-space: nowrap; }
-  .bar ul { display: flex; gap: 4px; list-style: none; height: 100%; }
-  .bar li { height: 100%; }
-  .bar li a { display: flex; align-items: center; height: 100%; padding: 0 12px; font-size: 14px; color: var(--ink-2); text-decoration: none; border-bottom: 3px solid transparent; border-top: 3px solid transparent; white-space: nowrap; }
-  .bar li a:hover { color: var(--navy); border-bottom-color: var(--gray-300); }
-  .bar li a[aria-current="true"] { color: var(--navy); font-weight: 700; border-bottom-color: var(--blue); }
-  .bar .group { margin-left: 16px; padding-left: 16px; border-left: 1px solid var(--gray-300); }
-  .only-narrow { display: none; }
-
-  /* First screen: one claim and its three proofs */
-  .lead { background: var(--navy); color: #fff; padding: 72px 0 0; }
-  .lead .role { font-size: 15px; color: #B8C4CE; }
-  .lead h1 { margin-top: 14px; max-width: 880px; font: 700 40px/1.2 var(--serif); }
-  .proofs { margin-top: 56px; display: grid; grid-template-columns: repeat(3, 1fr); list-style: none; border-top: 1px solid #3B4D5A; }
-  .proofs li + li { border-left: 1px solid #3B4D5A; }
-  .proofs a { display: block; height: 100%; padding: 24px 28px 32px 0; color: #fff; text-decoration: none; }
-  .proofs li + li a { padding-left: 28px; }
-  .proofs .name { display: block; font-size: 14px; color: #B8C4CE; }
-  .proofs .num { display: block; margin-top: 10px; font: 700 34px/1.1 var(--serif); }
-  .proofs .what { display: block; margin-top: 8px; font-size: 15px; line-height: 1.45; color: #E4E8EC; }
-  .proofs .go { display: inline-block; margin-top: 16px; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; }
-  .proofs a:hover .go { text-decoration-thickness: 2px; }
-  .proofs a:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
-
-  /* Case block: question, answer, key line */
-  .case { padding: 72px 0; border-bottom: 1px solid var(--gray-300); }
-  .case-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 24px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 2px solid var(--navy); }
-  .case-head .name { font-weight: 700; font-size: 16px; color: var(--navy); }
-  .case-head .facts { font-size: 14px; color: var(--muted); }
-  .question { margin-top: 28px; font: italic 18px/1.4 var(--serif); color: var(--ink-2); }
-  .answer { margin-top: 12px; padding: 24px 28px; background: var(--navy); color: #fff; font: 700 26px/1.3 var(--serif); }
-  .why { text-align: center; font: italic 14px/1.4 var(--serif); color: var(--muted); }
-  .why::before, .why::after { content: ""; display: block; width: 1px; margin: 0 auto; background: var(--gray-500); }
-  .why::before { height: 18px; margin-bottom: 6px; }
-  .why::after { height: 12px; margin-top: 6px; }
-  .keyline { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding-top: 14px; list-style: none; }
-  .keyline::before { content: ""; position: absolute; top: 0; left: calc((100% - 48px) / 6); right: calc((100% - 48px) / 6); border-top: 1px solid var(--gray-500); }
-  .keyline li { position: relative; padding: 18px 20px 20px; border-top: 2px solid var(--navy); background: var(--gray-100); }
-  .keyline li::before { content: ""; position: absolute; top: -16px; left: 50%; height: 14px; border-left: 1px solid var(--gray-500); }
-  .keyline h3 { font: 700 16px/1.35 var(--sans); }
-  .keyline p { margin-top: 8px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
-  .keyline b { color: var(--ink); }
-
-  /* Exhibit in the credit case */
-  .exhibit { margin-top: 40px; max-width: 760px; }
-  .exhibit .title { font-weight: 700; font-size: 16px; }
-  .exhibit .unit { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
-  .row { display: grid; grid-template-columns: 220px 1fr; gap: 16px; align-items: center; margin-bottom: 14px; }
-  .row .label { font-size: 14px; line-height: 1.35; color: var(--ink-2); }
-  .track { position: relative; height: 34px; }
-  .track::before { content: ""; position: absolute; left: 33.33%; top: -7px; bottom: -7px; width: 1px; background: var(--ink); }
-  .bar-fill { position: absolute; top: 0; height: 100%; }
-  .bar-fill.pos { left: 33.33%; transform-origin: left center; }
-  .bar-fill.neg { right: 66.67%; transform-origin: right center; }
-  .bar-fill.context { background: var(--gray-500); }
-  .bar-fill.loss { background: var(--negative); }
-  .bar-fill.point { background: var(--blue); }
-  .value { position: absolute; top: 0; line-height: 34px; padding-left: 8px; font-size: 15px; font-weight: 700; white-space: nowrap; }
-  .value.inside { padding: 0 8px 0 0; color: #fff; }
-  .value.is-loss { color: var(--negative); }
-  .value.is-point { color: var(--blue); font-family: var(--serif); font-size: 20px; }
-  .source { margin-top: 20px; font-size: 12px; line-height: 1.5; color: var(--muted); }
-
-  .js .build .bar-fill { transform: scaleX(0); }
-  .js .build .value { opacity: 0; }
-  .js .build.go .bar-fill { transform: scaleX(1); transition: transform 700ms cubic-bezier(.2,.7,.2,1); }
-  .js .build.go .value { opacity: 1; transition: opacity 250ms linear; }
-  .js .build.go .row:nth-child(2) .bar-fill { transition-delay: 500ms; }
-  .js .build.go .row:nth-child(3) .bar-fill { transition-delay: 1100ms; }
-  .js .build.go .row:nth-child(1) .value { transition-delay: 600ms; }
-  .js .build.go .row:nth-child(2) .value { transition-delay: 1100ms; }
-  .js .build.go .row:nth-child(3) .value { transition-delay: 1300ms; }
-
-  /* Approach and tools */
-  .plain { padding: 72px 0; border-bottom: 1px solid var(--gray-300); }
-  .plain h2 { max-width: 760px; font: 700 28px/1.3 var(--serif); }
-  .steps { margin-top: 32px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; list-style: none; counter-reset: step; }
-  .steps li { counter-increment: step; padding-top: 14px; border-top: 2px solid var(--navy); }
-  .steps li::before { content: counter(step); display: block; font: 700 22px/1 var(--serif); color: var(--navy); }
-  .steps h3 { margin-top: 10px; font: 700 16px/1.35 var(--sans); }
-  .steps p { margin-top: 8px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
-  .table-scroll { margin-top: 32px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 15px; }
-  th { text-align: left; background: var(--navy); color: #fff; font-weight: 700; padding: 10px 14px; }
-  td { padding: 12px 14px; border-bottom: 1px solid var(--gray-300); vertical-align: top; }
-  td:first-child { font-weight: 700; white-space: nowrap; }
-  td.none { color: var(--gray-500); }
-
-  footer { padding: 56px 0 72px; }
-  footer h2 { font: 700 28px/1.3 var(--serif); }
-  footer .links { margin-top: 16px; font-size: 17px; }
-  footer .note { margin-top: 40px; max-width: 760px; font-size: 13px; line-height: 1.6; color: var(--muted); }
-
-  @media (max-width: 900px) {
-    body { font-size: 16px; }
-    .wrap { padding: 0 20px; }
-    .only-wide { display: none; }
-    .only-narrow { display: block; }
-    .bar .group { margin-left: 0; padding-left: 0; border-left: 0; }
-    .bar li a { padding: 0 9px; }
-    .lead { padding-top: 48px; }
-    .lead h1 { font-size: 28px; }
-    .proofs { margin-top: 36px; grid-template-columns: 1fr; }
-    .proofs li + li { border-left: 0; border-top: 1px solid #3B4D5A; }
-    .proofs a, .proofs li + li a { padding: 20px 0 24px; }
-    .proofs .num { font-size: 28px; }
-    .case, .plain { padding: 48px 0; }
-    .answer { padding: 20px; font-size: 21px; }
-    .keyline { grid-template-columns: 1fr; gap: 12px; padding-top: 0; }
-    .keyline::before, .keyline li::before, .why::after { display: none; }
-    .why { padding-bottom: 12px; }
-    .row { grid-template-columns: 1fr; gap: 6px; }
-    .steps { grid-template-columns: 1fr 1fr; }
-    table { min-width: 520px; }
-    .plain h2, footer h2 { font-size: 23px; }
-  }
-  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
-  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-  @media (prefers-reduced-motion: reduce) {
-    .js .build .bar-fill { transform: none; transition: none; }
-    .js .build .value { opacity: 1; transition: none; }
-  }
-  @media print {
-    .bar { position: static; }
-    .js .build .bar-fill { transform: none; }
-    .js .build .value { opacity: 1; }
-  }
-</style>
+<meta name="description" content="I turn data into decisions a leadership team can approve: a clear recommendation, its dollar effect and a safe way to test it.">
+<link rel="stylesheet" href="/assets/site.css">
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-
-<nav class="bar" aria-label="Page sections">
+<nav class="bar" aria-label="Main">
   <div class="wrap">
-    <a class="home" href="#top">Adrian Do</a>
-    <ul>
-      <li class="only-wide"><a href="#credit">Credit case</a></li>
-      <li class="only-wide"><a href="#fraud">Fraud case</a></li>
-      <li class="only-wide"><a href="#marketing">Marketing case</a></li>
-      <li class="only-narrow"><a href="#credit">Cases</a></li>
-      <li class="group"><a href="#approach">Approach</a></li>
-      <li><a href="#tools">Tools</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <a class="home" href="/">Adrian Do</a>
+    <ul><li><a href="/" aria-current="page">Home</a></li><li><a href="/projects/">Projects</a></li><li><a href="/resume/">Resume</a></li><li><a href="/skills/">Skills</a></li><li><a href="/contact/">Contact</a></li></ul>
   </div>
 </nav>
-
-<header class="lead" id="top">
+<header class="lead">
   <div class="wrap">
     <p class="role">Strategy and analytics</p>
     <h1>I turn data into decisions a leadership team can approve: a clear recommendation, its dollar effect and a safe way to test it.</h1>
-    <ul class="proofs">
-      <li><a href="#credit">
-        <span class="name">Credit case</span>
-        <span class="num">+$7.1M</span>
-        <span class="what">realized NPV from a new approval cutoff, at the same bad rate</span>
-        <span class="go">See the credit case</span>
-      </a></li>
-      <li><a href="#fraud">
-        <span class="name">Fraud case</span>
-        <span class="num">$64k per month</span>
-        <span class="what">lower total cost of fraud, false declines and reviews</span>
-        <span class="go">See the fraud case</span>
-      </a></li>
-      <li><a href="#marketing">
-        <span class="name">Marketing case</span>
-        <span class="num">$13k per campaign</span>
-        <span class="what">profit from an email to all customers, with no targeting model</span>
-        <span class="go">See the marketing case</span>
-      </a></li>
-    </ul>
+    <p class="background">MBA from Michigan Ross. Before that, strategy and analytics lead at UrBox, and audit senior at KPMG and Grant Thornton.</p>
+    <p class="actions"><a class="btn solid" href="/projects/">See all projects</a><a class="btn" href="/resume/">Read the resume</a></p>
+    <ul class="proofs"><li><a href="/projects/credit-approval-cutoff/"><span class="name">Credit case</span><span class="num">+$7.1M</span><span class="what">realized NPV from a new approval cutoff, at the same bad rate</span><span class="go">Open the credit case</span></a></li><li><a href="/projects/fraud-transaction-policy/"><span class="name">Fraud case</span><span class="num">$64k per month</span><span class="what">lower total cost of fraud, false declines and reviews</span><span class="go">Open the fraud case</span></a></li><li><a href="/projects/marketing-offer-targeting/"><span class="name">Marketing case</span><span class="num">$13k per campaign</span><span class="what">profit from an email to all customers, with no targeting model</span><span class="go">Open the marketing case</span></a></li></ul>
   </div>
 </header>
-
 <main>
-  <section class="case" id="credit" aria-labelledby="credit-answer">
+  <section class="section">
     <div class="wrap">
-      <div class="case-head">
-        <p class="name">Credit case: approval cutoff</p>
-        <p class="facts">Lending Club public loan data. Python, SQL, Excel.</p>
-      </div>
-      <p class="question">Q: Can a new approval cutoff increase approvals at the same bad rate?</p>
-      <h2 class="answer" id="credit-answer">Yes. A scorecard cutoff approves more applicants at the same bad rate and adds $7.1M of realized NPV on the 2015 loans.</h2>
-      <p class="why">Why? Three reasons, strongest first</p>
-      <ol class="keyline">
-        <li>
-          <h3>It approves more applicants with no more defaults</h3>
-          <p>Approval rate: <b>85.7%</b> vs. 84.5% today. Bad rate (default rate of approved loans): <b>12.5%</b>, held equal.</p>
-        </li>
-        <li>
-          <h3>The gain holds under every cost assumption tested</h3>
-          <p>Realized NPV against the current policy: <b>+$7.1M</b>. Lowest result in the stress test: <b>+$5.1M</b>.</p>
-        </li>
-        <li>
-          <h3>A small test limits the risk of the change</h3>
-          <p>Start on <b>10%</b> of applications. Stop if 12-month defaults rise <b>1 point</b>.</p>
-        </li>
-      </ol>
-
-      <div class="exhibit">
-        <p class="title">The 2015 loans lost money under the current policy; the new cutoff recovers $7.1M</p>
-        <p class="unit">Realized NPV, $M</p>
-        <div class="build" id="chart" role="img" aria-label="Bar chart. Loans from 2013 to 2014 under the current policy: plus 71.7 million dollars. Loans from 2015 under the current policy: minus 32.9 million dollars. Gain from the new cutoff on the 2015 loans: plus 7.1 million dollars.">
-          <div class="row">
-            <div class="label">Loans from 2013–2014, current policy</div>
-            <div class="track">
-              <div class="bar-fill pos context" style="width:59.75%"></div>
-              <div class="value inside" style="right:6.92%">+$71.7M</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="label">Loans from 2015, current policy</div>
-            <div class="track">
-              <div class="bar-fill neg loss" style="width:27.42%"></div>
-              <div class="value is-loss" style="left:33.33%">–$32.9M</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="label">Loans from 2015, gain from the new cutoff</div>
-            <div class="track">
-              <div class="bar-fill pos point" style="width:5.92%"></div>
-              <div class="value is-point" style="left:39.25%">+$7.1M</div>
-            </div>
-          </div>
-        </div>
-        <p class="source">Source: Lending Club public loan data; analysis. The gain is measured against the current policy on the same 2015 loans.</p>
-      </div>
+      <h2>Ten years of work across audit, finance and strategy</h2>
+      <ul class="timeline"><li><span class="when">2025</span><span class="org">Embedded Capital</span><span class="did">MBA Consultant</span></li><li><span class="when">2021–2024</span><span class="org">UrBox</span><span class="did">Senior Manager, Strategy &amp; Analytics, Manager, Finance &amp; Operations</span></li><li><span class="when">2019–2021</span><span class="org">Grant Thornton</span><span class="did">Senior Assurance Associate</span></li><li><span class="when">2015–2019</span><span class="org">KPMG</span><span class="did">Audit Senior</span></li></ul>
+      <p class="more"><a href="/resume/">Full resume</a></p>
     </div>
   </section>
-
-  <section class="case" id="fraud" aria-labelledby="fraud-answer">
+  <section class="section">
     <div class="wrap">
-      <div class="case-head">
-        <p class="name">Fraud case: transaction policy</p>
-        <p class="facts">IEEE-CIS public transaction data. Python, SQL.</p>
-      </div>
-      <p class="question">Q: Which policy gives the lowest total cost of fraud, false declines and reviews?</p>
-      <h2 class="answer" id="fraud-answer">The lowest-cost policy cuts the total monthly cost by $64k and keeps false declines under the 3% cap.</h2>
-      <p class="why">Why? Three reasons, strongest first</p>
-      <ol class="keyline">
-        <li>
-          <h3>It lowers the cost that matters, not only fraud loss</h3>
-          <p>Total monthly cost = fraud loss that gets through + cost of false declines + cost of reviews. Decrease: <b>$64,274</b> per month.</p>
-        </li>
-        <li>
-          <h3>The saving is the low end of the estimate</h3>
-          <p>The decrease is <b>$64k to $127k</b> per month, depending on the baseline. I report the lowest figure.</p>
-        </li>
-        <li>
-          <h3>Good customers stay protected</h3>
-          <p>False decline rate (share of good transactions declined): <b>2.46%</b>, under the cap of <b>3%</b>.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="case" id="marketing" aria-labelledby="marketing-answer">
-    <div class="wrap">
-      <div class="case-head">
-        <p class="name">Marketing case: offer targeting</p>
-        <p class="facts">Hillstrom public email test data. R.</p>
-      </div>
-      <p class="question">Q: Which customers do we send the offer to, for the best return?</p>
-      <h2 class="answer" id="marketing-answer">Send the men's email to all customers and keep a 10% holdout. It earns $13k per campaign of 100,000 customers.</h2>
-      <p class="why">Why? Three reasons, strongest first</p>
-      <ol class="keyline">
-        <li>
-          <h3>The email raises spend</h3>
-          <p>Spend effect against the no-email group: <b>+$0.77</b> per customer in the 2 weeks after the email.</p>
-        </li>
-        <li>
-          <h3>The extra margin is larger than the contact cost</h3>
-          <p>30% margin on $0.77, less $0.10 for each email, gives <b>$13,095</b> of profit per 100,000 customers.</p>
-        </li>
-        <li>
-          <h3>A targeting model adds nothing at this cost</h3>
-          <p>At <b>$0.10</b> per email, no model-picked segment earns more than an email to all customers.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="plain" id="approach" aria-labelledby="approach-title">
-    <div class="wrap">
-      <h2 id="approach-title">Each case goes from a business question to a decision in four steps</h2>
-      <ol class="steps">
-        <li>
-          <h3>State the business question</h3>
-          <p>One question that a business leader must decide, with the result today and the result wanted.</p>
-        </li>
-        <li>
-          <h3>Compare the new policy with the current one</h3>
-          <p>Both policies run on the same data, so the difference comes from the policy alone.</p>
-        </li>
-        <li>
-          <h3>Put the effect in dollars</h3>
-          <p>Each result is a dollar figure, tested again under less favorable assumptions.</p>
-        </li>
-        <li>
-          <h3>Recommend, with a test and a stop rule</h3>
-          <p>The recommendation starts small, names the guardrail and says when to stop.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="plain" id="tools" aria-labelledby="tools-title">
-    <div class="wrap">
-      <h2 id="tools-title">SQL, Python, R and Excel do the work in the cases</h2>
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr><th scope="col">Tool</th><th scope="col">Cases</th><th scope="col">Practice sets</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>SQL</td>
-              <td>Credit, Fraud</td>
-              <td><a href="https://github.com/adriando-umich/leetcode/tree/main/sql/leetcode-sql-50">LeetCode SQL 50</a>: all 50 problems solved, in 7 topic groups</td>
-            </tr>
-            <tr>
-              <td>Python</td>
-              <td>Credit, Fraud</td>
-              <td><a href="https://github.com/adriando-umich/leetcode/tree/main/python/leetcode-pandas">LeetCode pandas problems</a>: 14 solved, in 3 topic groups</td>
-            </tr>
-            <tr>
-              <td>R</td>
-              <td>Marketing</td>
-              <td class="none">–</td>
-            </tr>
-            <tr>
-              <td>Excel</td>
-              <td>Credit</td>
-              <td class="none">–</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <h2>The tools I work with</h2>
+      <div class="toolstrip"><a href="/skills/#sql"><i class="ico" style="--i:url(/assets/icons/sql.svg)" aria-hidden="true"></i>SQL</a><a href="/skills/#python"><i class="ico" style="--i:url(/assets/icons/python.svg)" aria-hidden="true"></i>Python</a><a href="/skills/#r"><i class="ico" style="--i:url(/assets/icons/r.svg)" aria-hidden="true"></i>R</a><a href="/skills/#excel"><i class="ico" style="--i:url(/assets/icons/excel.svg)" aria-hidden="true"></i>Excel</a><a href="/skills/#vba"><i class="ico" style="--i:url(/assets/icons/vba.svg)" aria-hidden="true"></i>VBA</a><a href="/skills/#tableau"><i class="ico" style="--i:url(/assets/icons/tableau.svg)" aria-hidden="true"></i>Tableau</a><a href="/skills/#powerbi"><i class="ico" style="--i:url(/assets/icons/powerbi.svg)" aria-hidden="true"></i>Power BI</a><a href="/skills/#powerpoint"><i class="ico" style="--i:url(/assets/icons/powerpoint.svg)" aria-hidden="true"></i>PowerPoint</a></div>
+      <p class="more"><a href="/skills/">Projects by tool</a></p>
     </div>
   </section>
 </main>
-
-<footer id="contact">
+<footer>
   <div class="wrap">
-    <h2>Contact</h2>
-    <p class="links"><a href="https://github.com/adriando-umich">github.com/adriando-umich</a></p>
-    <p class="note">All cases use public data sets, not data from an employer or a client. The dollar results show the method on public data.</p>
+    <p class="links"><a href="mailto:adriando@umich.edu">adriando@umich.edu</a><a href="https://www.linkedin.com/in/dzungdotran/">LinkedIn</a><a href="https://github.com/adriando-umich">GitHub</a></p>
+    <p class="note">The case studies use public data sets, not data from an employer or a client.</p>
   </div>
 </footer>
-
-<script>
-(function () {
-  var chart = document.getElementById('chart');
-  if (chart) {
-    if ('IntersectionObserver' in window) {
-      var seen = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) { chart.classList.add('go'); seen.disconnect(); }
-      }, { threshold: 0.4 });
-      seen.observe(chart);
-    } else { chart.classList.add('go'); }
-  }
-
-  // Mark the section in view in the top bar
-  var links = Array.prototype.slice.call(document.querySelectorAll('.bar li a'));
-  var ids = ['credit', 'fraud', 'marketing', 'approach', 'tools', 'contact'];
-  var cases = ['credit', 'fraud', 'marketing'];
-  function mark() {
-    var line = window.scrollY + 120, current = null;
-    ids.forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el && el.offsetTop <= line) current = id;
-    });
-    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) current = 'contact';
-    links.forEach(function (a) {
-      var id = a.getAttribute('href').slice(1);
-      var on = id === current || (a.parentNode.className === 'only-narrow' && cases.indexOf(current) > -1);
-      if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
-    });
-  }
-  window.addEventListener('scroll', mark, { passive: true });
-  mark();
-})();
-</script>
+<script src="/assets/site.js"></script>
 </body>
 </html>

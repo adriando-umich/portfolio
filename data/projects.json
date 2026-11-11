@@ -1,0 +1,114 @@
+{
+  "tools": [
+    {"id": "sql", "name": "SQL"},
+    {"id": "python", "name": "Python"},
+    {"id": "r", "name": "R"},
+    {"id": "excel", "name": "Excel"},
+    {"id": "vba", "name": "VBA"},
+    {"id": "tableau", "name": "Tableau"},
+    {"id": "powerbi", "name": "Power BI"},
+    {"id": "powerpoint", "name": "PowerPoint"}
+  ],
+  "types": [
+    {"id": "case", "name": "Case studies", "note": "Decision cases on public data, each with a recommendation and its dollar effect."},
+    {"id": "work", "name": "Work experience", "note": "Results from roles in strategy, finance and audit."},
+    {"id": "practice", "name": "Practice and personal projects", "note": ""}
+  ],
+  "projects": [
+    {
+      "slug": "credit-approval-cutoff", "type": "case", "short": "Credit case",
+      "title": "Approval cutoff for a consumer lender",
+      "result": "+$7.1M realized NPV from a new approval cutoff, at the same bad rate",
+      "num": "+$7.1M", "what": "realized NPV from a new approval cutoff, at the same bad rate",
+      "tools": ["python", "sql", "excel"], "data": "Lending Club public loan data",
+      "question": "Can a new approval cutoff increase approvals at the same bad rate?",
+      "answer": "Yes. A scorecard cutoff approves more applicants at the same bad rate and adds $7.1M of realized NPV on the 2015 loans.",
+      "why": "Why? Three reasons, strongest first",
+      "keyline": [
+        {"h": "It approves more applicants with no more defaults", "p": "Approval rate: <b>85.7%</b> vs. 84.5% today. Bad rate (default rate of approved loans): <b>12.5%</b>, held equal."},
+        {"h": "The gain holds under every cost assumption tested", "p": "Realized NPV against the current policy: <b>+$7.1M</b>. Lowest result in the stress test: <b>+$5.1M</b>."},
+        {"h": "A small test limits the risk of the change", "p": "Start on <b>10%</b> of applications. Stop if 12-month defaults rise <b>1 point</b>."}
+      ],
+      "exhibit": "credit"
+    },
+    {
+      "slug": "fraud-transaction-policy", "type": "case", "short": "Fraud case",
+      "title": "Transaction policy for card fraud",
+      "result": "$64k lower monthly cost of fraud, false declines and reviews",
+      "num": "$64k per month", "what": "lower total cost of fraud, false declines and reviews",
+      "tools": ["python", "sql"], "data": "IEEE-CIS public transaction data",
+      "question": "Which policy gives the lowest total cost of fraud, false declines and reviews?",
+      "answer": "The lowest-cost policy cuts the total monthly cost by $64k and keeps false declines under the 3% cap.",
+      "why": "Why? Three reasons, strongest first",
+      "keyline": [
+        {"h": "It lowers the cost that matters, not only fraud loss", "p": "Total monthly cost = fraud loss that gets through + cost of false declines + cost of reviews. Decrease: <b>$64,274</b> per month."},
+        {"h": "The saving is the low end of the estimate", "p": "The decrease is <b>$64k to $127k</b> per month, depending on the baseline. I report the lowest figure."},
+        {"h": "Good customers stay protected", "p": "False decline rate (share of good transactions declined): <b>2.46%</b>, under the cap of <b>3%</b>."}
+      ]
+    },
+    {
+      "slug": "marketing-offer-targeting", "type": "case", "short": "Marketing case",
+      "title": "Offer targeting for an email campaign",
+      "result": "$13k profit per campaign from an email to all customers, with no targeting model",
+      "num": "$13k per campaign", "what": "profit from an email to all customers, with no targeting model",
+      "tools": ["r"], "data": "Hillstrom public email test data",
+      "question": "Which customers do we send the offer to, for the best return?",
+      "answer": "Send the men's email to all customers and keep a 10% holdout. It earns $13k per campaign of 100,000 customers.",
+      "why": "Why? Three reasons, strongest first",
+      "keyline": [
+        {"h": "The email raises spend", "p": "Spend effect against the no-email group: <b>+$0.77</b> per customer in the 2 weeks after the email."},
+        {"h": "The extra margin is larger than the contact cost", "p": "30% margin on $0.77, less $0.10 for each email, gives <b>$13,095</b> of profit per 100,000 customers."},
+        {"h": "A targeting model adds nothing at this cost", "p": "At <b>$0.10</b> per email, no model-picked segment earns more than an email to all customers."}
+      ]
+    },
+
+    {"type": "work", "org": "Embedded Capital", "period": "2025", "title": "KPI dashboards for 3 insurance portfolio companies", "result": "Built custom Applied Epic dashboards for churn, producer revenue and KPI tracking. Report preparation time fell by 30%.", "tools": []},
+    {"type": "work", "org": "Embedded Capital", "period": "2025", "title": "One renewal workflow across 3 insurance companies", "result": "Standardized the Applied Epic renewal workflow. Churn fell by 5% across 25K policies.", "tools": []},
+    {"type": "work", "org": "UrBox", "period": "2022–2024", "title": "Partnership ROI and pricing model with Vietnam Airlines", "result": "Modeled the partnership with the airline and internal leaders. The model projected a redemption uplift of about 30% and shaped the Cash & Miles launch.", "tools": []},
+    {"type": "work", "org": "UrBox", "period": "2022–2024", "title": "Renewal pricing tiers across 15 categories and 50K SKUs", "result": "Redesigned the pricing tiers to support client negotiations. Spread rose by about 1 point across 10+ renewals.", "tools": []},
+    {"type": "work", "org": "UrBox", "period": "2022–2024", "title": "Fundraising model for 3 to 5 years", "result": "Built the model, reclassified campaign revenue and lowered the valuation assumptions used in the investor deck.", "tools": []},
+    {"type": "work", "org": "UrBox", "period": "2022–2024", "title": "Optimization logic for the reward engine", "result": "Translated loyalty-program KPIs, margin rules and supplier constraints into optimization logic. 90% of clients later used the engine.", "tools": []},
+    {"type": "work", "org": "UrBox", "period": "2022–2024", "title": "Audit trail for loyalty balance transfers", "result": "Created transfer mappings and audit trails that kept contract-level traceability on about $0.5M of annual campaign transfers.", "tools": []},
+    {"type": "work", "org": "UrBox", "period": "2021–2022", "title": "Budget and forecast for a $60M+ operating plan", "result": "Owned the annual budget and forecast across revenue, operating expense, headcount and margin. The cash conversion cycle improved by 15%.", "tools": []},
+    {"type": "work", "org": "UrBox", "period": "2021–2022", "title": "Monthly reporting for a $60M segment", "result": "Standardized monthly reporting with Tableau for P&L variance tracking. KPI insights arrived 5 business days faster.", "tools": ["tableau"]},
+    {"type": "work", "org": "UrBox", "period": "2021–2022", "title": "SQL reporting automation for sales, finance and operations", "result": "Modernized the SQL-based reporting and documented ambiguous logic. Process time fell by 30%.", "tools": ["sql"]},
+    {"type": "work", "org": "UrBox", "period": "2021–2022", "title": "Finance transformation across 10+ clients and 4 departments", "result": "Led a 2-year program that digitized transaction verification and saved 10,000 hours each year.", "tools": []},
+    {"type": "work", "org": "Grant Thornton", "period": "2019–2021", "title": "Close workflow for a new solar-energy entity", "result": "Designed the workflow that reconciles the parent reporting package to the statutory financial statements. The reporting cycle became 2 to 3 weeks shorter.", "tools": []},
+    {"type": "work", "org": "Grant Thornton", "period": "2019–2021", "title": "Revenue and margin bridge for a steel-pipe business", "result": "Led a 12-month bridge across 4 product groups and 2 channels. It explained more than 85% of the variance and isolated 3 audit risks.", "tools": []},
+    {"type": "work", "org": "KPMG", "period": "2015–2019", "title": "Annual budget and financial plan for 5 branches", "result": "Prepared the plan in SAP and Excel for the Vietnam branches of a global Japanese client with annual sales above VND 200B (about $7.6M).", "tools": ["excel"]},
+    {"type": "work", "org": "KPMG", "period": "2015–2019", "title": "CFO dashboards across 5 branches and 4 functions", "result": "Built the dashboards in Excel and VBA. Preparation of the monthly budget package went from 2 days to the same day.", "tools": ["excel", "vba"]},
+    {"type": "work", "org": "KPMG", "period": "2015–2019", "title": "Revenue timing review of an EPC contract", "result": "Analyzed revenue timing and challenged the policy assumptions. The audit review made a downward adjustment of about $500K.", "tools": []},
+
+    {
+      "slug": "leetcode-sql-50", "type": "practice",
+      "title": "LeetCode SQL 50",
+      "result": "All 50 problems solved, in 7 topic groups",
+      "tools": ["sql"],
+      "headline": "All 50 problems of the LeetCode SQL 50 plan are solved, from basic selects to subqueries",
+      "repo": "https://github.com/adriando-umich/leetcode/tree/main/sql/leetcode-sql-50",
+      "groups": [
+        ["Select", 5, "01-select"],
+        ["Basic joins", 9, "02-basic-joins"],
+        ["Basic aggregate functions", 8, "03-basic-aggregate-functions"],
+        ["Sorting and grouping", 7, "04-sorting-and-grouping"],
+        ["Advanced select and joins", 7, "05-advanced-select-and-joins"],
+        ["Subqueries", 7, "06-subqueries"],
+        ["Advanced string functions", 7, "07-advanced-string-functions"]
+      ]
+    },
+    {
+      "slug": "leetcode-pandas", "type": "practice",
+      "title": "LeetCode pandas problems",
+      "result": "14 problems solved, in 3 topic groups",
+      "tools": ["python"],
+      "headline": "14 pandas problems are solved, across filtering, string methods and data manipulation",
+      "repo": "https://github.com/adriando-umich/leetcode/tree/main/python/leetcode-pandas",
+      "groups": [
+        ["Data filtering", 4, "01-data-filtering"],
+        ["String methods", 5, "02-string-methods"],
+        ["Data manipulation", 5, "03-data-manipulation"]
+      ]
+    },
+    {"type": "practice", "org": "Personal project", "title": "StoryLilt.app", "result": "Shipped an AI app that turns EPUB books into bilingual editions.", "tools": []}
+  ]
+}
