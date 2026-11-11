@@ -366,11 +366,16 @@ def course_page(p, crumb):
     return f"""<main>
   <div class="pagehead"><div class="wrap">{crumb}
     <h1>{e(p['title'])}</h1>
-    <p class="sub result">{e(p['result'])}</p>
     <div class="case-facts"><p class="facts"><b>Course project, Michigan Ross MBA.</b> {e(p['method'])}. Not client or employer work.</p>{tools(p['tools'])}</div>
     {f'<div class="dls">{cards}</div>' if cards else ""}
   </div></div>
   <div class="body"><div class="wrap cp">
+    <table class="scqa cp-scqa">
+      <tr><th scope="row">Situation</th><td>{e(p['scq'][0])}</td></tr>
+      <tr><th scope="row">Complication</th><td>{e(p['scq'][1])}</td></tr>
+      <tr class="question"><th scope="row">Question</th><td>{e(p['scq'][2])}</td></tr>
+      <tr class="answer"><th scope="row">Answer</th><td>{e(p['result'])}</td></tr>
+    </table>
     {frag}
     {pager(p)}
   </div></div>

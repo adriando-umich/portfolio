@@ -18,11 +18,16 @@
 <main>
   <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / How to reprice 15 products when price sensitivity differs by product</p>
     <h1>How to reprice 15 products when price sensitivity differs by product</h1>
-    <p class="sub result">Raise 12 prices and cut 3. Expected profit per customer rises 31%, with each price inside a ±20% limit.</p>
     <div class="case-facts"><p class="facts"><b>Course project, Michigan Ross MBA.</b> Multinomial logit demand model and constrained price optimization in R. Not client or employer work.</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/r.svg)" aria-hidden="true"></i>R</span></div></div>
     <div class="dls"><a class="dl" href="analysis.R"><i class="ico" style="--i:url(/assets/icons/r.svg)" aria-hidden="true"></i><span><b>R script</b><em>Demand model and price optimization</em></span></a></div>
   </div></div>
   <div class="body"><div class="wrap cp">
+    <table class="scqa cp-scqa">
+      <tr><th scope="row">Situation</th><td>A retailer sells a line of 15 related products. Each product has its own cost and price.</td></tr>
+      <tr><th scope="row">Complication</th><td>Customers do not react to price in the same way for each product: features such as import origin change the sensitivity. One price rule for the full line leaves profit unused.</td></tr>
+      <tr class="question"><th scope="row">Question</th><td>Which price for each product gives the highest expected profit, within 20% of the price today?</td></tr>
+      <tr class="answer"><th scope="row">Answer</th><td>Raise 12 prices and cut 3. Expected profit per customer rises 31%, with each price inside a ±20% limit.</td></tr>
+    </table>
     <div class="cp-kpis"><div><p class="k">Expected profit per customer</p><p class="v">+31%</p><p class="s">$1.08 to $1.42, with each price inside a ±20% limit</p></div><div><p class="k">Price changes</p><p class="v">12 up, 3 down</p><p class="s">8 products stop at the +20% limit</p></div><div><p class="k">Share of customers who buy</p><p class="v">10.5% to 7.2%</p><p class="s">fewer sales at a higher margin: the cost of the gain</p></div></div>
 <section class="part"><h2>Twelve prices go up, eight of them to the limit, and three high-margin prices come down</h2>
   <div class="table-scroll"><table class="cp-table prices">

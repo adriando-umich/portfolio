@@ -18,11 +18,16 @@
 <main>
   <div class="pagehead"><div class="wrap"><p class="crumb"><a href="/projects/">Projects</a> / How many workers to hire and when, for a factory with seasonal demand</p>
     <h1>How many workers to hire and when, for a factory with seasonal demand</h1>
-    <p class="sub result">A mixed plan of hires, overtime and inventory costs $6.22M for the year, 8% less than a level workforce.</p>
     <div class="case-facts"><p class="facts"><b>Course project, Michigan Ross MBA.</b> Integer program for a 12-month production plan, in Excel Solver and Python. Not client or employer work.</p><div class="tools"><span class="tool"><i class="ico" style="--i:url(/assets/icons/excel.svg)" aria-hidden="true"></i>Excel</span><span class="tool"><i class="ico" style="--i:url(/assets/icons/python.svg)" aria-hidden="true"></i>Python</span></div></div>
     <div class="dls"><a class="dl" href="production_plan_model.xlsx"><i class="ico" style="--i:url(/assets/icons/excel.svg)" aria-hidden="true"></i><span><b>Excel model</b><em>Monthly plan with costs, and three strategies</em></span></a><a class="dl" href="plan.py"><i class="ico" style="--i:url(/assets/icons/python.svg)" aria-hidden="true"></i><span><b>Python model</b><em>Integer program for the three strategies</em></span></a></div>
   </div></div>
   <div class="body"><div class="wrap cp">
+    <table class="scqa cp-scqa">
+      <tr><th scope="row">Situation</th><td>A factory has 160 workers and makes one product. The demand forecast for the next 12 months is known.</td></tr>
+      <tr><th scope="row">Complication</th><td>Demand in the peak month is three times the demand in the low months. The factory can hire, lay off, use overtime or build inventory, and each of the four has a cost.</td></tr>
+      <tr class="question"><th scope="row">Question</th><td>Which mix of the four gives the lowest cost for the year?</td></tr>
+      <tr class="answer"><th scope="row">Answer</th><td>A mixed plan of hires, overtime and inventory costs $6.22M for the year, 8% less than a level workforce.</td></tr>
+    </table>
     <div class="cp-kpis"><div><p class="k">Lowest cost for the year</p><p class="v">$6.22M</p><p class="s">8% below a level workforce, 2% below production that follows demand</p></div><div><p class="k">Workforce</p><p class="v">160 to 237</p><p class="s">hire before the peak, then reduce in steps to 140</p></div><div><p class="k">Overtime</p><p class="v">2 months</p><p class="s">Aug and Sep only; inventory takes the rest of the peak</p></div></div>
 <section class="part"><h2>The mixed plan costs 8% less than a level workforce and 2% less than production that follows demand</h2>
   <div class="cp-bars" role="img" aria-label="Cost for the year of three production strategies."><div class="cp-bar wide on"><span class="c"><b>Mixed plan (lowest cost)</b>Hire before the peak, add overtime at the peak, then reduce</span><span class="t"><i style="width:91.9%"></i></span><span class="v">$6.22M</span><span class="s">lowest cost</span></div><div class="cp-bar wide"><span class="c"><b>Level workforce</b>One workforce size all year, no overtime, inventory takes the peaks</span><span class="t"><i style="width:100.0%"></i></span><span class="v">$6.77M</span><span class="s">+$547,440 (+9%)</span></div><div class="cp-bar wide"><span class="c"><b>Production follows demand</b>No planned inventory; hires, layoffs and overtime take the peaks</span><span class="t"><i style="width:93.7%"></i></span><span class="v">$6.34M</span><span class="s">+$122,940 (+2%)</span></div></div>

@@ -723,3 +723,9 @@ html:not(.js) .deckbar { display: none; }
 .cp-fig { margin: 24px 0 0; max-width: 940px; }
 .cp-fig img { display: block; width: 100%; height: auto; border: 1px solid var(--gray-300); }
 .cp-fig figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }
+.cp-scqa { margin-top: 0; max-width: 940px; }
+.cp-scqa th { width: 150px; }
+.cp-scqa + .cp-kpis { margin-top: 36px; }
+.cp-scqa tr.question { margin: 0; font: inherit; color: inherit; }
+.cp-scqa tr.question th { font: 700 15px/1.55 var(--sans); font-style: normal; color: var(--ink); }
+.cp-scqa th { font-size: 15px; }

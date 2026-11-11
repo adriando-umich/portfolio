@@ -780,6 +780,11 @@
      "All 64 plans, enumerated",
      "check_model.py"
     ]
+   ],
+   "scq": [
+    "A city must give each of its six regions fire cover. It has six candidate sites for stations, each with a different cost.",
+    "A station is useful to a region only if it gets there within 12 minutes, and three siting rules limit which sites can open together. To open all six sites costs $1.8M.",
+    "Which sites must the city open to cover every region at the lowest cost?"
    ]
   },
   {
@@ -811,6 +816,11 @@
      "All 4,096 plans, enumerated",
      "check_model.py"
     ]
+   ],
+   "scq": [
+    "A confectionery company buys 12 packaging items through an online auction. Seven suppliers sent 12 bids.",
+    "Each bid is a bundle: some of the items at one all-or-nothing price, and the bundles overlap. Procurement also wants to know the cost of each sourcing policy before it commits.",
+    "Which bids buy all 12 items at the lowest cost, and what does each policy add?"
    ]
   },
   {
@@ -842,6 +852,11 @@
      "20,000 nights for each policy",
      "simulate.py"
     ]
+   ],
+   "scq": [
+    "A lodge has 10 cabins and sells them at $100 a night. About 100 guests ask for a cabin for each night.",
+    "Most guests are leisure travelers who book early. A few business guests come late and will pay about three times more, but by then the cabins are sold.",
+    "How many cabins must the lodge hold back for late guests, and at what rate?"
    ]
   },
   {
@@ -873,6 +888,11 @@
      "Integer program for the three strategies",
      "plan.py"
     ]
+   ],
+   "scq": [
+    "A factory has 160 workers and makes one product. The demand forecast for the next 12 months is known.",
+    "Demand in the peak month is three times the demand in the low months. The factory can hire, lay off, use overtime or build inventory, and each of the four has a cost.",
+    "Which mix of the four gives the lowest cost for the year?"
    ]
   },
   {
@@ -896,6 +916,11 @@
      "Decision tree and the table of bids",
      "bid_model.xlsx"
     ]
+   ],
+   "scq": [
+    "A developer plans a sealed bid of $5M for a property. If the project goes ahead, it is worth $15M for $8M of capital.",
+    "A higher bid wins more often but leaves less profit. A win is also not the end: the plan then needs an approval that has a 30% chance, and without it the developer loses 10% of the bid.",
+    "Which bid gives the highest expected value?"
    ]
   },
   {
@@ -919,6 +944,11 @@
      "Models, cutoffs and the test of the result",
      "analysis.R"
     ]
+   ],
+   "scq": [
+    "A bank sells term deposits by phone. A sale earns $5 net, and a call with no sale costs $1.",
+    "Only 11% of calls end in a sale, so a campaign that calls all customers loses money.",
+    "Which customers must the bank call, and which model finds them best?"
    ]
   },
   {
@@ -943,6 +973,11 @@
      "Demand model and price optimization",
      "analysis.R"
     ]
+   ],
+   "scq": [
+    "A retailer sells a line of 15 related products. Each product has its own cost and price.",
+    "Customers do not react to price in the same way for each product: features such as import origin change the sensitivity. One price rule for the full line leaves profit unused.",
+    "Which price for each product gives the highest expected profit, within 20% of the price today?"
    ]
   },
   {
@@ -966,6 +1001,11 @@
      "Two-stage least squares with robust standard errors",
      "analysis.R"
     ]
+   ],
+   "scq": [
+    "A vacation rental marketplace operates in 281 local markets. Its growth teams add listings to make each market larger.",
+    "More listings can help hosts (more travelers come) or hurt them (more competition). A plain comparison of markets cannot tell, because hosts enter the markets where demand is already good.",
+    "What is the effect of more listings on the bookings of a host?"
    ]
   },
   {
@@ -983,7 +1023,12 @@
    ],
    "result": "Loans grew 224 times from 2007 to 2013. The charge-off rate rises from 6% for grade A loans to 37% for grade G.",
    "method": "Tableau views of 230,716 public Lending Club loan records",
-   "files": []
+   "files": [],
+   "scq": [
+    "A marketplace lender matched borrowers and investors for 230,716 loans from 2007 to 2013.",
+    "Volume grew very quickly. From the totals, an investor cannot see if the growth came with more risk, or where the losses are.",
+    "How did the platform grow, and which loans went bad?"
+   ]
   },
   {
    "slug": "classroom-crowdfunding",
@@ -1000,7 +1045,12 @@
    ],
    "result": "70% of projects reach their goal. Price matters most: 90% of projects below $200 are funded, and 45% of projects above $1,500.",
    "method": "Tableau views of 1.2 million public DonorsChoose project records",
-   "files": []
+   "files": [],
+   "scq": [
+    "Teachers post classroom projects on a crowdfunding site, and donors choose which projects to fund. 1.2 million projects were posted from 2002 to 2016.",
+    "About 3 of 10 projects do not reach their goal. Teachers do not know which of their choices change the chance.",
+    "Which projects get funded, and what can a teacher control?"
+   ]
   },
   {
    "type": "work",
