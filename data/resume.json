@@ -113,8 +113,28 @@
  ],
  "other_tools": "SAP, Oracle",
  "story": [
-  "Pricing, growth, cost and process, over ten years at KPMG, Grant Thornton and UrBox, then an MBA at Michigan Ross.",
-  "I work answer first: frame the situation and what changed, ask the one question that matters, and lead with the answer.",
-  "Then I break the answer into parts that do not overlap, and prove each part with data."
+  "MBA from Michigan Ross, after ten years at KPMG, Grant Thornton and UrBox, across pricing, growth, cost and process."
+ ],
+ "method": [
+  [
+   "Question",
+   "Agree on the one decision the business must make, and what a good answer is worth."
+  ],
+  [
+   "Frame",
+   "State the situation and what changed. Break the question into parts that do not overlap."
+  ],
+  [
+   "Test",
+   "Prove or drop each part with data: a query, a model or an experiment."
+  ],
+  [
+   "Recommend",
+   "Lead with the answer: what to do, its dollar effect, and each risk with a control."
+  ],
+  [
+   "Launch",
+   "Start with a controlled test, set the measures before it starts, then roll out and track."
+  ]
  ]
 }

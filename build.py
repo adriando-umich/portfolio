@@ -86,6 +86,7 @@ def home():
         f'<span class="did">{e(", ".join(r["title"] for r in j["roles"]))}</span></li>'
         for j in R["experience"]
     )
+    method = "".join(f'<li><b>{e(a)}</b><span>{e(t)}</span></li>' for a, t in R["method"])
     body = f"""<header class="lead">
   <div class="wrap">
     <p class="role">{e(R['role'])}</p>
@@ -97,6 +98,12 @@ def home():
   </div>
 </header>
 <main>
+  <section class="section">
+    <div class="wrap">
+      <h2>How I work, from the question to the launch</h2>
+      <ol class="method">{method}</ol>
+    </div>
+  </section>
   <section class="section">
     <div class="wrap">
       <h2>Three case studies that I built on my own, with public data</h2>

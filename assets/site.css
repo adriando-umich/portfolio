@@ -759,3 +759,12 @@ html:not(.js) .deckbar { display: none; }
   .skill summary { padding: 14px 2px; }
   .cp-table, .cp-grid { font-size: 14px; }
 }
+
+/* Home: method in five steps */
+.method { margin: 28px 0 0; padding: 0; list-style: none; counter-reset: m; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 2px solid var(--navy); }
+.method li { counter-increment: m; position: relative; padding: 18px 20px 6px 0; }
+.method li + li { padding-left: 20px; border-left: 1px solid var(--gray-300); }
+.method li::before { content: counter(m); display: block; font: 700 14px/1 var(--sans); color: var(--blue); }
+.method b { display: block; margin-top: 10px; font: 700 22px/1.2 var(--serif); color: var(--navy); }
+.method span { display: block; margin-top: 8px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+@media (max-width: 900px) { .method { grid-template-columns: 1fr; } .method li, .method li + li { padding: 16px 0; border-left: 0; border-bottom: 1px solid var(--gray-300); } }
